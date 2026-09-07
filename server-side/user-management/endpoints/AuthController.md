@@ -6,34 +6,61 @@
 ## Endpoints
 
 ### POST /api/auth/register
-Register a new user account.
+
+**Description:** Register a new user account
+
+**Service Method:** `UserService.createUser(User)`
 
 **Request Body:**
 ```json
 {
-  "userName": "string",
-  "name": "string",
-  "email": "string",
-  "password": "string",
-  "mobileNumber": "string",
+  "userName": "string (required, unique)",
+  "name": "string (required)",
+  "email": "string (required, unique)",
+  "password": "string (required)",
+  "mobileNumber": "string (unique)",
   "age": 0
 }
 ```
 
-**Response:** `200 OK`
+**Response (200 OK):**
 ```json
 {
   "success": true,
-  "message": "Registration successful",
+  "message": "User registered successfully!",
   "data": {
-    "token": "jwt_token",
-    "user": { }
+    "id": 1,
+    "userName": "...",
+    "name": "...",
+    "email": "...",
+    "userType": "CUSTOMER",
+    "active": true
   }
 }
 ```
 
+**Response (400 Bad Request):**
+```json
+{
+  "success": false,
+  "message": "Email taken"
+}
+```
+
+**Exceptions:**
+| Status | Condition |
+|--------|-----------|
+| 400 | Email taken, Username taken, missing required fields |
+
+**Access:** Public
+
+---
+
 ### POST /api/auth/login
-Authenticate user.
+
+**Description:** Authenticate user and get JWT token
+
+**Service Method:** `AuthenticationManager.authenticate()` + `JwtService.generateToken()`
 
 **Request Body:**
 ```json
@@ -43,23 +70,32 @@ Authenticate user.
 }
 ```
 
-**Response:** `200 OK`
+**Response (200 OK):**
 ```json
 {
   "success": true,
-  "message": "Login successful",
-  "data": {
-    "token": "jwt_token",
-    "user": { }
+  "token": "eyJhbGciOiJIUzI1NiJ9...",
+  "user": {
+    "id": 1,
+    "userName": "...",
+    "email": "...",
+    "userType": "CUSTOMER"
   }
 }
 ```
 
-### POST /api/auth/request-password-reset
-Request password reset code.
+**Response (401 Unauthorized):**
+```json
+{
+  "success": false,
+  "message": "Invalid email/username or password"
+}
+```
 
-### POST /api/auth/confirm-password-reset
-Confirm reset with code.
+**Exceptions:**
+| Status | Condition |
+|--------|-----------|
+| 401 | BadCredentialsException - invalid credentials |
+| 400 | User data not found after authentication |
 
-## Access
-All endpoints are **public** (no authentication required).
+**Access:** Public

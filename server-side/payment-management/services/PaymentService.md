@@ -4,8 +4,14 @@
 
 ## Methods
 
-### execute(reservationId, PaymentMethod) -> Payment
-Routes payment to appropriate processor.
+### filter(userId, status, method, date) -> List<Payment>
 
-### filter(FilterParams) -> Page<Payment>
-### getById(id) -> Payment
+**Parameters:**
+| Param | Type | Description |
+|-------|------|-------------|
+| userId | Integer | Filter by user |
+| status | PaymentStatus | Filter by status |
+| method | PaymentMethod | Filter by method |
+| date | LocalDate | Filter by date |
+
+**Returns:** Filtered list of payments

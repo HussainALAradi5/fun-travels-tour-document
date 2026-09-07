@@ -2,39 +2,48 @@
 
 **File:** `src/main/java/com/server/server/services/AuthService.java`
 
-Handles user authentication and registration.
+## Code
+
+```java
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+    private final UserRepository repository;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+
+    public String authenticate(String email, String password) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
+        return jwtService.generateToken(email);
+    }
+}
+```
 
 ## Methods
 
-### register(RegisterRequest) -> AuthResponse
-Creates a new user account.
-- Validates unique username and email
-- Hashes password with BCrypt
-- Creates associated Account (wallet)
-- Generates JWT token
-- Returns token + user data
+### authenticate(email, password) -> String
 
-### login(LoginRequest) -> AuthResponse
-Authenticates user by email, username, or mobile number.
-- Looks up user by identifier (case-insensitive)
-- Validates password against BCrypt hash
-- Generates JWT token
-- Returns token + user data
+**Parameters:**
+| Param | Type | Description |
+|-------|------|-------------|
+| email | String | User email, username, or mobile number |
+| password | String | Plain text password |
 
-### requestPasswordReset(email) -> void
-Initiates password reset flow.
-- Generates 6-digit reset code
-- Sends code via email
-- Code expires after 15 minutes
+**Returns:** JWT token string
 
-### confirmPasswordReset(email, code, newPassword) -> void
-Completes password reset.
-- Validates reset code
-- Updates password (BCrypt hashed)
-- Invalidates reset code
+**Business Logic:**
+1. Spring Security's AuthenticationManager validates credentials
+2. BCrypt password hash is compared automatically
+3. If valid, generates JWT token via JwtService
 
-## Dependencies
+**Exceptions:**
+| Exception | Condition |
+|-----------|-----------|
+| BadCredentialsException | Invalid email/username or password |
+| UsernameNotFoundException | User not found in database |
+
+**Dependencies:**
 - UserRepository
-- AccountRepository
 - JwtService
-- PasswordEncoder (BCrypt)
+- AuthenticationManager (Spring Security)
