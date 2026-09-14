@@ -1,5 +1,19 @@
 # CountryService
 
+## `getCountryById`
+
+**Signature:** `public Country getCountryById(Integer id)`
+
+**Parameters:** required country ID.
+
+**Logic:** null-checks the ID and retrieves the country repository record.
+
+**Business logic:** relationship mapping must use an existing country.
+
+**Return:** the managed country; read-only with no side effects.
+
+**Exception:** `ResourceNotFoundException("Country", id)`; null input produces `"id must not be null"`.
+
 **File:** `src/main/java/com/server/server/services/CountryService.java`
 
 ## Methods

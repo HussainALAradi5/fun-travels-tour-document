@@ -6,6 +6,6 @@
 
 ### getAll() -> Seat[]
 ### getById(id) -> Seat
-### filter(params) -> PageData<Seat>
+### search(params) -> PageResponse<Seat>
 ### update(id, data) -> Seat
 ### updateStatus(id, status) -> Seat

@@ -1,12 +1,15 @@
-# Transportation Service
+# Transportation API Client
 
-**File:** `src/Api/tourmanagement/Transportation.ts`
+**Source:** `src/Api/tourmanagement/Transportation.ts`
 
-## Methods
+| Method | Result | Purpose |
+|---|---|---|
+| `getAll(params)` | `PageResponse<Transportation>` | Paginated fleet list |
+| `search(params)` | `PageResponse<Transportation>` | Search, filter, date/sort pagination parameters |
+| `getById(id)` | `Transportation` | Detail including seat summaries |
+| `create(request)` | `Transportation` | Create a unit and seat layout |
+| `update(id, data)` | `Transportation` | Update details or bulk seat configuration |
+| `updateStatus(id, status)` | `Transportation` | Change operational status |
+| `importExcel(file)` | `ImportResult` | Server-side spreadsheet import |
 
-### getAll() -> Transportation[]
-### getById(id) -> Transportation
-### create(data) -> Transportation
-### update(id, data) -> Transportation
-### updateStatus(id, status) -> Transportation
-### filter(params) -> PageData<Transportation>
+The import client sends `multipart/form-data`; spreadsheet parsing and business validation remain on the backend.

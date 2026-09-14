@@ -1,40 +1,31 @@
-# UI Components (Client)
+# Reusable UI Components
 
-Reusable generic component library.
+The component library is built with Chakra UI and typed TypeScript interfaces. Components support responsive layouts and both light and dark color modes.
 
-## Data Display
-- **GenericTable** - Data table with pagination, search, selection, expand
-- **GenericCard** - Reusable card component
-- **CapacityProgress** - Capacity progress bar
-- **InfoItem** - Info display item
-- **StatusLegend** - Status color legend
+## Forms and selection
 
-## Forms
-- **GenericForm** - Dynamic form generator from FieldConfig[]
-- **FormField** - Single form field renderer
-- **FormInputs** - Input components
-- **FormSelect** - Select/dropdown
-- **FormCombobox** - Searchable combobox
-- **FormFile** - File upload
-- **DatePicker** - Date picker
+- `DynamicForm` renders typed `FieldConfig` definitions, supports nested paths such as `seatConfig.KIDS_CHAIR`, and memoizes fields for responsive typing.
+- `FormSelect` renders local options with optional Lucide icons.
+- `PaginatedSearchSelect` supports local options or a debounced backend loader returning `PageResponse<SelectOption>`.
+- `FormCombobox` is the thin adapter between `DynamicForm` and `PaginatedSearchSelect`.
+- `DatePicker` supports single/range selection, deterministic SSR, accessible controls, and valid HTML nesting.
 
 ## Dialogs
-- **GenericDialog** - Base dialog
-- **GenericFormDialog** - Dialog with form
-- **GenericTableDialog** - Dialog with table
-- **GenericExportDialog** - Export dialog (PDF/Excel)
-- **ConfirmDialog** - Confirmation dialog
 
-## Filtering
-- **GenericFilterBar** - Filter bar component
-- **ModernFilterBar** - Modern styled filter bar
-- **UnifiedFilterBar** - Unified filter bar
+- `AppDialog` provides the shared accessible dialog surface.
+- `DynamicFormDialog` hosts configuration-driven forms.
+- `GuidedStepsDialog` renders reusable step-by-step instructions.
+- `ExcelImportDialog` handles file selection, submission state, and row-result feedback.
+- `ConfirmDialog`, `DataTableDialog`, and `ExportDialog` cover common operational workflows.
 
-## Tracking
-- **GenericAuditLog** - Audit log timeline
-- **GenericCommentSection** - Comment section
-- **GenericTracking** - Event tracking timeline
-- **GenericStatusWorkflow** - Status workflow stepper
+## Pagination and filtering
 
-## Hooks
-- **useTableLogic** - Reusable table state: pagination, search, selection
+The UI consumes the shared `PageResponse<T>` contract. Sort direction uses the dedicated `SortDirection` type. Date and domain filter interfaces remain separate from pagination metadata, allowing service and endpoint contracts to stay precise.
+
+## Reliability
+
+- Root rendering suppresses only unavoidable theme/extension attribute differences.
+- Time-dependent UI uses `useIsHydrated` where necessary.
+- Browser listeners are registered in effects and cleaned up.
+- Axios errors are translated into customer-readable messages.
+- Dialogs avoid nested interactive HTML and conflicting modal focus scopes.

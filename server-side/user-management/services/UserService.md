@@ -1,5 +1,33 @@
 # UserService
 
+## `updatePermissions`
+
+**Signature:** `public User updatePermissions(Integer id, UserTypeEnum type, Integer branchId)`
+
+**Parameters:** user ID, required target role, optional branch ID.
+
+**Logic:** resolves the user, applies role, resolves/assigns the optional branch, and saves.
+
+**Business logic:** role and organizational assignment change together so access scope stays consistent.
+
+**Return/side effects:** updated persisted user.
+
+**Exceptions:** missing user/branch failures propagate.
+
+## `getUserById`
+
+**Signature:** `public User getUserById(Integer id)`
+
+**Parameters:** required user ID.
+
+**Logic:** queries the user repository and unwraps the result.
+
+**Business logic:** central managed-user lookup keeps callers consistent.
+
+**Return:** user; read-only.
+
+**Exceptions:** resource-not-found failure; null input validation.
+
 **File:** `src/main/java/com/server/server/services/UserService.java`
 
 ## Methods

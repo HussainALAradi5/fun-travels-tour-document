@@ -1,5 +1,19 @@
 # TourService
 
+## `autoProcessScheduledTours`
+
+**Signature:** `public void autoProcessScheduledTours()`
+
+**Parameters:** none.
+
+**Logic:** scans scheduled tours, activates/finishes eligible records based on current date, saves changes, and triggers completion communication where applicable.
+
+**Business logic:** tour lifecycle follows travel dates even without manual staff action.
+
+**Return/side effects:** no return; updates tour/ticket workflow and notifications.
+
+**Exceptions:** item-level processing failures follow scheduled-task logging so one record does not stop the batch.
+
 **File:** `src/main/java/com/server/server/services/tourmanagement/TourService.java`
 
 ## Methods

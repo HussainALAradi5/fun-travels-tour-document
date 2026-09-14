@@ -5,7 +5,7 @@
 
 ## Endpoints
 
-### GET /api/tickets/filter
+### GET /api/tickets/search
 
 **Description:** Filter tickets
 **Service Method:** `TicketService.filter(status, customerId, tourId, sortBy, sortDir)`
@@ -17,7 +17,7 @@
 | tourId | Integer | No | Filter by tour |
 | sortBy | String | No | Sort field |
 | sortDir | String | No | Sort direction |
-**Response (200 OK):** List of Ticket entities
+**Response (200 OK):** `ApiResponse<PageResponse<TicketResponse>>`
 **Access:** Authenticated
 
 ---
@@ -26,7 +26,7 @@
 
 **Description:** Get all tickets
 **Service Method:** `TicketService.getAll()`
-**Response (200 OK):** List of Ticket entities
+**Response (200 OK):** `ApiResponse<PageResponse<TicketResponse>>`
 **Access:** Authenticated
 
 ---

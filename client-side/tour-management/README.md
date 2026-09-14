@@ -1,36 +1,32 @@
-# Tour Management (Client)
+# Tour Management Client
 
-Core domain for tours, transportation, tickets, seats, meals, reservations, and booking.
+The client module covers tour discovery, administration, booking, transportation, meals, seats, and tickets.
 
-## Components
-- TourCreate, TourEdit, TourDetailsView, TourInventoryManager
-- TransportationManager, TransportationCreate, TransportationTable
-- TicketTable, CustomerTicketsManager, CustomerTicketDetailManager
-- SeatManager, SeatPickerDialog, SeatEditDialog
-- MealPlanManager, MealSelectionList, MealsSelectionDialog
-- BookingManager, BookingCheckoutCard, BookingSummaryBar, GuestConfigCard
-- CustomerTourCatalog, CustomerTourCatalogCard, CustomerTourCatalogTable
+## Customer experience
 
-## Services
-- [tourService](services/tourService.md)
-- [transportationService](services/transportationService.md)
-- [ticketService](services/ticketService.md)
-- [seatService](services/seatService.md)
-- [mealPlanService](services/mealPlanService.md)
-- [reservationService](services/reservationService.md)
+- Search and filter available tours by route and date.
+- Follow a step-by-step booking guide.
+- Configure guests, seats, and meals.
+- Review checkout totals before payment.
+- View ticket status, boarding information, QR code, and ticket instructions.
 
-## Hooks
-- [useTourManagement](hooks/useTourManagement.md) - Central tour CRUD hook
+## Operations experience
 
-## Routes
-| Route | Page | Access |
-|-------|------|--------|
-| /tours | CustomerCatalogPage | Public |
-| /reserve/:tourId | BookingPage | Private |
-| /my-bookings | CustomerTicketsPage | Private |
-| /my-bookings/:id | CustomerTicketDetailPage | Private |
-| /admin/tours | AdminToursPage | ADMIN |
-| /admin/tours/create | TourCreatePage | ADMIN |
-| /admin/tours/:id | AdminTourDetailsPage | ADMIN |
-| /admin/transports | TransportPage | ADMIN |
-| /admin/meals | MealsPage | ADMIN |
+- Create and edit tours with optimized dynamic forms.
+- Search agencies and branches through paginated backend selectors.
+- Register transportation with visual vehicle-type icons.
+- Import multiple transportation units through a generic Excel dialog.
+- Generate specialized seats in bulk and manage individual seat details.
+- Filter and sort tours, transportation, reservations, tickets, and seats.
+
+## Important components
+
+| Component | Responsibility |
+|---|---|
+| `CustomerTourCatalog` | Public tour discovery and filters |
+| `BookingManager` | Guest and inventory selection |
+| `CustomerTicketsManager` | Customer ticket history |
+| `TransportationManager` | Fleet table and Excel import |
+| `TransportationCreate` | Agency-aware unit registration and seat generation |
+| `SeatManager` | Seat summary, filters, and editing workflow |
+| `GuidedStepsDialog` | Reusable customer guidance |

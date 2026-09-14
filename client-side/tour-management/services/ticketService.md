@@ -7,7 +7,7 @@
 ### getAll() -> Ticket[]
 ### getById(id) -> Ticket
 ### create(data) -> Ticket
-### filter(params) -> PageData<Ticket>
+### search(params) -> PageResponse<Ticket>
 ### updateStatus(id, status) -> Ticket
 ### approve(id) -> Ticket
 ### confirm(id) -> Ticket

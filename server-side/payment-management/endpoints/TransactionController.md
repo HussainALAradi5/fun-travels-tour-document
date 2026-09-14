@@ -5,7 +5,7 @@
 
 ## Endpoints
 
-### GET /api/transactions/filter
+### GET /api/transactions/search
 
 **Description:** Filter transactions
 **Service Method:** `TransactionService.filterTransactions(...)`
@@ -20,7 +20,7 @@
 | branchId | Long | No | Filter by branch |
 | sortBy | String | No | Sort field (default: timestamp) |
 | sortDir | String | No | Sort direction (default: desc) |
-**Response (200 OK):** List of Transaction entities
+**Response (200 OK):** `ApiResponse<PageResponse<Transaction>>`
 **Access:** ADMIN, MANAGER, EMPLOYEE, CUSTOMER, OWNER
 
 ---

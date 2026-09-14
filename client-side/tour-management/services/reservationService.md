@@ -9,4 +9,4 @@
 ### create(data) -> TourReservation
 ### updateStatus(id, status) -> TourReservation
 ### cancel(id) -> TourReservation
-### filter(params) -> PageData<TourReservation>
+### search(params) -> PageResponse<TourReservation>

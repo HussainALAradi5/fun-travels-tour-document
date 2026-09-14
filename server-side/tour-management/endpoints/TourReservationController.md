@@ -34,7 +34,7 @@
 
 ---
 
-### GET /api/reservations/filter
+### GET /api/reservations/search
 
 **Description:** Filter reservations
 **Service Method:** `TourReservationService.filter(status, customerId, agencyId)`
@@ -44,7 +44,7 @@
 | status | GenericStatus | No | Filter by status |
 | customerId | Long | No | Filter by customer |
 | agencyId | Long | No | Filter by agency |
-**Response (200 OK):** List of TourReservation entities
+**Response (200 OK):** `ApiResponse<PageResponse<TourReservationResponse>>`
 **Access:** Authenticated
 
 ---
@@ -53,7 +53,7 @@
 
 **Description:** Get all reservations
 **Service Method:** `TourReservationService.getAll()`
-**Response (200 OK):** List of TourReservation entities
+**Response (200 OK):** `ApiResponse<PageResponse<TourReservationResponse>>`
 **Access:** Authenticated
 
 ---

@@ -1,81 +1,40 @@
-# Fun Travels Tour - Server Documentation
+# Server Documentation
 
-Backend API for the Fun Travels Tour travel agency management platform.
-
-**Tech:** Java 21 | Spring Boot 3.4.13 | PostgreSQL | JWT | Stripe
-
-## Quick Start
-
-```bash
-# Prerequisites: Java 21+, PostgreSQL 15+
-
-# 1. Create database
-createdb fun_travels_tour
-
-# 2. Configure src/main/resources/application.properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/fun_travels_tour
-spring.datasource.username=your_user
-spring.datasource.password=your_pass
-spring.jpa.hibernate.ddl-auto=update
-jwt.secret=your_secret_key
-stripe.api.secret-key=sk_test_xxx
-stripe.api.publishable-key=pk_test_xxx
-
-# 3. Run
-./mvnw spring-boot:run
-```
-
-Server starts at `http://localhost:8080`
+The backend is a Java 21 and Spring Boot 3.5.16 REST application backed by PostgreSQL.
 
 ## Architecture
 
-```
-com.server.server/
-├── Config/           # Security, JWT, CORS, Stripe, WebSocket, Audit
-├── controllers/      # REST API endpoints (20 controllers)
-├── Models/           # JPA entities (19 entities)
-├── repositories/     # Spring Data JPA repositories (19 repos)
-├── services/         # Business logic (27 services)
-├── enums/            # Type enumerations (17 enums)
-├── exceptions/       # Global error handling
-└── utilities/        # ApiResponse wrapper
-```
+| Layer | Responsibility |
+|---|---|
+| Controllers | HTTP routing, validation, authorization, and response envelopes |
+| Services | Transactions, workflows, conflict checks, and orchestration |
+| Repositories | Spring Data JPA queries, specifications, locks, and entity graphs |
+| DTOs and mappers | Stable API contracts without exposing persistence graphs |
+| Utilities | Pagination, filtering, workflow validation, Excel parsing, and mapping |
+| Exceptions | Consistent user-safe errors through `GlobalExceptionHandler` |
 
-## Domain Modules
+## Local setup
 
-| Module | Entities | Services | Endpoints |
-|--------|----------|----------|-----------|
-| [User Management](user-management/) | User, Account | AuthService, UserService, AccountService | Auth, User, Account, Wallet |
-| [Agency Management](agency-management/) | Agency, AgencyBranch | AgencyService, AgencyBranchService | Agency, AgencyBranch |
-| [Tour Management](tour-management/) | Tour, Transportation, Seat, MealPlan, TourReservation, Ticket | TourService, TransportationService, SeatService, MealPlanService, TourReservationService, TicketService | Tour, Transportation, Seat, MealPlan, TourReservation, Ticket |
-| [Payment Management](payment-management/) | Payment, Transaction | PaymentService, TransactionService, PaymentProcessingService, WalletTopUpService | Payment, Transaction, Wallet |
-| [Geography Management](geography-management/) | Country, City, Port | CountryService, CityService, PortService | Country, City, Port |
-| [Notification Management](notification-management/) | Notification | NotificationService | Notification |
-| [Support Management](support-management/) | UserRequest, GenericComment, GenericEventLog | UserRequestService, GenericTrackingService | UserRequest, GenericTracking |
+1. Install Java 21 and PostgreSQL.
+2. Create the `fun_travels_tour` database.
+3. Copy `src/main/resources/application.properties.example` to `application.properties`.
+4. Configure database, JWT, payment, and optional mail credentials.
+5. Run `./mvnw spring-boot:run` (`.\mvnw.cmd spring-boot:run` on Windows).
 
-## User Roles
+The API starts at `http://localhost:8080/api` by default.
 
-| Role | Access Level |
-|------|-------------|
-| ADMIN | Full system access |
-| OWNER | Agency owner - manages branches, employees, tours |
-| MANAGER | Branch manager - manages tours and reservations |
-| EMPLOYEE | Day-to-day operations |
-| CUSTOMER | Books tours, views tickets, makes payments |
-| SUPPORT_AGENT | Handles support requests |
+## Shared collection contract
 
-## Security
+Paginated endpoints accept `page`, `size`, `sortBy`, and `sortDir`. Search endpoints add domain filters such as `search`, `startDate`, `endDate`, `status`, `agencyId`, and `branchId`. Unsupported sort fields and directions are rejected with clear client-safe messages.
 
-- JWT token-based authentication (stateless)
-- BCrypt password hashing
-- CORS: localhost, Android emulator (10.0.2.2)
-- WebSocket: STOMP at /ws-notifications
+## Security and integrity
 
-## External Integrations
+- Stateless JWT authentication and BCrypt password hashing
+- Method-level role authorization
+- Transactional workflow operations
+- Pessimistic locking for contention-sensitive inventory
+- DTO responses that avoid recursive or lazy entity serialization
+- Central validation and exception translation
 
-| Service | Purpose |
-|---------|---------|
-| Stripe | Payment processing |
-| Twilio | SMS/WhatsApp messaging |
-| RestCountries API | Country data sync |
-| ZXing | QR code / barcode generation |
+See the domain folders for endpoint and service contracts.
+See the [complete endpoint reference](ENDPOINT_REFERENCE.md) for the URL-to-service/function mapping and the [platform services](platform-services/) section for shared infrastructure.

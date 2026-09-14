@@ -16,7 +16,7 @@
 
 ---
 
-### GET /api/payments/filter
+### GET /api/payments/search
 
 **Description:** Filter payments
 **Service Method:** `PaymentService.filter(userId, status, method, date)`
@@ -27,5 +27,5 @@
 | status | PaymentStatus | No | Filter by status |
 | method | PaymentMethod | No | Filter by method |
 | date | LocalDate | No | Filter by date |
-**Response (200 OK):** List of Payment entities
+**Response (200 OK):** `ApiResponse<PageResponse<Payment>>`
 **Access:** CUSTOMER, ADMIN, MANAGER

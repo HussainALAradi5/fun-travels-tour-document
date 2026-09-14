@@ -1,5 +1,14 @@
 # UserRequestService
 
+## Additional public function reference
+
+| Function and signature | Parameters | Logic and business purpose | Return / side effects | Exceptions |
+|---|---|---|---|---|
+| `public UserRequest assignRequest(Integer requestId, Integer agentId)` | Request and agent IDs | Resolves both, assigns ownership, updates workflow state, saves, logs, and notifies. | Updated request plus audit/notification writes. | Missing-resource and workflow failures propagate. |
+| `public PageResponse<UserRequest> getFilteredRequests(UserRequestFilterRequest filter)` | Status, priority, ownership, dates, search, page/sort | Builds specifications, applies role scope, and executes safe pagination. | Request page; read-only. | Range/pagination validation may propagate. |
+| `public UserRequest getById(Integer id)` | Required request ID | Resolves one support request. | Request; read-only. | Resource-not-found failure. |
+| `public void delete(Integer id)` | Required request ID | Verifies existence, then deletes. | Deletes request. | `"Cannot delete: Request #{id} does not exist."` |
+
 **File:** `src/main/java/com/server/server/services/UserRequestService.java`
 
 ## Methods

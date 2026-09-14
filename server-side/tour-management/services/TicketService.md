@@ -1,5 +1,14 @@
 # TicketService
 
+## Additional public function reference
+
+| Function and signature | Parameters | Logic and business purpose | Return / side effects | Exceptions |
+|---|---|---|---|---|
+| `public Ticket cancelTicket(Integer ticketId)` | Required ticket ID | Validates ownership/state/tour timing, applies refund rules where eligible, releases inventory, cancels, saves, and notifies. | Cancelled ticket plus inventory/financial/notification writes. | `"You are not authorized to cancel this ticket."`, `"Ticket is already cancelled."`, `"Cannot cancel a ticket for a completed tour."` |
+| `public Ticket approveTicket(Integer id)` | Ticket ID | Delegates to the approved workflow transition. | Approved ticket. | Paid-reservation and transition failures propagate. |
+| `public Ticket confirmTicket(Integer id)` | Ticket ID | Delegates to the confirmed workflow transition. | Confirmed ticket. | Workflow transition failures propagate. |
+| `public void autoCancelExpiredTickets()` | None | Finds pending tickets for past tours, cancels them, releases inventory, saves, notifies, and isolates/logs each failure. | Batch state changes and notifications. | Per-ticket exceptions are caught and logged. |
+
 **File:** `src/main/java/com/server/server/services/tourmanagement/TicketService.java`
 
 ## Methods

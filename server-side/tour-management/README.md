@@ -1,36 +1,32 @@
 # Tour Management
 
-Core domain handling tours, transportation, tickets, seats, reservations, and meal plans.
+Tour management coordinates tours, transportation, seats, reservations, tickets, and meal plans as one operational workflow.
 
-## Entities
-- **Tour** - Tour package with dates, pricing, capacity, and destinations
-- **Transportation** - Vehicle/vessel (bus, flight, boat, train, etc.)
-- **Seat** - Individual seat within a transportation unit
-- **MealPlan** - Meal option available for tours
-- **TourReservation** - Customer reservation for a tour
-- **Ticket** - Individual passenger ticket with QR/barcode
+## Domain flow
 
-## Services
-- [TourService](services/TourService.md) - Tour lifecycle management
-- [TransportationService](services/TransportationService.md) - Transport CRUD
-- [SeatService](services/SeatService.md) - Seat management
-- [MealPlanService](services/MealPlanService.md) - Meal plan management
-- [TourReservationService](services/TourReservationService.md) - Reservation handling
-- [TicketService](services/TicketService.md) - Ticket generation and management
+1. An authorized agency user registers transportation and its seat layout.
+2. A tour is configured with dates, destinations, capacity, meals, and optional transportation.
+3. Workflow validation prevents invalid status changes and conflicting inventory usage.
+4. A customer reservation holds capacity while checkout is completed.
+5. Confirmed passengers receive tickets with seat, QR/barcode, and journey details.
+6. Cancellation and completion update inventory and financial state consistently.
 
-## Endpoints
-- [TourController](endpoints/TourController.md) - `/api/tours`
-- [TransportationController](endpoints/TransportationController.md) - `/api/transportations`
-- [SeatController](endpoints/SeatController.md) - `/api/seats`
-- [MealPlanController](endpoints/MealPlanController.md) - `/api/meals`
-- [TourReservationController](endpoints/TourReservationController.md) - `/api/reservations`
-- [TicketController](endpoints/TicketController.md) - `/api/tickets`
+## Important rules
 
-## Business Logic
-- Tours go through a workflow: PENDING -> APPROVED -> CONFIRMED -> COMPLETED/CANCELLED
-- Auto-generated codes for tours, reservations, tickets, transport units
-- Seat allocation prevents double-booking
-- Reservations validate available capacity
-- Tickets include QR codes and barcodes for verification
-- Cancellation triggers refund calculation
-- Scheduled tasks auto-complete expired tours and cancel unpaid reservations
+- Requested capacity cannot exceed available tour or transportation inventory.
+- Seat allocation must not double-book a physical seat.
+- Bulk seat layouts cannot exceed transportation capacity.
+- Protected seat layouts cannot be changed while seats are unavailable or a linked tour is approved/active.
+- Paginated list responses remain lightweight; detail queries explicitly load required relationships.
+- Status transitions are validated centrally rather than accepted as arbitrary strings.
+
+## Documentation
+
+- [Tour service](services/TourService.md)
+- [Transportation service](services/TransportationService.md)
+- [Seat service](services/SeatService.md)
+- [Reservation service](services/TourReservationService.md)
+- [Inventory service](services/InventoryService.md)
+- [Ticket service](services/TicketService.md)
+- [Transportation endpoints](endpoints/TransportationController.md)
+- [Seat endpoints](endpoints/SeatController.md)

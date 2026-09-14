@@ -21,7 +21,7 @@
 
 ---
 
-### GET /api/tours/filter
+### GET /api/tours/search
 
 **Description:** Filter tours with pagination and sorting
 **Service Method:** `TourService.filter(...)`
@@ -41,7 +41,7 @@
 | createdById | Integer | No | Creator user ID |
 | sortBy | String | No | Sort field |
 | sortDir | String | No | asc/desc |
-**Response (200 OK):** List of Tour entities
+**Response (200 OK):** `ApiResponse<PageResponse<TourResponse>>`
 **Access:** ADMIN, MANAGER, EMPLOYEE, OWNER
 
 ---
@@ -50,7 +50,7 @@
 
 **Description:** Get all tours
 **Service Method:** `TourService.getAll()`
-**Response (200 OK):** List of Tour entities
+**Response (200 OK):** `ApiResponse<PageResponse<TourResponse>>`
 **Access:** ADMIN, MANAGER, EMPLOYEE, OWNER
 
 ---

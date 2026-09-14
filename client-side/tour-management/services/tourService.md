@@ -9,5 +9,5 @@
 ### create(tourData) -> Tour
 ### update(id, tourData) -> Tour
 ### updateStatus(id, status) -> Tour
-### filter(params) -> PageData<Tour>
-### getCatalog(params) -> PageData<Tour>
+### search(params) -> PageResponse<Tour>
+### getCatalog(params) -> PageResponse<Tour>

@@ -1,67 +1,16 @@
-# AgencyService
+# Agency Service
 
-**File:** `src/main/java/com/server/server/services/agency/AgencyService.java`
+**Source:** `src/main/java/com/server/server/services/agency/AgencyService.java`
 
-## Methods
+## Function reference
 
-### getAllAgencies() -> List<Agency>
+| Function and signature | Parameters | Function logic | Business logic | Return and side effects | Exceptions / authorization |
+|---|---|---|---|---|---|
+| `public List<Agency> getAllAgencies()` | None | Calls `findAll`. | Supports complete-list legacy/internal consumers. | All agencies; read-only. | None directly. |
+| `public PageResponse<Agency> searchAgencies(String query, Integer page, Integer size)` | Optional search and pagination | Trims search, creates name-ascending pageable, uses `findAll` when blank or case-insensitive name search otherwise. | Remote selectors must show all page results before typing and remain server-paginated. | One agency page; read-only. | Pagination validation may propagate. |
+| `public Agency getAgencyById(Integer id)` | Required agency ID | Null-checks and queries by ID. | Every agency reference must resolve to a real owner aggregate. | Agency; read-only. | `ResourceNotFoundException("Agency", id)`; null produces `"id must not be null"`. |
+| `public Agency createAgencyFromMap(Map<String,Object> payload)` | Agency fields plus optional `countryId`, `cityId`, `agencyOwnerId` | Maps payload, resolves geography, saves/flushed agency, resolves owner, links both sides, and saves owner. | Relationships use managed entities; flush creates the agency ID before owner linkage. | Created agency; writes agency and optional owner. | Resource-standard messages for missing country, city, or user. |
+| `public List<User> getEmployeesByAgencyId(Integer agencyId)` | Required agency ID | Queries active users by agency. | Deactivated accounts are excluded. | Active employee list; read-only. | Null produces `"agencyId must not be null"`. |
+| `private Integer extractId(Map<String,Object> map, String key)` | Payload and property name | Returns parsed integer; missing or invalid text becomes `null`. | Optional relationship IDs do not break payload mapping. | ID or `null`; no side effects. | None directly. |
 
-**Parameters:** None
-**Returns:** List of all agencies
-**Business Logic:** Direct repository findAll() call
-**Exceptions:** None
-
----
-
-### getAgencyById(id) -> Agency
-
-**Parameters:**
-| Param | Type | Description |
-|-------|------|-------------|
-| id | Integer | Agency ID |
-
-**Returns:** Agency entity
-**Exceptions:**
-| Exception | Condition |
-|-----------|-----------|
-| RuntimeException | "Agency not found with ID: {id}" |
-
----
-
-### createAgencyFromMap(Map<String, Object>) -> Agency
-
-**Parameters:**
-| Param | Type | Description |
-|-------|------|-------------|
-| payload | Map<String, Object> | Map with agencyName, address, contactNumber, countryId, cityId, agencyOwnerId |
-
-**Returns:** Created Agency entity
-
-**Business Logic:**
-1. Converts payload map to Agency entity via ObjectMapper
-2. Resolves Country relationship by countryId
-3. Resolves City relationship by cityId
-4. Saves and flushes agency (forces DB to generate ID)
-5. Links agency owner by agencyOwnerId
-6. Updates owner's agency reference
-7. Returns complete agency with owner
-
-**Exceptions:**
-| Exception | Condition |
-|-----------|-----------|
-| RuntimeException | "Country not found with ID: {id}" |
-| RuntimeException | "City not found with ID: {id}" |
-| RuntimeException | "Owner User not found with ID: {id}" |
-| RuntimeException | "Failed to create agency: {message}" |
-
----
-
-### getEmployeesByAgencyId(agencyId) -> List<User>
-
-**Parameters:**
-| Param | Type | Description |
-|-------|------|-------------|
-| agencyId | Integer | Agency ID |
-
-**Returns:** List of active users in agency
-**Exceptions:** None
+Read functions use `@Transactional(readOnly = true)`; creation uses `@Transactional`.

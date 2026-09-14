@@ -1,5 +1,19 @@
 # TransactionService
 
+## `getById`
+
+**Signature:** `public Transaction getById(Integer id)`
+
+**Parameters:** required transaction ID.
+
+**Logic:** loads the transaction, obtains the authenticated user, and permits platform staff or the owning customer.
+
+**Business logic:** wallet history is private financial data.
+
+**Return:** authorized transaction; read-only.
+
+**Exceptions:** missing-resource error or `AccessDeniedException` with `"You do not have permission to view this transaction."`.
+
 **File:** `src/main/java/com/server/server/services/TransactionService.java`
 
 ## Methods

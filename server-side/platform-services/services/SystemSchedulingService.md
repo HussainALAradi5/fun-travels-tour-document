@@ -1,0 +1,10 @@
+# System Scheduling Service
+
+**Source:** `src/main/java/com/server/server/services/SystemSchedulingService.java`
+
+## Function reference
+
+| Function | Signature | Parameters | Function logic | Business logic | Return/side effects | Exceptions and transaction |
+|---|---|---|---|---|---|---|
+| `registerNightlyTask` | `public void registerNightlyTask(Runnable task)` | `task`: required maintenance callback | Appends the callback to the in-memory task list. | Lets feature services register cleanup without duplicating scheduler configuration. | Mutates the task registry. | No explicit exception or transaction. |
+| `runNightlyMaintenance` | `public void runNightlyMaintenance()` | None | At midnight, logs the count, runs every callback independently, logs individual failures, then completion. | One failed maintenance task must not prevent the remaining tasks. | Runs all registered jobs. | Catches each exception and logs `"Scheduled task failed: {reason}"`; no transaction is imposed across tasks. |
