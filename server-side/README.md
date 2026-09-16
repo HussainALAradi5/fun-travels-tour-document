@@ -37,4 +37,13 @@ Paginated endpoints accept `page`, `size`, `sortBy`, and `sortDir`. Search endpo
 - Central validation and exception translation
 
 See the domain folders for endpoint and service contracts.
-See the [complete endpoint reference](ENDPOINT_REFERENCE.md) for the URL-to-service/function mapping and the [platform services](platform-services/) section for shared infrastructure.
+Endpoint contracts are owned by their feature folders:
+
+- [Agency endpoints](agency-management/ENDPOINTS.md)
+- [Geography endpoints](geography-management/ENDPOINTS.md)
+- [Notification endpoints](notification-management/ENDPOINTS.md)
+- [Payment endpoints](payment-management/ENDPOINTS.md)
+- [Platform service entry points](platform-services/ENDPOINTS.md)
+- [Support endpoints](support-management/ENDPOINTS.md)
+- [Tour and booking endpoints](tour-management/ENDPOINTS.md)
+- [User and authentication endpoints](user-management/ENDPOINTS.md)

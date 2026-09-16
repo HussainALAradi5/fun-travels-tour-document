@@ -33,11 +33,13 @@ Fun Travels Tour manages the operational lifecycle of tours: agency ownership, b
 ## Documentation map
 
 - [Server documentation](server-side/)
-- [Complete endpoint reference](server-side/ENDPOINT_REFERENCE.md)
+- [Feature-owned server endpoints](server-side/README.md)
 - [Shared platform services](server-side/platform-services/)
 - [Client documentation](client-side/)
 - [Implementation updates](IMPLEMENTATION_UPDATES.md)
 - [Documentation standard](DOCUMENTATION_STANDARD.md)
+- [Software engineering artifacts](SOFTWARE_ENGINEERING.md)
+- [System personas](PERSONAS.md)
 - [Agency management](server-side/agency-management/)
 - [Tour and transportation management](server-side/tour-management/)
 - [Payment management](server-side/payment-management/)
