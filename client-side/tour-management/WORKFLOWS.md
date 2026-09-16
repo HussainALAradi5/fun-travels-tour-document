@@ -17,7 +17,14 @@
 3. Submissions are disabled while pending.
 4. Only affected query caches are invalidated.
 
+## Booking and payment behavior
+
+1. The client submits the selected travelers, meals, and seats to create a 15-minute pending reservation hold.
+2. The checkout then requests wallet payment using the returned reservation ID.
+3. Only a server response with a confirmed reservation is presented as a successful booking.
+4. If payment fails, the page keeps the pending reservation ID and presents `Retry Wallet Payment` while explaining the remaining hold.
+5. Customer ticket lifecycle controls are read-only; cancellation is the only customer mutation and displays the full/partial/no-refund windows.
+
 ## Traceability
 
 Each WF identifier maps to related RQ and UC identifiers in this module. Workflow changes require corresponding flowchart updates.
-

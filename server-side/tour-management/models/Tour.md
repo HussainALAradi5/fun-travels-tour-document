@@ -37,7 +37,7 @@
 
 ## Status Workflow
 ```
-PENDING -> APPROVED -> CONFIRMED -> COMPLETED
+PENDING -> APPROVED -> ACTIVE -> COMPLETED
                 \-> REJECTED
          \-> CANCELLED
 ```

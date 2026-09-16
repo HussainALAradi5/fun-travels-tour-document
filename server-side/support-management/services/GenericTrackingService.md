@@ -5,8 +5,8 @@
 | Function and signature | Parameters | Logic and business purpose | Return / side effects | Exceptions |
 |---|---|---|---|---|
 | `public Map<String,Object> getTimelineMap(Integer refId, ReferenceType refType)` | Required reference ID/type | Combines comments and events into one auditable timeline response. | Timeline map; read-only. | Reference validation failures may propagate. |
-| `public GenericComment addComment(Integer refId, ReferenceType refType, String content, Integer userId)` | Reference, text, author ID | Validates modifiability, resolves author, saves comment, and logs the event. | Created comment and audit event. | Closed reference: `"This request is closed. No further modifications are allowed."`; missing user/reference errors propagate. |
-| `public GenericComment updateComment(Integer commentId, Integer editorId, String newContent)` | Comment, editor, new text | Resolves comment and editor, verifies authorship, updates text/time, and saves. | Updated comment. | `"Unauthorized: Only the author can edit this comment"`; missing resources propagate. |
+| `public GenericComment addComment(Integer refId, ReferenceType refType, String content)` | Reference and comment text | Validates reference access/state, derives the author from authentication, and saves the comment. | Created comment. | Closed reference: `"This request is closed. No further modifications are allowed."`; blank content and access errors are explicit. |
+| `public GenericComment updateComment(Integer commentId, String newContent)` | Comment and replacement text | Derives the editor from authentication, verifies authorship and reference access/state, then saves. | Updated comment. | `"Unauthorized: Only the author can edit this comment"`; missing/blank content errors propagate. |
 | `public List<GenericComment> getComments(Integer refId, ReferenceType refType)` | Reference ID/type | Queries comments in timeline order. | Comment list; read-only. | Repository failures may propagate. |
 | `public void logEvent(Integer refId, ReferenceType refType, String action, String description, User actor)` | Reference and event metadata | Constructs and saves an immutable audit event. | Writes event log. | Persistence failures may propagate. |
 | `public List<GenericEventLog> getEvents(Integer refId, ReferenceType refType)` | Reference ID/type | Queries event history. | Event list; read-only. | Repository failures may propagate. |
@@ -27,11 +27,11 @@ Merged event log + comments timeline.
 
 Loads comments and event records for the same reference and returns the data required to render one auditable timeline. It is read-only and must not silently mix different reference types. Invalid/missing references display their resource-specific validation message.
 
-### `addComment(Integer refId, ReferenceType refType, String content, Integer userId)`
+### `addComment(Integer refId, ReferenceType refType, String content)`
 
-Verifies that the referenced workflow is still modifiable, resolves the author, saves the comment, and records a matching audit event. Both records should be committed as one operation. A closed workflow displays `This request is closed. No further modifications are allowed.` A missing author or reference displays its resource-not-found message. Empty content should be rejected with a `content` field error.
+Verifies access and that the referenced workflow remains modifiable, derives the author from the authenticated session, and saves the comment. A closed workflow displays `This request is closed. No further modifications are allowed.` Empty content displays `Comment content is required.`
 
-### `updateComment(Integer commentId, Integer editorId, String newContent)`
+### `updateComment(Integer commentId, String newContent)`
 
 Loads the comment and editor, verifies that the editor is the original author, updates the text and modification time, and saves. A different user receives `Unauthorized: Only the author can edit this comment`. Missing records use their resource-not-found messages. Empty replacement content should be rejected before persistence.
 

@@ -17,7 +17,15 @@
 3. Domain events, notifications, and audit records follow the committed state.
 4. Retry behavior must not duplicate charges, inventory, or terminal transitions.
 
+## Authoritative lifecycle rules
+
+- A reservation is confirmed only by successful payment; the administrative status command cannot approve or confirm it.
+- Rejecting a pending reservation cancels its tickets, clears its hold, and releases held capacity and seats.
+- Completing a confirmed reservation completes every non-cancelled ticket.
+- Cancelling a tour cancels affected reservations and tickets, releases seats, refunds confirmed bookings to customer wallets, and notifies customers atomically.
+- Ticket seat changes lock and validate the replacement seat before releasing the current seat.
+- Customer ticket workflow indicators are read-only; customers may cancel their own ticket but cannot approve, confirm, or complete it.
+
 ## Traceability
 
 Each WF identifier maps to related RQ and UC identifiers in this module. Workflow changes require corresponding flowchart updates.
-

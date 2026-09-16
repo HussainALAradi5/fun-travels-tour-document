@@ -17,7 +17,8 @@
 3. Domain events, notifications, and audit records follow the committed state.
 4. Retry behavior must not duplicate charges, inventory, or terminal transitions.
 
+The authenticated principal is always the request/comment actor. Browser-supplied solver, rejector, author, or editor IDs are not accepted. Requests progress from `PENDING` to assigned (`APPROVED`) and then `COMPLETED`, or from pending/assigned to `REJECTED`. Completed and rejected requests are closed to comments and further transitions.
+
 ## Traceability
 
 Each WF identifier maps to related RQ and UC identifiers in this module. Workflow changes require corresponding flowchart updates.
-
