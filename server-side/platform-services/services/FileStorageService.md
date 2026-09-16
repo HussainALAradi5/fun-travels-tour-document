@@ -22,3 +22,9 @@
 **Exception:** `RuntimeException` with `"Could not save image file: {reason}"` for filesystem I/O failures. Invalid Base64 may propagate `IllegalArgumentException`.
 
 **Authorization and transaction:** Authorization belongs to the calling profile workflow; no database transaction.
+
+## Expected behavior and displayed errors
+
+On success, the directory exists, the decoded image is stored as `{preferredName}.jpg`, and the caller receives `/uploads/profiles/{preferredName}.jpg`. Reusing the same preferred name intentionally replaces the previous profile image.
+
+The calling workflow must reject empty payloads, unsupported media, and excessive image sizes before storage. Invalid Base64 should be translated to `The selected image is invalid. Please choose another image.` File-system failures display `Could not save image file: {reason}` to an administrator or `The image could not be saved. Please try again.` to a customer. Absolute server paths and permission details must never be returned.
