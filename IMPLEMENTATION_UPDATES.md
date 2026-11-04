@@ -1,5 +1,10 @@
 # Implementation Updates
 
+## 2026-11-04 (late) - Mobile parity with the web customer app
+
+- New mobile screens: boarding pass, transaction and payment details, payments list, support requests (list, create, reply, delete), profile edit (photo, phone with country code), password reset with code, catalog filters, My reports, and Export buttons on tours, bookings, and wallet; notifications open the related screen. See [mobile](mobile/README.md).
+- Shared mobile components: `SelectSheet` (searchable picker, now also behind `PhoneField`), `InfoRow`, `LinkRow`, `Avatar`, `ExportButton`; generated DTOs extended to payments, support, reports, and media.
+
 ## 2026-11-04 (night) - Server-generated reports and media
 
 - **Server.** `ReportType` and `ReportFormat` enums, a `Media` model (`media` table) with `MediaCategory`, `MediaRepository`, `MediaService` (private storage through `FileStorageService`), `ReportDataService` (rows through the scoped domain services), `ReportService`, OpenPDF and Apache POI renderers with the same branded template as the web client, `POST /api/reports`, `GET /api/media`, `GET /api/media/{id}/download`, `DELETE /api/media/{id}`. New setting `app.media-dir` (`MEDIA_DIR`, default `./media`).

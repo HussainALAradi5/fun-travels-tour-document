@@ -1,5 +1,14 @@
 # Verification
 
+## 2026-11-04 (late): mobile parity
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Mobile | `tsc --noEmit`, `expo lint` (0 problems), `expo export --platform android`; every screen at most 150 lines | Pass |
+| Mobile | Contract run of every endpoint the new screens call, in app order, against a running server | 24/24, plus payment detail on a paid booking |
+| Mobile | Original booking contract run | 20/20 |
+| Not verified | The app on an Android or iOS device or emulator (none available); the share sheet and photo picker need a device | - |
+
 ## 2026-11-04 (night): server-generated reports
 
 | Repository | Check | Result |

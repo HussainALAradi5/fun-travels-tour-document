@@ -27,6 +27,10 @@ ENUMS = {
     "mobile": {
         "GenericStatus": "@/enums/GenericStatus", "PaymentMethod": "@/enums/PaymentMethod",
         "SeatStatus": "@/enums/SeatStatus", "TicketStatus": "@/enums/TicketStatus",
+        "ReportType": "@/enums/ReportType", "ReportFormat": "@/enums/ReportFormat", "MediaCategory": "@/enums/MediaCategory",
+        "UserRequestType": "@/enums/UserRequestType", "UserRequestStatus": "@/enums/UserRequestStatus",
+        "ReferenceType": "@/enums/ReferenceType", "PaymentStatus": "@/enums/PaymentStatus",
+        "TransactionType": "@/enums/TransactionType",
     },
 }[FLAVOR]
 # The mobile app only calls customer endpoints; it mirrors just those contracts.
@@ -36,7 +40,9 @@ MOBILE_TYPES = {
     "EntityReference", "TourResponse", "TourSummary", "CountrySummary", "CitySummary", "TransportationSummary",
     "UserSummary", "MealPlanResponse", "SeatResponse", "SeatSummary", "ReservationCreateRequest",
     "TicketSelectionRequest", "ReservationResponse", "TicketResponse", "NotificationResponse", "NotificationCounts",
-    "PasswordResetRequest", "PasswordResetConfirmRequest", "CountryResponse",
+    "PasswordResetRequest", "PasswordResetConfirmRequest", "CountryResponse", "PaymentResponse", "ReservationSummary",
+    "UserRequestCreateRequest", "UserRequestResponse", "CommentRequest", "CommentResponse", "EventLogResponse",
+    "TimelineResponse", "ReportRequest", "MediaResponse",
 }
 NUM = {"Integer", "int", "Double", "double", "Long", "long", "BigDecimal", "Float", "float", "Short"}
 
