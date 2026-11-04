@@ -30,6 +30,17 @@ Shared values live in `constants/`; services never repeat them inline.
 | `PAYMENT` | `"TRX"` |
 | `ACCOUNT` | `"ACC"` |
 
+## ReportRules
+
+| Name | Value |
+| --- | --- |
+| `MAX_ROWS` | `5000` |
+| `LOAD_PAGE_SIZE` | `100` |
+| `BRAND_NAME` | `"Fun Travels Tour"` |
+| `BRAND_TAGLINE` | `"Travel agency management platform"` |
+| `CONFIDENTIALITY` | `"Confidential - for internal use only"` |
+| `MEDIA_REPORT_FOLDER` | `"reports"` |
+
 ## RoleGroups
 
 | Name | Value |
@@ -38,6 +49,8 @@ Shared values live in `constants/`; services never repeat them inline.
 | `SUPPORT_STAFF` | `EnumSet.of( UserTypeEnum.ADMIN, UserTypeEnum.SUPPORT_AGENT)` |
 | `OWNER_CREATABLE` | `EnumSet.of( UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
 | `MANAGER_CREATABLE` | `EnumSet.of(UserTypeEnum.EMPLOYEE)` |
+| `REPORT_STAFF` | `EnumSet.of( UserTypeEnum.ADMIN, UserTypeEnum.OWNER, UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
+| `USER_REPORT` | `EnumSet.of(UserTypeEnum.ADMIN, UserTypeEnum.MANAGER)` |
 | `IMPORTABLE` | `EnumSet.of( UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
 
 ## ValidationPatterns

@@ -10,6 +10,7 @@ Every persisted model extends [BaseEntity](base/BaseEntity.md): `id`, unique `co
 | geography | [City](geography/City.md) | `cities` | BaseEntity |
 | geography | [Country](geography/Country.md) | `countries` | BaseEntity |
 | geography | [Port](geography/Port.md) | `ports` | BaseEntity |
+| media | [Media](media/Media.md) | `media` | BaseEntity |
 | notification | [Notification](notification/Notification.md) | `notifications` | BaseEntity |
 | payment | [Account](payment/Account.md) | `accounts` | BaseEntity |
 | payment | [Payment](payment/Payment.md) | `payments` | BaseEntity |
@@ -44,6 +45,7 @@ Every persisted model extends [BaseEntity](base/BaseEntity.md): `id`, unique `co
 | City | ManyToOne | Country | `country` | `country_id` | - |
 | Port | ManyToOne | City | `city` | `city_id` | - |
 | Port | ManyToOne | Country | `country` | `country_id` | - |
+| Media | ManyToOne | User | `owner` | `owner_id` | - |
 | Notification | ManyToOne | User | `recipient` | `user_id` | - |
 | Account | OneToOne | User | `user` | `user_id` | - |
 | Payment | ManyToOne | TourReservation | `reservation` | `reservation_id` | - |

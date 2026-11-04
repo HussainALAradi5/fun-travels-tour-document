@@ -10,11 +10,13 @@ Generated from the controller source; one file per controller, grouped by domain
 | geography | [CityController](geography/CityController.md) | `/api/cities` | 4 |
 | geography | [CountryController](geography/CountryController.md) | `/api/countries` | 5 |
 | geography | [PortController](geography/PortController.md) | `/api/ports` | 3 |
+| media | [MediaController](media/MediaController.md) | `/api/media` | 3 |
 | notification | [NotificationController](notification/NotificationController.md) | `/api/notifications` | 3 |
 | payment | [AccountController](payment/AccountController.md) | `/api/accounts/user/{userId}` | 2 |
 | payment | [PaymentController](payment/PaymentController.md) | `/api/payments` | 3 |
 | payment | [TransactionController](payment/TransactionController.md) | `/api/transactions` | 3 |
 | payment | [WalletController](payment/WalletController.md) | `/api/wallet` | 2 |
+| report | [ReportController](report/ReportController.md) | `/api/reports` | 1 |
 | support | [GenericTrackingController](support/GenericTrackingController.md) | `/api/tracking` | 3 |
 | support | [UserRequestController](support/UserRequestController.md) | `/api/user-requests` | 7 |
 | tourmanagement | [MealPlanController](tourmanagement/MealPlanController.md) | `/api/meals` | 6 |

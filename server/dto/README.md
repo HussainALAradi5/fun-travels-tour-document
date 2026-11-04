@@ -32,6 +32,8 @@ Every request and response body is a Java record in `dto/<domain>/`, one type pe
 | geography | [CountrySummary](geography/README.md#countrysummary) | response record |
 | geography | [PortCreateRequest](geography/README.md#portcreaterequest) | request record |
 | geography | [PortResponse](geography/README.md#portresponse) | response record |
+| media | [MediaFile](media/README.md#mediafile) | response record |
+| media | [MediaResponse](media/README.md#mediaresponse) | response record |
 | notification | [NotificationCounts](notification/README.md#notificationcounts) | response record |
 | notification | [NotificationResponse](notification/README.md#notificationresponse) | response record |
 | payment | [AccountResponse](payment/README.md#accountresponse) | response record |
@@ -40,6 +42,7 @@ Every request and response body is a Java record in `dto/<domain>/`, one type pe
 | payment | [PaymentResponse](payment/README.md#paymentresponse) | response record |
 | payment | [TransactionFilterRequest](payment/README.md#transactionfilterrequest) | query parameters (class) |
 | payment | [TransactionResponse](payment/README.md#transactionresponse) | response record |
+| report | [ReportRequest](report/README.md#reportrequest) | request record |
 | support | [CommentRequest](support/README.md#commentrequest) | request record |
 | support | [CommentResponse](support/README.md#commentresponse) | response record |
 | support | [EventLogResponse](support/README.md#eventlogresponse) | response record |

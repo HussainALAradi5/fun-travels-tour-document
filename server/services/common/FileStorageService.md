@@ -2,7 +2,7 @@
 
 Source: `services/common/FileStorageService.java`.
 
-Stores validated uploads under `app.upload-dir`. Only JPEG and PNG images are accepted.
+Stores files. Profile images go to the public `app.upload-dir` (JPEG and PNG only); private files such as reports go to `app.media-dir`, which is only reachable through access-checked endpoints.
 
 ## Functions
 
@@ -13,3 +13,11 @@ Stores validated uploads under `app.upload-dir`. Only JPEG and PNG images are ac
 ### `void deleteProfileImage(String publicPath)`
 
 **Purpose:** Deletes a stored profile image by its public path; paths outside the profile folder are ignored.
+
+### `void writePrivate(String relativePath, byte[] content)`
+
+**Purpose:** Writes a private file (relative to `app.media-dir`); private files are never served statically.
+
+### `byte[] readPrivate(String relativePath)`
+
+### `void deletePrivate(String relativePath)`

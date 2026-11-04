@@ -1,5 +1,11 @@
 # Implementation Updates
 
+## 2026-11-04 (night) - Server-generated reports and media
+
+- **Server.** `ReportType` and `ReportFormat` enums, a `Media` model (`media` table) with `MediaCategory`, `MediaRepository`, `MediaService` (private storage through `FileStorageService`), `ReportDataService` (rows through the scoped domain services), `ReportService`, OpenPDF and Apache POI renderers with the same branded template as the web client, `POST /api/reports`, `GET /api/media`, `GET /api/media/{id}/download`, `DELETE /api/media/{id}`. New setting `app.media-dir` (`MEDIA_DIR`, default `./media`).
+- **Web client.** Export buttons on tours, catalog, tickets, passenger manifest, fleet, meals, ledger, users, and agency branches/employees request the server report (`reportService`, `mediaService`, `useServerReport`); selected rows and guests still export in the browser.
+- **Fixed during testing.** PDF footer said "of 4" on a 3-page report (OpenPDF's page counter on close); money now always shows two decimals.
+
 ## 2026-11-04 (evening) - Report template for every PDF and Excel export
 
 - One branded template for all exports: letterhead, report meta, repeated table header, page numbers, confidentiality footer, rows kept whole, QR codes as images (PDF); typed, filterable, print-ready sheets (Excel). Import templates keep a clean header row plus an Instructions sheet. See [client](client/README.md#exports-pdf-and-excel).

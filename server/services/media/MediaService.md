@@ -1,0 +1,31 @@
+# MediaService
+
+Source: `services/media/MediaService.java`.
+
+Stored files and who may see them: the owner, or an administrator.
+
+## Business logic
+
+Stores generated files under the private `app.media-dir` (never served statically) at `reports/<ownerId>/<random>.<ext>`, with a `Media` record holding name, type, size, category, owner, report type and format, and row count. Only the owner or an administrator can download or delete a file (403 otherwise, 404 when missing). `listMine` returns the caller's files, newest first. Storage paths are never returned to clients, and `FileStorageService` rejects paths that would leave the media folder.
+
+## Functions
+
+### `Media storeReport(byte[] content, String fileName, ReportType type, ReportFormat format, int recordCount, User owner)`
+
+**Purpose:** Saves a generated report for its owner under `reports/<ownerId>/<random>.<ext>`.
+
+**Runs in:** transaction
+
+### `PageResponse<Media> listMine(MediaCategory category, Integer page, Integer size)`
+
+**Purpose:** The signed-in user's files, newest first, optionally of one category.
+
+**Runs in:** read-only transaction
+
+### `MediaFile open(Integer id)`
+
+**Runs in:** read-only transaction
+
+### `void delete(Integer id)`
+
+**Runs in:** transaction

@@ -21,6 +21,8 @@ ENUMS = {
         "TicketStatus": "@/enums/tour-management/TicketStatus",
         "TransportationStatus": "@/enums/tour-management/TransportationStatus",
         "TransportationType": "@/enums/tour-management/TransportationType", "UserTypeEnum": ("@/enums/UserType", "UserType"),
+        "ReportType": "@/enums/report/ReportType", "ReportFormat": "@/enums/report/ReportFormat",
+        "MediaCategory": "@/enums/media/MediaCategory",
     },
     "mobile": {
         "GenericStatus": "@/enums/GenericStatus", "PaymentMethod": "@/enums/PaymentMethod",

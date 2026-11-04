@@ -30,6 +30,7 @@ Review of the server, web client, and their contract (2026-11). Every finding be
 | 22 | Medium | Every signed-in user could read every agency's meals, including inactive ones | Agency staff see their agency's and shared meals; others shared meals |
 | 23 | Low | Profile pictures kept one file name per user (browsers showed the old picture) and old files were never deleted | New file name per upload; old file deleted, path checked to stay inside the profile folder |
 | 24 | Low | The card top-up form logged the Stripe token and each step to the browser console | Logging removed |
+| 25 | Design | Generated reports hold customer and financial data | Stored in a private media folder (not under the public `/uploads`), downloaded only through `/api/media/{id}/download` by the owner or an admin with `Cache-Control: no-store`; reports reuse the list pages' scoping and per-type role rules |
 
 ## Known limitations
 

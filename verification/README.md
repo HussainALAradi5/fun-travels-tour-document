@@ -1,5 +1,13 @@
 # Verification
 
+## 2026-11-04 (night): server-generated reports
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw test`: 65 tests, including PDF text checks (letterhead, meta, every row, "Page x of y") and Excel structure (header row, typed dates and money, frozen pane, footer) | Pass |
+| Server | Live: every report type in PDF and Excel as the allowed role, downloaded and checked by file signature; customer/employee role limits; missing parameters; sign-in required; download and delete limited to the owner or an admin; storage path never returned | 52/52 |
+| Web client | `tsc`, `eslint`, `next build`; browser: admin Export -> PDF on the tour inventory made `POST /api/reports` (201) and `GET /api/media/{id}/download` (200) and saved the server's file | Pass |
+
 ## 2026-11-04 (later): DTO records, sign-in, profile, review fixes
 
 | Repository | Check | Result |

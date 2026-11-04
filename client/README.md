@@ -73,7 +73,7 @@ Next.js App Router with Chakra UI. Layers under `src/`:
 
 ## Exports (PDF and Excel)
 
-Every Export button opens `ExportDialog`, which uses one report template (`utilities/export/`, brand values in `constants/export/reportTemplate.ts`):
+Every Export button opens `ExportDialog`. When the table passes a `report` (`ReportSpec`: report type plus `tourId`, `agencyId`, or `role`) and the user is signed in, the **server** generates the report from all matching records and keeps it (`POST /api/reports`, then `GET /api/media/{id}/download` through `useServerReport`). Selected rows, guests, and tables without a report type use the same template in the browser (`utilities/export/`, brand values in `constants/export/reportTemplate.ts`):
 
 | File | Template |
 | --- | --- |
