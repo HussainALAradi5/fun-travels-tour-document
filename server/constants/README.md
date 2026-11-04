@@ -44,5 +44,5 @@ Shared values live in `constants/`; services never repeat them inline.
 
 | Name | Value |
 | --- | --- |
-| `MOBILE_NUMBER` | `"^\\+?[1-9]\\d{7,14}$"` |
-| `MOBILE_NUMBER_MESSAGE` | `"Mobile number must be a valid international phone number"` |
+| `MOBILE_NUMBER` | `"^\\+[1-9]\\d{7,14}$"` |
+| `MOBILE_NUMBER_MESSAGE` | `"Mobile number must start with + and the country code, for example +97339990001"` |

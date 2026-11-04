@@ -1,5 +1,15 @@
 # Implementation Updates
 
+## 2026-11-04 (later) - DTOs everywhere, sign-in, profile, and a full review
+
+- **Server DTOs.** Every request and response is a Java record, one type per file. Responses build themselves with `from(entity)`; `ModelMapper` and the three mapper classes were removed. 28 nested summary classes became 11 shared summary records (`UserSummary`, `CountrySummary`, `TourSummary`, `SeatSummary`, ...). `PageResponse` and `EntityReference` are records. Filter DTOs stay classes (inherited paging fields, query binding). Wire names are unchanged.
+- **Client DTOs.** The web client and the mobile app get a `src/dtos/<domain>/` layer generated from the server records (`tools/generate-ts-dtos.py`). Services use the DTOs, and the hand-written read models (`Tour`, `Ticket`, `User`, ...) are now aliases of them; 26 unused hand-written request interfaces were deleted.
+- **Sign-in.** Email, username, or mobile number, with the password always required. Phone numbers match in any common format.
+- **Country code required.** Mobile numbers are stored as `+<country code><number>`. Register, add employee, profile, and agency contact fields use the country-code picker (Bahrain by default) on web and mobile.
+- **Profile.** `GET`/`PUT /api/users/me/profile` (`ProfileResponse`: identity, agency, branch, wallet, member since). The web profile page and the mobile profile tab use it.
+- **Review fixes (server).** User lists, fleet, and meals are agency-scoped; managers manage only their own branch; admin role changes keep staff in an agency; per-tour seat status filtering runs in the query; meals can be edited (`PUT /api/meals/{id}`); profile photos get new file names and old files are deleted; bookings are wallet-only; failed top-ups stay recorded; missing tour, vehicle, and meal return 404. See [security](security/README.md) items 18-24.
+- **Review fixes (web).** Boarding pass and journey tracker show the real route and vehicle; agency Branches tab loads branches; the profile form edits the name and no longer offers password and image-URL fields the server ignored; meals can be edited and switched on/off; the card form no longer logs the Stripe token. See [client](client/README.md).
+
 ## 2026-11-03 - Clean-up, security, inventory, and mobile
 
 - **Server structure.** Lower-case layer packages with domain subfolders (`controllers/tourmanagement`, `services/payment`, ...); `BaseEntity` for every model (unique `code`, audit fields, identity equality); `constants/`, `middlewares/`, `seeds/`, typed `config/properties`.

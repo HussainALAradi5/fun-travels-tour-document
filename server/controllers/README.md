@@ -17,10 +17,10 @@ Generated from the controller source; one file per controller, grouped by domain
 | payment | [WalletController](payment/WalletController.md) | `/api/wallet` | 2 |
 | support | [GenericTrackingController](support/GenericTrackingController.md) | `/api/tracking` | 3 |
 | support | [UserRequestController](support/UserRequestController.md) | `/api/user-requests` | 7 |
-| tourmanagement | [MealPlanController](tourmanagement/MealPlanController.md) | `/api/meals` | 5 |
+| tourmanagement | [MealPlanController](tourmanagement/MealPlanController.md) | `/api/meals` | 6 |
 | tourmanagement | [SeatController](tourmanagement/SeatController.md) | `/api/seats` | 5 |
 | tourmanagement | [TicketController](tourmanagement/TicketController.md) | `/api/tickets` | 8 |
 | tourmanagement | [TourController](tourmanagement/TourController.md) | `/api/tours` | 7 |
 | tourmanagement | [TourReservationController](tourmanagement/TourReservationController.md) | `/api/reservations` | 6 |
 | tourmanagement | [TransportationController](tourmanagement/TransportationController.md) | `/api/transportations` | 7 |
-| user | [UserController](user/UserController.md) | `/api/users` | 9 |
+| user | [UserController](user/UserController.md) | `/api/users` | 11 |

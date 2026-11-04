@@ -23,10 +23,17 @@ Review of the server, web client, and their contract (2026-11). Every finding be
 | 15 | High | Tour, vehicle, seat, city, country, and port endpoints still bound request bodies straight to JPA entities (mass assignment, unchecked city/country pairs) | Dedicated request DTOs (`TourUpdateRequest`, `TransportationUpdateRequest`, `SeatUpdateRequest`, `CityCreateRequest`, `CountryCreateRequest`, `PortCreateRequest`) with validation |
 | 16 | Medium | WebSocket notifications accepted unauthenticated connections and any topic | STOMP `CONNECT` requires a valid JWT; users may only subscribe to their own `/topic/notifications/<id>` (`WebSocketAuthInterceptor`) |
 | 17 | Low | Booking requests sent travelers' passport numbers, birth dates, and contact details the server never used | Client sends only tour and ticket selections |
+| 18 | High | `GET /api/users` and `/api/users/role/{type}` let managers and owners list every user on the platform, with emails and phone numbers | Agency staff see their own agency, plus customers for walk-in sales |
+| 19 | High | Fleet list, search, and detail were not agency-scoped, and search had no role check (customers could list every vehicle) | Staff only; agency staff see their own agency's vehicles |
+| 20 | Medium | Managers could add or import staff into another branch of the agency, and could import MANAGER accounts | Managers create and import EMPLOYEE accounts in their own branch only |
+| 21 | Medium | An admin role change could leave agency staff without an agency, or change the admin's own role | Agency staff must keep an agency; self-change rejected |
+| 22 | Medium | Every signed-in user could read every agency's meals, including inactive ones | Agency staff see their agency's and shared meals; others shared meals |
+| 23 | Low | Profile pictures kept one file name per user (browsers showed the old picture) and old files were never deleted | New file name per upload; old file deleted, path checked to stay inside the profile folder |
+| 24 | Low | The card top-up form logged the Stripe token and each step to the browser console | Logging removed |
 
 ## Known limitations
 
-- **Card and PayPal booking payments** stay PENDING: no signed provider webhook exists yet to complete them. Wallet payments work end to end. Wallet top-up uses Stripe Charges and was not exercised against Stripe.
+- **Bookings are paid from the wallet only.** Card and PayPal booking payments are rejected (`PAYMENT_METHOD_UNSUPPORTED`) because no signed provider webhook exists to complete them. Wallet top-up uses Stripe Charges and was not exercised against Stripe.
 - **Email delivery** for password reset was not exercised against an SMTP server.
 - **Web client tokens** are stored in `localStorage` (readable by any script injected into the page); an httpOnly cookie session would be stronger.
 - **Schema changes** rely on `ddl-auto=update` plus `SchemaMaintenance`; there are no versioned migrations yet.

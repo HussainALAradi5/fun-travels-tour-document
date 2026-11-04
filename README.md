@@ -21,6 +21,7 @@ The layout mirrors the code layers, not features.
 | [server/models](server/models/README.md) | Every model, its fields, and the relationship table |
 | [server/services](server/services/README.md) | Every service function with signature; business rules for workflow services |
 | [server/controllers](server/controllers/README.md) | Every endpoint: method, path, service function, role, request and response DTO |
+| [server/dto](server/dto/README.md) | Every request and response record with fields and validation rules; how clients mirror them |
 | [server/enums](server/enums/README.md) / [server/constants](server/constants/README.md) | Enumerations and shared rule values |
 | [server/globals](server/globals/README.md) | Configuration, security filters, errors, pagination, schema maintenance, seeds |
 | [client](client/README.md) | Web client layers, services, and contract notes |
@@ -36,6 +37,13 @@ The layout mirrors the code layers, not features.
 
 ```bash
 python tools/generate-reference.py ../fun-travels-tour-server .
+```
+
+After changing a server DTO, regenerate the client mirrors too:
+
+```bash
+python tools/generate-ts-dtos.py ../fun-travels-tour-server/src/main/java/com/server/server/dto ../fun-travels-tour-client/src web
+python tools/generate-ts-dtos.py ../fun-travels-tour-server/src/main/java/com/server/server/dto ../fun-travels-tour-mobile/src mobile
 ```
 
 ## Roles

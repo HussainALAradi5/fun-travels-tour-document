@@ -10,7 +10,8 @@ Next.js App Router with Chakra UI. Layers under `src/`:
 | `hooks/` | State and data loading |
 | `services/<domain>/` | Typed services named after their export (`services/user/userService.ts`) over one axios client (`config/BaseApi.ts`) |
 | `config/` | `api.config.ts` (API base URL, origin, WebSocket URL from `NEXT_PUBLIC_*`) and `endpoints.ts` (every API path, mirroring the server controllers) |
-| `interfaces/`, `types/`, `enums/` | Wire contracts, UI types, enums - one per file |
+| `dtos/<domain>/` | Generated mirrors of the server DTOs (`TourResponseDto`, `RegisterRequestDto`, ...). Services send and receive these; do not edit by hand |
+| `interfaces/`, `types/`, `enums/` | Read models (aliases of DTOs, for example `type Tour = TourResponseDto`), form and UI types, enums - one per file |
 | `utilities/` | Pure helpers, auth and notification contexts |
 
 ## Contract changes in this release
@@ -56,6 +57,19 @@ Next.js App Router with Chakra UI. Layers under `src/`:
 | Seat picker and seat manager | Seats in text order `S1, S10, S2` | `SEAT_ORDER` (`id` ascending) |
 | Tour console | Revenue counted cancelled tickets at base price; vehicle shown as "TR-UNASSIGNED"; header said "Reservation - Step 1" | Live tickets at their paid price; `transportationNumber`; status and tour number |
 | Agencies, branches, itinerary | "City, Country" printed ", " when unset | `formatPlace` |
+
+## Defects found by switching to generated DTOs (2026-11-04)
+
+| Area | Defect | Fix |
+| --- | --- | --- |
+| Boarding pass, journey tracker, verification | Read the tour's cities, countries, vehicle, and status from the ticket, which only carries a tour summary, so they always showed TBD | `useTicketDetail` also loads the tour |
+| Agency detail | Branches tab read `agency.branches`, which the server never sends, so it was always empty | Loads `GET /branches/agency/{id}` |
+| Branch table and export | Showed city, country, and owner mobile, which branches do not have | Shows contact number and manager |
+| Profile edit | Offered "New password" and "Image URL", which the server ignores; had no name field | Name added; ignored fields removed; page uses `/users/me/profile` |
+| Register, add employee, agency contacts | Plain text phone fields; numbers could miss the country code | Country-code picker (`mobile` field type) |
+| Meals | No edit or activate/deactivate; logic inside the page component | `useMealPlans`, `useMealPlanColumns`, row actions |
+| Card top-up | Logged the Stripe token and each step; offered non-card text | Card-only form; logic in `useCardTopUp` |
+| Ticket | `Ticket.isPaid` read a field the server never sends (`paid`) | Ticket is the DTO |
 
 ## Structure change
 

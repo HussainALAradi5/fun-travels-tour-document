@@ -23,7 +23,7 @@ Source: `services/tourmanagement/TourReservationService.java`.
 
 ### `finalizeReservationWithPayment(Integer reservationId, PaymentMethod method)`
 
-Locks the reservation, checks ownership (customer) or agency (staff), requires PENDING status, an unexpired hold, and an ACTIVE tour that has not started. Wallet payments debit the wallet and confirm immediately: active tickets become CONFIRMED, APPROVED, and paid. Card and PayPal payments stay PENDING until a verified provider webhook completes them (not implemented; listed under known limitations in the security review).
+Locks the reservation, checks ownership (customer) or agency (staff), requires PENDING status, an unexpired hold, and an ACTIVE tour that has not started. The wallet is debited and the reservation confirmed at once: active tickets become CONFIRMED, APPROVED, and paid. Other payment methods are rejected with `PAYMENT_METHOD_UNSUPPORTED` (see PaymentService).
 
 | Case | Result |
 | --- | --- |

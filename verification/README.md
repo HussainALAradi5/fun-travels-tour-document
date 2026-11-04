@@ -1,4 +1,18 @@
-# Verification (2026-11-03)
+# Verification
+
+## 2026-11-04 (later): DTO records, sign-in, profile, review fixes
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw clean package`: 60 unit tests (adds `MobileNumbersTest`) | Pass |
+| Server | Fresh PostgreSQL database, seeded; 48-check end-to-end API suite | 48/48 |
+| Server | 37 live checks for this round: sign-in by email, username, and phone in five formats; blank and wrong password; registration without country code rejected and with spaces accepted; `GET`/`PUT /users/me/profile`; wire names after the record change (`paid`, tour dates); public meal list, meal edit and permissions; fleet scoping and search; manager/owner user lists; per-tour seat filters and totals; card booking payment rejected; 404s; admin role change rules | 37/37 |
+| Server | Live STOMP checks | 4/4 |
+| Web client | `tsc --noEmit`, `eslint src`, `next build`; every `.tsx` at most 150 lines | Pass |
+| Web client | Browser, production build: sign-in by phone with spaces; profile page (member since, wallet account) and profile edit save; ticket boarding pass shows route and vehicle; register shows the +973 picker; meals edit, activate, deactivate; agency Branches tab lists branches | Pass |
+| Mobile | `tsc --noEmit`, `expo lint`, `expo export --platform android`; 20-check contract run | Pass, 20/20 |
+
+## 2026-11-03
 
 | Repository | Check | Result |
 | --- | --- | --- |
@@ -18,4 +32,5 @@
 
 - Mobile screens on a device or emulator (no AVD/simulator available).
 - Web client create/edit forms that write data (create tour, register vehicle, add agency/branch, seat configuration save) were opened but not submitted in the browser; their API calls are covered by the end-to-end suite.
-- Stripe card top-up, card/PayPal booking payment completion, SMTP email delivery, and the content of WebSocket pushes (connection rules were verified).
+- Stripe card top-up against Stripe, SMTP email delivery, and the content of WebSocket pushes (connection rules were verified). Card and PayPal booking payments are now rejected by design.
+- The mobile phone picker and profile tab were type-checked and bundled but not opened on a device.
