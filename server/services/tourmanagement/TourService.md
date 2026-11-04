@@ -4,6 +4,10 @@ Source: `services/tourmanagement/TourService.java`.
 
 ## Business logic
 
+### Visibility
+
+`getVisible` (the public `GET /api/tours/{id}`): ACTIVE (bookable) tours are public; other tours are shown to administrators, the owning agency's staff, and customers holding a ticket for the tour. Anyone else gets 404, so pending or cancelled tours do not leak. `getAll` and `filter` list every tour for administrators, the agency's tours for agency staff, and only ACTIVE tours for everyone else. The tour price is `basePrice` minus `discountPrice` (`totalPrice`); the old duplicate `price` column was removed.
+
 ### `create(TourCreateRequest request)`
 
 Agency staff create tours for their own agency (and branch). Cities must belong to their countries, start date cannot be in the past, capacity cannot exceed the vehicle capacity, the vehicle cannot serve an overlapping tour, and offered meals must be ACTIVE and belong to the tour's agency (or be shared). New tours start PENDING.
@@ -27,6 +31,14 @@ Nightly: PENDING tours past their start date are cancelled; ACTIVE/APPROVED tour
 **Runs in:** transaction
 
 ### `PageResponse<Tour> getAll(Integer page, Integer size, String sortBy, String sortDir)`
+
+**Purpose:** Admins and agency staff list every tour (staff within their agency); everyone else only bookable ones.
+
+**Runs in:** read-only transaction
+
+### `Tour getVisible(Integer id)`
+
+**Purpose:** One tour by id for the public endpoint. Bookable (ACTIVE) tours are public; others are shown to administrators, the owning agency's staff, and customers holding a ticket for it. Anyone else gets 404, so pending or cancelled tours do not leak.
 
 **Runs in:** read-only transaction
 

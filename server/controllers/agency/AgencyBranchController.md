@@ -8,6 +8,6 @@ Errors use the shared envelope (see [errors](../../globals/errors.md)): 400 vali
 | --- | --- | --- | --- | --- | --- |
 | `POST /api/branches/agency/{agencyId}` | `AgencyBranchService.addBranch` | Admins add branches anywhere; owners only to their own agency. | ADMIN, OWNER | body `AgencyBranchCreateRequest` | `AgencyBranchResponse` |
 | `GET /api/branches` | `AgencyBranchService.getAllBranches` | Get all branches. | ADMIN | - | `List<AgencyBranchResponse>` |
-| `GET /api/branches/agency/{agencyId}` | `AgencyBranchService.getBranchesByAgency` | Get by agency. | any signed-in user | - | `List<AgencyBranchResponse>` |
+| `GET /api/branches/agency/{agencyId}` | `AgencyBranchService.getBranchesByAgency` | Active branches, for administrators and the agency's own staff. | any signed-in user | - | `List<AgencyBranchResponse>` |
 | `GET /api/branches/agency/{agencyId}/search` | `AgencyBranchService.searchBranches` | Search by agency. | any signed-in user | query `query`, `page`, `size` | `PageResponse<AgencyBranchResponse>` |
 | `GET /api/branches/agency/{agencyId}/branch/{branchId}/employees` | `AgencyBranchService.getEmployeesByBranch` | Get employees by agency and branch. | any signed-in user | - | `List<UserResponse>` |

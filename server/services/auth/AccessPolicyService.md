@@ -13,6 +13,7 @@ Controllers check roles; this service checks whose data a signed-in user may tou
 | `requireSelfOrAdmin(userId)` | Wallet, notifications, profile edits |
 | `requireRecordAccess(user, ownerId, agency)` | Customers: only their own record. Agency staff (OWNER, MANAGER, EMPLOYEE): only their agency. Admin and support: unrestricted |
 | `agencyScope(user)` | Agency id applied to list queries for agency staff; staff without an agency are rejected |
+| `requireAgencyMember(user, agency)` | Stricter: only administrators and staff of that agency. Guards agency internals (details with owner contacts, branches, staff lists) that customers and other roles must not read |
 
 ## Functions
 
@@ -43,6 +44,10 @@ Controllers check roles; this service checks whose data a signed-in user may tou
 ### `void requireRecordAccess(User current, Integer ownerId, Agency agency)`
 
 **Purpose:** Customers may only touch their own records; agency staff only their agency's records.
+
+### `void requireAgencyMember(User current, Agency agency)`
+
+**Purpose:** Stricter than `#requireAgencyAccess`: only administrators and staff of this agency pass. Used for agency internals (branches, staff lists, owner contacts) that customers and other roles must not read.
 
 ### `void requireAgencyAccess(User current, Agency agency)`
 

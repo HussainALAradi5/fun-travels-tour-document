@@ -2,6 +2,11 @@
 
 Source: `services/agency/AgencyBranchService.java`.
 
+## Business logic
+
+- Listing, searching, and the branch staff list are for administrators and the agency's own staff.
+- `addBranch`: owners add branches to their own agency, admins to any; names are unique per agency. The optional manager must have the MANAGER role and be unassigned or already in this agency; a manager of another agency is never moved over.
+
 ## Functions
 
 ### `List<AgencyBranch> getAllBranches()`
@@ -9,6 +14,8 @@ Source: `services/agency/AgencyBranchService.java`.
 **Runs in:** read-only transaction
 
 ### `List<AgencyBranch> getBranchesByAgency(Integer agencyId)`
+
+**Purpose:** Active branches, for administrators and the agency's own staff.
 
 **Runs in:** read-only transaction
 

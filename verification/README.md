@@ -1,5 +1,15 @@
 # Verification
 
+## 2026-11-04 (late night): access and logic fixes
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw test`: 69 tests (adds place recount, drift correction, nightly reconciliation, report retention) | Pass |
+| Server | Start-up against a database holding the old `tours.price` and `transportations.remaining_seats` columns | Both dropped, start continued |
+| Server | 32 live access and logic checks: customer/owner/manager/employee/admin access to agencies, branches, and staff; cross-agency reads refused; manager transfer refused; tour visibility for visitors, customers, ticket holders, staff, and admins; places counted from tickets on booking and cancellation; vehicle responses without counters | 32/32 |
+| All | Regression on a fresh database: end-to-end 48/48, booking contract 20/20, earlier round 37/37, mobile screens 24/24, reports 52/52, WebSocket 4/4 | Pass |
+| Clients | DTOs regenerated; web `tsc` and `eslint`, mobile `tsc` | Pass |
+
 ## 2026-11-04 (late): mobile parity
 
 | Repository | Check | Result |

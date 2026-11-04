@@ -8,8 +8,8 @@ Errors use the shared envelope (see [errors](../../globals/errors.md)): 400 vali
 | --- | --- | --- | --- | --- | --- |
 | `GET /api/tours/catalog` | `TourService.getCatalogTours` | Get catalog. | public | query `startCountryId`, `endCountryId`, `startDate`, `endDate`, `page`, `size` | `PageResponse<TourResponse>` |
 | `GET /api/tours/search` | `TourService.filter` | Search. | public | query `filter` | `PageResponse<TourResponse>` |
-| `GET /api/tours` | `TourService.getAll` | Get all. | public | query `page`, `size`, `sortBy`, `sortDir` | `PageResponse<TourResponse>` |
-| `GET /api/tours/{id}` | `TourService.getById` | Get by id. | public | - | `TourResponse` |
+| `GET /api/tours` | `TourService.getAll` | Admins and agency staff list every tour (staff within their agency); everyone else only bookable ones. | public | query `page`, `size`, `sortBy`, `sortDir` | `PageResponse<TourResponse>` |
+| `GET /api/tours/{id}` | `TourService.getVisible` | One tour by id for the public endpoint. | public | - | `TourResponse` |
 | `POST /api/tours` | `TourService.create` | Create. | OWNER, MANAGER, ADMIN | body `TourCreateRequest` | `TourResponse` |
 | `PUT /api/tours/{id}` | `TourService.updateTour` | Update. | OWNER, MANAGER, ADMIN | body `TourUpdateRequest` | `TourResponse` |
 | `PUT /api/tours/{id}/status` | `TourService.updateStatus` | Update status. | OWNER, MANAGER, ADMIN | query `status` | `TourResponse` |

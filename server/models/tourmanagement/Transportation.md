@@ -10,8 +10,6 @@ Table `transportations`. Inherits `BaseEntity`. Source: `models/tourmanagement/T
 | `providerName` | `String` |   |
 | `status` | `GenericStatus` |  required |
 | `totalCapacity` | `Integer` |  required |
-| `remainingSeats` | `Integer` |   |
-| `calculatedAvailable` | `Integer` |   |
 | `unitStatus` | `TransportationStatus` |  required |
 | `agency` | `Agency` | ManyToOne  |
 | `agencyBranch` | `AgencyBranch` | ManyToOne  |

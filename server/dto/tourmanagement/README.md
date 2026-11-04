@@ -330,8 +330,6 @@ response record; built by `from(Transportation)`, `listItem(Transportation)`.
 | `status` | `GenericStatus` | - |
 | `unitStatus` | `TransportationStatus` | - |
 | `totalCapacity` | `Integer` | - |
-| `remainingSeats` | `Integer` | - |
-| `calculatedAvailable` | `Integer` | - |
 | `agency` | `AgencySummary` | - |
 | `agencyBranch` | `BranchSummary` | - |
 | `seats` | `List<SeatSummary>` | - |

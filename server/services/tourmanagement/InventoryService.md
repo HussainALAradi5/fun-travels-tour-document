@@ -6,13 +6,13 @@ Tour places and seat holds.  <p>Places: `Tour.availableSlots` drops when a booki
 
 ## Business logic
 
-**Places.** `Tour.availableSlots` drops when a booking is held and rises when it is released (never above `maxCapacity`). Every change locks the tour row (`PESSIMISTIC_WRITE`), so concurrent bookings for one tour are serialized.
+**Places.** The tickets are the source of truth: places left = `maxCapacity` minus the tour's tickets that are not cancelled. Each booking recounts them before checking capacity and stores the result in `Tour.availableSlots`; a release adds the places back (never above `maxCapacity`); `reconcileActiveTours` recounts every ACTIVE tour nightly, so a drifted counter is corrected. Every change locks the tour row (`PESSIMISTIC_WRITE`), so concurrent bookings for one tour are serialized.
 
 **Seats are per tour.** A vehicle can serve several tours on different dates. A seat is taken for a tour when an active (not cancelled) ticket **of that tour** holds it; the same seat stays free for the vehicle's other tours. The seat's stored status only records its physical condition: `MAINTENANCE` seats are never sold. Cancelling a ticket frees its seat without any extra update.
 
 ### `reserve(Integer tourId, int quantity, List<Ticket> tickets)`
 
-1. Requires an ACTIVE tour and enough places.
+1. Requires an ACTIVE tour and enough places, counted from its tickets (not from the stored counter).
 2. Validates each explicitly chosen seat: same vehicle, not chosen twice in the request, not under maintenance, not already taken on this tour.
 3. Gives travelers without a chosen seat the lowest free seat, skipping seats chosen by other travelers in the same request.
 4. Lowers `availableSlots`. Any failure aborts the whole hold.
@@ -30,6 +30,12 @@ Per-tour taken seats (for booking and the seat picker) and whether a seat is hel
 ### `Tour reserve(Integer tourId, int quantity, List<Ticket> tickets)`
 
 **Purpose:** Holds places and seats. Tickets without a chosen seat get the lowest free seat.
+
+**Runs in:** transaction
+
+### `int reconcileActiveTours()`
+
+**Purpose:** Nightly: sets every bookable tour's available places from its tickets.
 
 **Runs in:** transaction
 

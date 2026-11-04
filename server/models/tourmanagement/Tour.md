@@ -12,7 +12,6 @@ Table `tours`. Inherits `BaseEntity`. Source: `models/tourmanagement/Tour.java`.
 | `numberOfDays` | `Integer` |   |
 | `maxCapacity` | `Integer` |  required |
 | `availableSlots` | `Integer` |   |
-| `price` | `Double` |  required |
 | `status` | `GenericStatus` |  required |
 | `hasTransportation` | `boolean` |  required |
 | `transportation` | `Transportation` | ManyToOne  |

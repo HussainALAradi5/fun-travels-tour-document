@@ -1,5 +1,12 @@
 # Implementation Updates
 
+## 2026-11-04 (late night) - Access and logic fixes
+
+- **Access.** Agency details, staff lists, branches, and agency search are limited to administrators and the agency's own staff; owners can no longer pull another agency's manager into a branch; only bookable tours are public. See [security](security/README.md) items 26-30.
+- **Places.** Available places are counted from the tour's tickets at every booking and reconciled nightly, instead of trusting a stored counter.
+- **Reports.** Generated reports are deleted nightly after `app.report-retention-days` (`REPORT_RETENTION_DAYS`, default 30).
+- **Model.** Removed the duplicate `Tour.price` and the vehicle seat counters (`remainingSeats`, `calculatedAvailable`); `SchemaMaintenance` drops the old `tours.price` and `transportations.remaining_seats` columns on start-up.
+
 ## 2026-11-04 (late) - Mobile parity with the web customer app
 
 - New mobile screens: boarding pass, transaction and payment details, payments list, support requests (list, create, reply, delete), profile edit (photo, phone with country code), password reset with code, catalog filters, My reports, and Export buttons on tours, bookings, and wallet; notifications open the related screen. See [mobile](mobile/README.md).
