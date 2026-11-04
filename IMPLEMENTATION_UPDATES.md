@@ -1,5 +1,10 @@
 # Implementation Updates
 
+## 2026-11-04 (evening) - Report template for every PDF and Excel export
+
+- One branded template for all exports: letterhead, report meta, repeated table header, page numbers, confidentiality footer, rows kept whole, QR codes as images (PDF); typed, filterable, print-ready sheets (Excel). Import templates keep a clean header row plus an Instructions sheet. See [client](client/README.md#exports-pdf-and-excel).
+- Fixed: QR/barcode images were never drawn (column keys were compared with column indexes), long cells crushed other columns, and rows split across pages. Removed the unused `excelMapper.ts` and the `xlsx` dependency.
+
 ## 2026-11-04 (later) - DTOs everywhere, sign-in, profile, and a full review
 
 - **Server DTOs.** Every request and response is a Java record, one type per file. Responses build themselves with `from(entity)`; `ModelMapper` and the three mapper classes were removed. 28 nested summary classes became 11 shared summary records (`UserSummary`, `CountrySummary`, `TourSummary`, `SeatSummary`, ...). `PageResponse` and `EntityReference` are records. Filter DTOs stay classes (inherited paging fields, query binding). Wire names are unchanged.

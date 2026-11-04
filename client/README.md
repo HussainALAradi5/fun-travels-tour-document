@@ -71,6 +71,18 @@ Next.js App Router with Chakra UI. Layers under `src/`:
 | Card top-up | Logged the Stripe token and each step; offered non-card text | Card-only form; logic in `useCardTopUp` |
 | Ticket | `Ticket.isPaid` read a field the server never sends (`paid`) | Ticket is the DTO |
 
+## Exports (PDF and Excel)
+
+Every Export button opens `ExportDialog`, which uses one report template (`utilities/export/`, brand values in `constants/export/reportTemplate.ts`):
+
+| File | Template |
+| --- | --- |
+| PDF report (`pdfReport.ts`) | A4 landscape; navy letterhead with brand and report title on every page; generated date, author, and record count; table header repeated per page; rows never split across pages; numbers right-aligned with two decimals; QR codes and barcodes drawn as images; footer with confidentiality note and "Page X of Y"; "End of report" line |
+| Excel report (`excelReport.ts`) | Brand, title, and meta rows; frozen, filterable header; dates, timestamps, and numbers kept as typed cells (sortable, summable; server timestamps shown as sent); zebra rows; fitted column widths; landscape print setup with a page-numbered footer |
+| Import template (`mode="template"`) | Column names in row 1 with nothing above them (the server and the importer read row 1 as the header), plus an Instructions sheet; no PDF |
+
+Identifiers, secrets, audit fields, and nested lists are never exported (`HIDDEN_EXPORT_KEYS`).
+
 ## Structure change
 
 `features/` moved to `components/pages/`, `Api/` to `services/`, and `interface/` to `interfaces/` (moved with git history; 268 import paths rewritten). Every component, page, and hook file is at most 150 lines: logic lives in hooks (`hooks/<domain>/`), field and column definitions in `constants/` or column hooks, and repeated markup in child components. All folders under `src/` (except Next.js route segments such as `[tourId]`) use kebab-case: `components/tour-management/seat/seat-management`, `components/ui/custom/dialogs`, `hooks/tour-management`, `services/agency`. Component files keep PascalCase (`SeatManager.tsx`), hooks keep camelCase (`useTourManagement.ts`), and service files keep their current names (`services/User.ts`). 43 folders were renamed with git and their imports rewritten.
