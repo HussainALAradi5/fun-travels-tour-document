@@ -1,5 +1,29 @@
 # Implementation Updates
 
+## 2026-11-03 - Clean-up, security, inventory, and mobile
+
+- **Server structure.** Lower-case layer packages with domain subfolders (`controllers/tourmanagement`, `services/payment`, ...); `BaseEntity` for every model (unique `code`, audit fields, identity equality); `constants/`, `middlewares/`, `seeds/`, typed `config/properties`.
+- **Removed dead code.** `PaymentProcessingService`, `BarcodeService`, the unused `AuthService`, `PricingCalculator` (old), `ExcelImportUtils`, a fake `SpringBootTest` annotation, unused ticket update/approve/confirm paths, `restoreInventory`, duplicate reminder job, `extractDialCode`, about 35 unused repository queries and 110 unused imports.
+- **Merged duplicate logic.** Ticket numbering, QR codes, and pricing (`TicketIssuingService`); refund policy and ticket pricing (`PricingCalculator`); booking end-of-life steps (`BookingLifecycleService`); spreadsheet reading (`ExcelImportService`).
+- **Security.** See [security review](security/README.md): configurable JWT key, DTOs instead of entities for user, agency, branch, reservation, ticket, and staff requests, ownership and agency scoping, password-reset hardening, upload validation, CORS, generic 500s.
+- **Inventory.** Seats are taken per tour by active tickets (a vehicle can serve several tours), maintenance is the only stored seat state, the one-to-one ticket-seat mapping and its unique key are removed, meal rules enforced.
+- **Clients.** Web client contract updates and defect fixes ([client](client/README.md)); new Expo mobile app ([mobile](mobile/README.md)).
+- **Docs.** Layer-mirrored, generated reference; duplicated client use-case files and stale feature folders removed.
+
+## 2026-11-03 (later) - Remaining contracts, WebSocket security, client structure
+
+- Server: request DTOs for the last six entity-bound endpoints; `CountryControllers` renamed `CountryController`; WebSocket CONNECT/SUBSCRIBE authorization; `updatedAt` on edited comments; editing a running tour no longer rejects its past start date.
+- Web client: services grouped by domain with export-matching names; `config/endpoints.ts`; kebab-case folders; every component, page, and hook at most 150 lines; eleven UI/contract defects fixed (see [client](client/README.md)).
+- Mobile: lint clean.
+
+## 2026-11-04 - Browser test fixes
+
+- Server: tour responses carry country `officialName`/`flagPngUrl` and `destinationCountries`; ticket responses carry the tour's `startDate`/`endDate` (My Bookings showed "TBD").
+- Web client: seats requested in cabin order (`id` ascending, not `S1, S10, S2`); tour console revenue and booking count use live tickets only and real prices; vehicle number shown instead of "TR-UNASSIGNED"; customer reservation copy removed from the admin tour header; "City, Country" no longer renders a lone comma when either is missing.
+- Known design limit: the web admin console is ADMIN-only. Owners, managers, and employees use the customer pages on the web, although the server already scopes their staff endpoints by agency.
+
+## Earlier updates
+
 This document records the cross-cutting improvements reflected in the current server and client applications.
 
 ## API consistency

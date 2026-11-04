@@ -1,57 +1,53 @@
 # Fun Travels Tour Documentation
 
-> Technical and business documentation for a full-stack, multi-agency travel operations platform.
+> Technical and business documentation for a multi-agency travel operations platform.
 
-**Author:** Hussain Al Aradi
+**Author:** Hussain Al Aradi - [GitHub](https://github.com/HussainALAradi5)
 
-[Email](mailto:hussainaradi.ha@gmail.com) · [GitHub](https://github.com/HussainALAradi5) · [LinkedIn](https://www.linkedin.com/in/hussainalaradi/)
+## Repositories
 
-## Platform overview
-
-Fun Travels Tour manages the operational lifecycle of tours: agency ownership, branches, transportation inventory, generated seats, reservations, passenger tickets, payments, notifications, and customer support. The implementation emphasizes explicit workflow validation, typed API contracts, paginated queries, secure role-based access, and reusable client components.
-
-## Technology
-
-| Application | Stack | Purpose |
-|---|---|---|
-| [Server](server-side/) | Java 21, Spring Boot 3.5.16, Spring Data JPA, PostgreSQL | REST API and business workflows |
-| [Client](client-side/) | Next.js 16.3, React 19, TypeScript 5.9, Chakra UI 3 | Responsive customer and administration portal |
-| Mobile | React Native, Expo | Planned mobile client |
-
-## Core capabilities
-
-- Multi-agency and branch-aware operations
-- Tour lifecycle and conflict validation
-- Transportation inventory with agency/branch ownership
-- Bulk Excel transportation import with row-level results
-- Automatic and bulk seat-layout generation
-- Reservation holds, capacity protection, and ticket issuance
-- Payment, transaction, wallet, notification, and support workflows
-- Consistent pagination, sorting, date filters, DTO mapping, and API errors
-- Accessible, reusable light/dark UI components
+| Application | Stack | Repository | Setup |
+| --- | --- | --- | --- |
+| Server | Java 21, Spring Boot 3.5.16, Spring Data JPA, PostgreSQL | [fun-travels-tour-server](https://github.com/HussainALAradi5/fun-travels-tour-server) | [setup](setup/README.md#server) |
+| Web client | Next.js 16, React 19, TypeScript, Chakra UI 3 | [fun-travels-tour-client](https://github.com/HussainALAradi5/fun-travels-tour-client) | [setup](setup/README.md#web-client) |
+| Mobile app | Expo SDK 58, React Native 0.88, Expo Router, TypeScript | local repository `fun-travels-tour-mobile` (no remote yet) | [setup](setup/README.md#mobile-app) |
 
 ## Documentation map
 
-- [Server documentation](server-side/)
-- [Feature-owned server endpoints](server-side/README.md)
-- [Shared platform services](server-side/platform-services/)
-- [Client documentation](client-side/)
-- [Implementation updates](IMPLEMENTATION_UPDATES.md)
-- [Documentation standard](DOCUMENTATION_STANDARD.md)
-- [Software engineering artifacts](SOFTWARE_ENGINEERING.md)
-- [System personas](PERSONAS.md)
-- [Agency management](server-side/agency-management/)
-- [Tour and transportation management](server-side/tour-management/)
-- [Payment management](server-side/payment-management/)
-- [Reusable UI components](client-side/ui-components/)
+The layout mirrors the code layers, not features.
+
+| Section | Contents |
+| --- | --- |
+| [server/models](server/models/README.md) | Every model, its fields, and the relationship table |
+| [server/services](server/services/README.md) | Every service function with signature; business rules for workflow services |
+| [server/controllers](server/controllers/README.md) | Every endpoint: method, path, service function, role, request and response DTO |
+| [server/enums](server/enums/README.md) / [server/constants](server/constants/README.md) | Enumerations and shared rule values |
+| [server/globals](server/globals/README.md) | Configuration, security filters, errors, pagination, schema maintenance, seeds |
+| [client](client/README.md) | Web client layers, services, and contract notes |
+| [mobile](mobile/README.md) | Mobile app layers, screens, and device notes |
+| [use-cases](use-cases/README.md) | Actor, preconditions, main and failure flows, result |
+| [security](security/README.md) | Access rules, review findings and fixes, known limitations |
+| [setup](setup/README.md) | Running each repository locally |
+| [verification](verification/README.md) | What was built, tested, and exercised, with results |
+| [Personas](PERSONAS.md) / [Software engineering](SOFTWARE_ENGINEERING.md) | Personas and engineering artifacts |
+| [Implementation updates](IMPLEMENTATION_UPDATES.md) | Change history |
+
+`server/` reference pages are generated from the server source by `tools/generate-reference.py`; the business-logic sections come from `tools/service-logic/`. Regenerate after server changes:
+
+```bash
+python tools/generate-reference.py ../fun-travels-tour-server .
+```
 
 ## Roles
 
-| Role | Responsibility |
-|---|---|
-| `ADMIN` | Platform-wide administration |
-| `OWNER` | Agency, branch, staff, and inventory ownership |
-| `MANAGER` | Branch operations and workflow supervision |
-| `EMPLOYEE` | Day-to-day operational work |
-| `CUSTOMER` | Tour discovery, booking, payment, and tickets |
-| `SUPPORT_AGENT` | Customer-request handling and audit communication |
+| Role | Responsibility | Data scope |
+| --- | --- | --- |
+| `ADMIN` | Platform administration | Everything |
+| `OWNER` | Agency, branches, staff, fleet, tours | Own agency |
+| `MANAGER` | Branch operations | Own agency (tours: own branch) |
+| `EMPLOYEE` | Day-to-day operations | Own agency (tours: ones they created) |
+| `CUSTOMER` | Discovery, booking, payment, tickets | Own records |
+| `SUPPORT_AGENT` | Support requests | Support requests |
+| `DEVELOPER` | Reserved; no permissions beyond sign-in | Own profile |
+
+Development seed accounts are listed in [setup](setup/README.md#seeded-accounts).
