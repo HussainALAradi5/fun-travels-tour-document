@@ -22,12 +22,13 @@ The layout mirrors the code layers, not features.
 
 | Section | Contents |
 | --- | --- |
+| [phases](phases/README.md) | The nine project phases with goal, tasks, acceptance criteria, verification and status |
 | [server/models](server/models/README.md) | Every model, its fields, and the relationship table |
-| [server/services](server/services/README.md) | Every service function with signature; business rules for workflow services |
-| [server/controllers](server/controllers/README.md) | Every endpoint: method, path, service function, role, request and response DTO |
+| [server/services](server/services/README.md) | Every service function: signature, purpose, cases and exceptions; business rules for workflow services |
+| [server/controllers](server/controllers/README.md) | Every endpoint under `/api/v1`: method, path, service function, role, request and response DTO, exceptions |
 | [server/dto](server/dto/README.md) | Every request and response record with fields and validation rules; how clients mirror them |
 | [server/enums](server/enums/README.md) / [server/constants](server/constants/README.md) | Enumerations and shared rule values |
-| [server/globals](server/globals/README.md) | Configuration, security filters, errors, pagination, schema maintenance, seeds |
+| [server/globals](server/globals/README.md) | Configuration, security filters, error codes, pagination, Flyway migrations, seeds |
 | [client](client/README.md) | Web client layers, services, and contract notes |
 | [mobile](mobile/README.md) | Mobile app layers, screens, and device notes |
 | [use-cases](use-cases/README.md) | Actor, preconditions, main and failure flows, result |

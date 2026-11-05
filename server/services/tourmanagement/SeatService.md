@@ -18,9 +18,17 @@ Seat records of a vehicle. A seat's stored status is its physical condition (`AV
 
 **Runs in:** read-only transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `Seat getById(Integer id)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Seat not found | `ResourceNotFoundException` | 404 |
 
 ### `PageResponse<SeatResponse> search(SeatFilterRequest filter)`
 
@@ -28,12 +36,38 @@ Seat records of a vehicle. A seat's stored status is its physical condition (`AV
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Tour not found | `ResourceNotFoundException` | 404 |
+
 ### `Seat updateSeat(Integer id, SeatUpdateRequest updatedData)`
 
 **Purpose:** Chair type and price can only change while no active booking or approved/active tour uses the seat.
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Cannot change the type or price of a seat held by an active ticket. | `WorkflowException` `SEAT_IN_USE` | 409 |
+| Seat layout is locked while the vehicle is assigned to an approved or active tour. | `WorkflowException` `SEAT_LAYOUT_LOCKED` | 409 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Seat not found | `ResourceNotFoundException` | 404 |
+| Seats are reserved and booked through tickets; staff can only set AVAILABLE or MAINTENANCE. | `WorkflowException` `SEAT_STATUS_LOCKED` | 409 |
+| This seat is held by an active ticket. Move or cancel the ticket first. | `WorkflowException` `SEAT_IN_USE` | 409 |
+
 ### `Seat updateStatus(Integer id, SeatStatus status)`
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Seat not found | `ResourceNotFoundException` | 404 |
+| Seats are reserved and booked through tickets; staff can only set AVAILABLE or MAINTENANCE. | `WorkflowException` `SEAT_STATUS_LOCKED` | 409 |
+| This seat is held by an active ticket. Move or cancel the ticket first. | `WorkflowException` `SEAT_IN_USE` | 409 |

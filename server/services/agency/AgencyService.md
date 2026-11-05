@@ -16,11 +16,24 @@ Source: `services/agency/AgencyService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Agency not found | `ResourceNotFoundException` | 404 |
+
 ### `PageResponse<Agency> searchAgencies(String query, Integer page, Integer size)`
 
 **Purpose:** Admins search every agency; agency staff find only their own; other roles are refused.
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 
 ### `Agency getVisibleAgency(Integer id)`
 
@@ -28,9 +41,22 @@ Source: `services/agency/AgencyService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Agency not found | `ResourceNotFoundException` | 404 |
+
 ### `Agency getAgencyById(Integer id)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Agency not found | `ResourceNotFoundException` | 404 |
 
 ### `Agency createAgency(AgencyCreateRequest request)`
 
@@ -38,6 +64,24 @@ Source: `services/agency/AgencyService.java`.
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Country not found | `ResourceNotFoundException` | 404 |
+| City not found | `ResourceNotFoundException` | 404 |
+| The selected city does not belong to the selected country. | `IllegalArgumentException` | 400 |
+| An agency named ' ' already exists in this country. | `DuplicateResourceException` | 409 |
+| User not found | `ResourceNotFoundException` | 404 |
+| The selected agency owner must have the OWNER role. | `IllegalArgumentException` | 400 |
+
 ### `List<User> getEmployeesByAgencyId(Integer agencyId)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Agency not found | `ResourceNotFoundException` | 404 |

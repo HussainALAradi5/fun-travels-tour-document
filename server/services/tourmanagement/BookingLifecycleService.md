@@ -22,9 +22,13 @@ Shared by customer cancellation, hold expiry, staff rejection, and agency tour c
 
 ### `static List<Ticket> activeTickets(TourReservation reservation)`
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `static BigDecimal activeTotal(TourReservation reservation)`
 
 **Purpose:** Amount still covered by the reservation; legacy reservations without tickets use their total.
+
+**Exceptions:** none of its own; failures come from the functions it calls.
 
 ### `void releaseAndCancelTickets(TourReservation reservation, GenericStatus ticketApprovalStatus)`
 
@@ -32,8 +36,12 @@ Shared by customer cancellation, hold expiry, staff rejection, and agency tour c
 
 **Runs in:** transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `void refundToWallet(TourReservation reservation, BigDecimal amount, TransactionType type, String reason)`
 
 **Purpose:** Credits the customer's wallet when the amount is positive.
 
 **Runs in:** transaction
+
+**Exceptions:** none of its own; failures come from the functions it calls.

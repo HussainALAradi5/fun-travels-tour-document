@@ -14,8 +14,20 @@ The signed-in user's own profile in one response (`ProfileResponse`): identity, 
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `ProfileResponse updateMyProfile(UserUpdateRequest request)`
 
 **Purpose:** Name, mobile number, age, and profile image; role, agency, email, and password change elsewhere.
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

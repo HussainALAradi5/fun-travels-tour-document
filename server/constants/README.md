@@ -2,7 +2,58 @@
 
 Shared values live in `constants/`; services never repeat them inline.
 
-## BookingRules
+## common/CodePrefixes
+
+| Name | Value |
+| --- | --- |
+| `TICKET` | `"TKT"` |
+| `RESERVATION` | `"RES"` |
+| `PAYMENT` | `"TRX"` |
+| `ACCOUNT` | `"ACC"` |
+
+## common/ValidationPatterns
+
+| Name | Value |
+| --- | --- |
+| `MOBILE_NUMBER` | `"^\\+[1-9]\\d{7,14}$"` |
+| `MOBILE_NUMBER_MESSAGE` | `"Mobile number must start with + and the country code, for example +97339990001"` |
+
+## errors/ErrorCodes
+
+| Name | Value |
+| --- | --- |
+| `VALIDATION_FAILED` | `"VALIDATION_FAILED"` |
+| `BAD_REQUEST` | `"BAD_REQUEST"` |
+| `UNAUTHORIZED` | `"UNAUTHORIZED"` |
+| `ACCOUNT_DISABLED` | `"ACCOUNT_DISABLED"` |
+| `FORBIDDEN` | `"FORBIDDEN"` |
+| `NOT_FOUND` | `"NOT_FOUND"` |
+| `ROUTE_NOT_FOUND` | `"ROUTE_NOT_FOUND"` |
+| `METHOD_NOT_ALLOWED` | `"METHOD_NOT_ALLOWED"` |
+| `UNSUPPORTED_MEDIA_TYPE` | `"UNSUPPORTED_MEDIA_TYPE"` |
+| `PAYLOAD_TOO_LARGE` | `"PAYLOAD_TOO_LARGE"` |
+| `DUPLICATE_RESOURCE` | `"DUPLICATE_RESOURCE"` |
+| `CONCURRENT_UPDATE` | `"CONCURRENT_UPDATE"` |
+| `CONFLICT` | `"CONFLICT"` |
+| `WORKFLOW_CONFLICT` | `"WORKFLOW_CONFLICT"` |
+| `TOO_MANY_REQUESTS` | `"TOO_MANY_REQUESTS"` |
+| `STORAGE_FAILED` | `"STORAGE_FAILED"` |
+| `EXTERNAL_SERVICE_FAILED` | `"EXTERNAL_SERVICE_FAILED"` |
+| `DATABASE_ERROR` | `"DATABASE_ERROR"` |
+| `INTERNAL_ERROR` | `"INTERNAL_ERROR"` |
+
+## report/ReportRules
+
+| Name | Value |
+| --- | --- |
+| `MAX_ROWS` | `5000` |
+| `LOAD_PAGE_SIZE` | `100` |
+| `BRAND_NAME` | `"Fun Travels Tour"` |
+| `BRAND_TAGLINE` | `"Travel agency management platform"` |
+| `CONFIDENTIALITY` | `"Confidential - for internal use only"` |
+| `MEDIA_REPORT_FOLDER` | `"reports"` |
+
+## tourmanagement/BookingRules
 
 | Name | Value |
 | --- | --- |
@@ -21,27 +72,7 @@ Shared values live in `constants/`; services never repeat them inline.
 | `BARCODE_HEIGHT` | `100` |
 | `CURRENCY` | `"USD"` |
 
-## CodePrefixes
-
-| Name | Value |
-| --- | --- |
-| `TICKET` | `"TKT"` |
-| `RESERVATION` | `"RES"` |
-| `PAYMENT` | `"TRX"` |
-| `ACCOUNT` | `"ACC"` |
-
-## ReportRules
-
-| Name | Value |
-| --- | --- |
-| `MAX_ROWS` | `5000` |
-| `LOAD_PAGE_SIZE` | `100` |
-| `BRAND_NAME` | `"Fun Travels Tour"` |
-| `BRAND_TAGLINE` | `"Travel agency management platform"` |
-| `CONFIDENTIALITY` | `"Confidential - for internal use only"` |
-| `MEDIA_REPORT_FOLDER` | `"reports"` |
-
-## RoleGroups
+## user/RoleGroups
 
 | Name | Value |
 | --- | --- |
@@ -53,10 +84,3 @@ Shared values live in `constants/`; services never repeat them inline.
 | `REPORT_STAFF` | `EnumSet.of( UserTypeEnum.ADMIN, UserTypeEnum.OWNER, UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
 | `USER_REPORT` | `EnumSet.of(UserTypeEnum.ADMIN, UserTypeEnum.MANAGER)` |
 | `IMPORTABLE` | `EnumSet.of( UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
-
-## ValidationPatterns
-
-| Name | Value |
-| --- | --- |
-| `MOBILE_NUMBER` | `"^\\+[1-9]\\d{7,14}$"` |
-| `MOBILE_NUMBER_MESSAGE` | `"Mobile number must start with + and the country code, for example +97339990001"` |

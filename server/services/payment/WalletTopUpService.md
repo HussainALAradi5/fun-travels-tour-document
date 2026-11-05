@@ -13,3 +13,15 @@ Card only (`CREDIT_CARD`) with a Stripe token. The amount is converted to cents 
 **Purpose:** The FAILED payment record is kept when the card is declined, so the attempt stays visible.
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Amount must be greater than zero. | `IllegalArgumentException` | 400 |
+| Wallet top-ups are only supported by card. | `IllegalArgumentException` | 400 |
+| A card token is required. | `IllegalArgumentException` | 400 |
+| The card payment was not captured. | `WorkflowException` `PAYMENT_NOT_CAPTURED` | 409 |
+| Card declined: | `WorkflowException` `CARD_DECLINED` | 409 |
+| Payment processing error: | `WorkflowException` `PAYMENT_FAILED` | 409 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

@@ -13,14 +13,41 @@ Source: `services/payment/TransactionService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Transaction not found | `ResourceNotFoundException` | 404 |
+| You do not have permission to view this transaction. | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `Transaction creditAccount(Account account, BigDecimal amount, TransactionType type, String description, TourReservation reservation)`
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Credit amount must be greater than zero. | `IllegalArgumentException` | 400 |
 
 ### `Transaction debitAccount(Account account, BigDecimal amount, TransactionType type, String description, TourReservation reservation)`
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Debit amount must be greater than zero. | `IllegalArgumentException` | 400 |
+| Insufficient wallet balance. | `WorkflowException` `INSUFFICIENT_BALANCE` | 409 |
+
 ### `PageResponse<Transaction> filterTransactions(TransactionFilterRequest filter)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

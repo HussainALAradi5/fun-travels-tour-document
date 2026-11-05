@@ -86,4 +86,3 @@ Every persisted model extends [BaseEntity](base/BaseEntity.md): `id`, unique `co
 | Transportation | OneToMany | Seat | `seats` | mapped by `transportation` | ALL |
 | User | ManyToOne | Agency | `agency` | `agency_id` | - |
 | User | ManyToOne | AgencyBranch | `agencyBranch` | `agency_branch_id` | - |
-| User | OneToOne | Account | `account` | mapped by `user` | ALL |

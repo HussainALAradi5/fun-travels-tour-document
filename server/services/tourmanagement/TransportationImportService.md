@@ -11,3 +11,14 @@ Bulk vehicle registration from a spreadsheet; each row goes through the normal c
 ## Functions
 
 ### `ImportResult importExcel(InputStream input)`
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| is required. | `IllegalArgumentException` | 400 |
+| seat count cannot be negative. | `IllegalArgumentException` | 400 |
+| seat count must be a whole number. | `IllegalArgumentException` | 400 |
+| must be a positive integer. | `IllegalArgumentException` | 400 |
+| must be a whole number. | `IllegalArgumentException` | 400 |
+| Invalid  : | `IllegalArgumentException` | 400 |

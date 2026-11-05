@@ -12,6 +12,10 @@ Nightly (`autoProcessScheduledTours`, registered with `SystemSchedulingService`)
 
 ### `void init()`
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `void autoProcessScheduledTours()`
 
 **Runs in:** transaction
+
+**Exceptions:** none of its own; failures come from the functions it calls.

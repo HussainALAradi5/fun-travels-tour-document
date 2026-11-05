@@ -13,3 +13,10 @@ Loads report rows through the same service methods the list pages use, so every 
 ### `ReportTable load(ReportRequest request, User actor)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| This report needs  . | `WorkflowException` `REPORT_PARAMETER_REQUIRED` | 409 |

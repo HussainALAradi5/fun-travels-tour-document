@@ -17,9 +17,21 @@ Vehicles of an agency: registration, editing, seat layout, unit status, and flee
 
 **Runs in:** read-only transaction; roles: ADMIN, MANAGER, EMPLOYEE, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `Transportation getById(Integer id)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Transportation not found | `ResourceNotFoundException` | 404 |
 
 ### `Transportation getVisible(Integer id)`
 
@@ -27,18 +39,65 @@ Vehicles of an agency: registration, editing, seat layout, unit status, and flee
 
 **Runs in:** read-only transaction; roles: ADMIN, MANAGER, EMPLOYEE, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Transportation not found | `ResourceNotFoundException` | 404 |
+
 ### `Transportation create(TransportationCreateRequest request)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Transportation code already exists: | `IllegalArgumentException` | 400 |
+| This registration already exists for the selected provider. | `IllegalArgumentException` | 400 |
+| Agency not found | `ResourceNotFoundException` | 404 |
+| Agency branch not found | `ResourceNotFoundException` | 404 |
+| The selected branch does not belong to the selected agency. | `IllegalArgumentException` | 400 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Configuration exceeds capacity! | `WorkflowException` | 409 |
 
 ### `Transportation update(Integer id, TransportationUpdateRequest incomingData)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| This registration already exists for the selected provider. | `DuplicateResourceException` | 409 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Transportation not found | `ResourceNotFoundException` | 404 |
+| Seat layout cannot be changed while seats are held by active tickets. | `WorkflowException` `SEAT_LAYOUT_LOCKED` | 409 |
+| Seat layout cannot be changed while this transportation is assigned to an approved or active tour. | `WorkflowException` | 409 |
+| Unsupported chair type: | `IllegalArgumentException` | 400 |
+| Seat counts cannot be negative. | `IllegalArgumentException` | 400 |
+| Configured seat counts exceed the transportation capacity of  . | `WorkflowException` | 409 |
+| Configuration exceeds capacity! | `WorkflowException` | 409 |
+
 ### `Transportation updateStatus(Integer id, TransportationStatus newUnitStatus)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Cannot force a FULL unit to AVAILABLE. Seats must be freed via ticket cancellations. | `WorkflowException` | 409 |
+| Transportation not found | `ResourceNotFoundException` | 404 |
+
 ### `PageResponse<Transportation> filter(TransportationFilterRequest filter)`
 
 **Runs in:** read-only transaction; roles: ADMIN, MANAGER, EMPLOYEE, OWNER
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

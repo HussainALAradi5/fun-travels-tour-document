@@ -8,6 +8,11 @@ All values come from environment variables through `application.properties` (cop
 | `spring.datasource.username` / `password` | `DB_USERNAME` / `DB_PASSWORD` | - | |
 | `jwt.secret` | `JWT_SECRET` | development placeholder | **Required, at least 32 characters** (`JwtProperties`). Change for any shared environment |
 | `jwt.expiration` | `JWT_EXPIRATION` | `86400000` (24 h) | milliseconds |
+| `app.api-prefix` | `API_PREFIX` | `/api/v1` | Prefix of every REST endpoint; the web and mobile apps use the same value |
+| `app.rate-limit.auth-requests` / `window-seconds` | `AUTH_RATE_LIMIT` / `AUTH_RATE_WINDOW_SECONDS` | `10` / `60` | Sign-in, registration and reset attempts per address and window |
+| `app.media-dir` | `MEDIA_DIR` | `./media` | Private generated reports, never served statically |
+| `app.report-retention-days` | `REPORT_RETENTION_DAYS` | `30` | Reports older than this are deleted nightly |
+| `spring.jpa.properties.hibernate.default_batch_fetch_size` | `JPA_BATCH_FETCH_SIZE` | `50` | Lazy relations of a page load in batches |
 | `app.client-url` | `CLIENT_URL` | `http://localhost:3000` | Used in password-reset links |
 | `app.cors-allowed-origins` | `CORS_ALLOWED_ORIGINS` | localhost, 127.0.0.1, 10.0.2.2 (any port) | Also applied to the WebSocket endpoint |
 | `app.upload-dir` | `FILE_UPLOAD_DIR` | `./uploads` | Served read-only at `/uploads/**` |
@@ -17,3 +22,5 @@ All values come from environment variables through `application.properties` (cop
 | `stripe.api.secret-key` / `publishable-key` | `STRIPE_SECRET_KEY` / `STRIPE_PUBLISHABLE_KEY` | test placeholders | Wallet top-up by card |
 | `api.restcountries.api-key` | `REST_COUNTRIES_API_KEY` | empty | Country sync |
 | `spring.mail.*` | `MAIL_*` | Gmail SMTP | Password-reset email |
+
+The schema is managed by Flyway (`spring.jpa.hibernate.ddl-auto=validate`); see [schema and seeds](schema-and-seeds.md).

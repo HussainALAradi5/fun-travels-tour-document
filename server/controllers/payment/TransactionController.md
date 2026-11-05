@@ -1,11 +1,11 @@
 # TransactionController
 
-Base path `/api/transactions`. Source: `controllers/payment/TransactionController.java`.
+Base path `/api/v1/transactions`. Source: `controllers/payment/TransactionController.java`.
 
-Errors use the shared envelope (see [errors](../../globals/errors.md)): 400 validation or bad input, 401 missing/invalid token, 403 role or ownership, 404 missing record, 409 workflow or duplicate conflict.
+Errors use the shared envelope and codes in [errors](../../globals/errors.md). The Exceptions column lists the statuses an endpoint can return (workflow codes in brackets), derived from the service functions it calls; each service page lists the cases behind them.
 
-| Method and path | Service function | Why it is used | Role | Request | Response |
-| --- | --- | --- | --- | --- | --- |
-| `GET /api/transactions` | `TransactionService.filterTransactions` | Get transactions. | ADMIN, MANAGER, EMPLOYEE, CUSTOMER, OWNER | query `filter` | `PageResponse<TransactionResponse>` |
-| `GET /api/transactions/{id}` | `TransactionService.getById` | Get by id. | ADMIN, MANAGER, EMPLOYEE, CUSTOMER, OWNER | - | `TransactionResponse` |
-| `POST /api/transactions/manual-credit/{userId}` | `AccountService.getAccountByUserId`, `TransactionService.creditAccount` | Manual credit. | ADMIN | query `amount`, `description` | `TransactionResponse` |
+| Method and path | Service function | Why it is used | Role | Request | Response | Exceptions |
+| --- | --- | --- | --- | --- | --- | --- |
+| `GET /api/v1/transactions` | `TransactionService.filterTransactions` | Get transactions. | ADMIN, MANAGER, EMPLOYEE, CUSTOMER, OWNER | query `filter` | `PageResponse<TransactionResponse>` | 400, 401, 403 |
+| `GET /api/v1/transactions/{id}` | `TransactionService.getById` | Get by id. | ADMIN, MANAGER, EMPLOYEE, CUSTOMER, OWNER | - | `TransactionResponse` | 401, 403, 404 |
+| `POST /api/v1/transactions/manual-credit/{userId}` | `AccountService.getAccountByUserId`, `TransactionService.creditAccount` | The user's wallet, created on first use for accounts that predate wallets. | ADMIN | query `amount`, `description` | `TransactionResponse` | 400, 401, 403, 404, 409 |

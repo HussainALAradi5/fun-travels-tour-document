@@ -18,16 +18,28 @@ Read side of tours: the public catalog, lists and search, and who may see which 
 
 **Runs in:** read-only transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `Tour getVisible(Integer id)`
 
 **Purpose:** One tour by id for the public endpoint. Bookable (ACTIVE) tours are public; others are shown to administrators, the owning agency's staff, and customers holding a ticket for it. Anyone else gets 404, so pending or cancelled tours do not leak.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Tour not found | `ResourceNotFoundException` | 404 |
+
 ### `PageResponse<Tour> getCatalogTours(Integer startCountryId, Integer endCountryId, LocalDate start, LocalDate end, Integer page, Integer size)`
 
 **Runs in:** read-only transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `PageResponse<Tour> filter(TourFilterRequest filter)`
 
 **Runs in:** read-only transaction
+
+**Exceptions:** none of its own; failures come from the functions it calls.

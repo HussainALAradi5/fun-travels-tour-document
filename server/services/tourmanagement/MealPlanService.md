@@ -17,17 +17,35 @@ Source: `services/tourmanagement/MealPlanService.java`.
 
 **Runs in:** read-only transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `MealPlan findById(Integer id)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Meal not found | `ResourceNotFoundException` | 404 |
 
 ### `PageResponse<MealPlan> getAgencyCatalog(Integer agencyId, Integer page, Integer size)`
 
 **Runs in:** read-only transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `MealPlan createMeal(MealPlanCreateRequest request)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Agency not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Standard cannot be combined with another dietary classification. | `IllegalArgumentException` | 400 |
 
 ### `MealPlan updateMeal(Integer id, MealPlanCreateRequest request)`
 
@@ -35,6 +53,21 @@ Source: `services/tourmanagement/MealPlanService.java`.
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Meal not found | `ResourceNotFoundException` | 404 |
+| Standard cannot be combined with another dietary classification. | `IllegalArgumentException` | 400 |
+
 ### `void updateMealStatus(Integer id, GenericStatus status)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Meal not found | `ResourceNotFoundException` | 404 |

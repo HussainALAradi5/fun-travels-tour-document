@@ -17,16 +17,32 @@ Source: `services/auth/AuthService.java`.
 
 **Runs in:** transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `AuthResponse login(LoginRequest request)`
 
 **Purpose:** Accepts email, username, or mobile number; Spring Security verifies the password hash.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Invalid username or password | `WorkflowException` `INVALID_CREDENTIALS` | 409 |
+
 ### `String requestPasswordReset(String email)`
 
 **Runs in:** transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `User confirmPasswordReset(PasswordResetConfirmRequest request)`
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| This reset link is invalid or has expired. | `WorkflowException` `INVALID_RESET_LINK` | 409 |

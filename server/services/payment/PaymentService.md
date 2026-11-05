@@ -14,14 +14,35 @@ Source: `services/payment/PaymentService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Payment not found | `ResourceNotFoundException` | 404 |
+| Only administrators can view wallet top-up payments. | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `Payment executeTransaction(TourReservation res, PaymentMethod method)`
 
 **Purpose:** Creates and executes a transaction.
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Bookings are paid from your wallet. Top up your wallet by card, then pay. | `WorkflowException` `PAYMENT_METHOD_UNSUPPORTED` | 409 |
+
 ### `PageResponse<Payment> filter(PaymentFilterRequest filter)`
 
 **Purpose:** Dynamic filtering with Date support and DESC sorting.
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Use either date or startDate/endDate, not both. | `IllegalArgumentException` | 400 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

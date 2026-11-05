@@ -13,3 +13,17 @@ Status workflow: PENDING -> APPROVED or CANCELLED; APPROVED -> ACTIVE or CANCELL
 ### `Tour updateStatus(Integer id, GenericStatus newStatus)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Cannot change the status of a completed tour. | `WorkflowException` | 409 |
+| A cancelled tour can only be restored to PENDING status. | `WorkflowException` | 409 |
+| Cancellation denied: Tour is less than 2 weeks away. | `WorkflowException` | 409 |
+| Cancellation denied: Booked seats exceed 1/3 of total capacity. | `WorkflowException` | 409 |
+| A pending tour must be APPROVED or CANCELLED. | `WorkflowException` | 409 |
+| An approved tour must be made ACTIVE or CANCELLED. | `WorkflowException` | 409 |
+| An active tour must be marked COMPLETED or CANCELLED. | `WorkflowException` | 409 |
+| Status change not allowed by the workflow | `WorkflowException` | 409 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

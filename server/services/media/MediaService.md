@@ -16,11 +16,15 @@ Stores generated files under the private `app.media-dir` (never served staticall
 
 **Runs in:** transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `Media storeReport(byte[] content, String fileName, ReportType type, ReportFormat format, int recordCount, User owner)`
 
 **Purpose:** Saves a generated report for its owner under `reports/<ownerId>/<random>.<ext>`.
 
 **Runs in:** transaction
+
+**Exceptions:** none of its own; failures come from the functions it calls.
 
 ### `PageResponse<Media> listMine(MediaCategory category, Integer page, Integer size)`
 
@@ -28,10 +32,32 @@ Stores generated files under the private `app.media-dir` (never served staticall
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `MediaFile open(Integer id)`
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Media not found | `ResourceNotFoundException` | 404 |
+| You can only access your own files. | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `void delete(Integer id)`
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Media not found | `ResourceNotFoundException` | 404 |
+| You can only access your own files. | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

@@ -18,4 +18,3 @@ Table `users`. Inherits `BaseEntity`. Source: `models/user/User.java`.
 | `base64Image` | `String` |  not stored |
 | `resetToken` | `String` |   |
 | `resetTokenExpiry` | `java.time.LocalDateTime` |   |
-| `account` | `Account` | OneToOne  |

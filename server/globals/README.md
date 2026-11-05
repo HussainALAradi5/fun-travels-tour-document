@@ -3,25 +3,28 @@
 | Topic | Page |
 | --- | --- |
 | Configuration and environment | [configuration.md](configuration.md) |
-| Authentication filter, roles, ownership | [security.md](security.md) |
+| Authentication, rate limiting, request ids, roles, ownership | [security.md](security.md) |
 | Error envelope and codes | [errors.md](errors.md) |
 | Pagination and sorting | [pagination.md](pagination.md) |
-| Schema maintenance and development seed | [schema-and-seeds.md](schema-and-seeds.md) |
+| Flyway migrations and development seed | [schema-and-seeds.md](schema-and-seeds.md) |
 
 ## Code layout
 
 ```text
 src/main/java/com/server/server/
-  config/        database, notification, payment, properties, scheduling, security, web
-  constants/     BookingRules, CodePrefixes, RoleGroups, ValidationPatterns
-  controllers/   agency, auth, geography, notification, payment, support, tourmanagement, user
-  dto/           common, agency, auth, geography, notification, payment, support, tourmanagement, user
-  enums/         common, geography, notification, payment, support, tourmanagement, user
-  exceptions/    domain exceptions and GlobalExceptionHandler
-  middlewares/   JwtAuthenticationFilter
+  config/        database (auditing), notification, payment, properties, scheduling, security, web
+  constants/     common, errors (ErrorCodes), report, tourmanagement, user (RoleGroups)
+  controllers/   agency, auth, geography, media, notification, payment, report, support, tourmanagement, user
+  dto/           common and the same domain folders
+  enums/         common and the same domain folders
+  exceptions/    common: named exceptions services throw
+  middlewares/   auth (JWT filter, WebSocket auth), errors (GlobalExceptionHandler, SecurityErrorResponder),
+                 logging (RequestIdFilter), security (AuthRateLimitFilter)
   models/        base (BaseEntity) + domain folders
   repositories/  domain folders
-  seeds/         DataSeeder (development only)
+  seeds/         development: DataSeeder
   services/      auth, common, domain folders
-  utilities/     ApiResponse, CodeGenerator, DomainWorkflowValidator, FilterUtils, PaginationUtils, PricingCalculator, mappers
+  utilities/     codes, filters, pagination, phone, pricing, report, responses
+  validations/   workflow: DomainWorkflowValidator
+src/main/resources/db/migration/   Flyway scripts
 ```

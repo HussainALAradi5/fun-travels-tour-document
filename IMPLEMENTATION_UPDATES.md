@@ -1,5 +1,17 @@
 # Implementation Updates
 
+## 2026-11-05 (evening) - Review fixes
+
+Fixes for every finding of the [2026-11-05 test report](verification/test-report-2026-11-05.md), one branch and pull request each.
+
+- **Errors.** Every error carries a specific code (`constants/errors/ErrorCodes`); unknown routes return 404 and wrong methods 405 instead of 500; missing ports and notification recipients return 404; disk failures (`StorageException`, 500) and the country API (`ExternalServiceException`, 502) no longer leak details; security 401 and 403 use the JSON envelope.
+- **Migrations.** Flyway owns the schema (V1 baseline, V2 retired columns and 53 indexes); Hibernate only validates. Existing databases are baselined. `SchemaMaintenance` is gone.
+- **Loading.** All relations are lazy, with batch fetching; `User` no longer maps its account inverse one-to-one. List requests went from 124 to 52 SQL statements across ten endpoints. Nightly jobs now run in transactions (they bypassed the proxy before).
+- **Middleware.** Auth rate limiting (10 attempts per minute, 429 with `Retry-After`) and request ids in every log line.
+- **API version.** All REST paths moved to `/api/v1` (`app.api-prefix`); the web and mobile apps follow. Media `downloadPath` is relative to the API base.
+- **Layout.** Server constants, exceptions, middlewares, utilities and seeds have domain subfolders; a `validations/` layer holds the workflow validator. Web and mobile local types moved to their own files; banner photos to `constants/ui/images.ts`.
+- **Docs.** `phases/` folder; service pages list each function's cases and exceptions and controller tables list statuses (generated); error codes, security, configuration, migrations and setup updated.
+
 ## 2026-11-05 (later) - Polish
 
 - GitHub Actions in the server (unit tests and package on Java 21), web client (type-check, lint, production build), and mobile app (type-check, lint, Android bundle); the client gained an `npm run typecheck` script.

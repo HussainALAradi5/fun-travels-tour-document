@@ -24,11 +24,34 @@ Source: `services/user/UserService.java`.
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Email already exists | `DuplicateResourceException` | 409 |
+| Username already exists | `DuplicateResourceException` | 409 |
+| Mobile number already exists | `DuplicateResourceException` | 409 |
+
 ### `User createEmployee(EmployeeCreateRequest request, Integer agencyId, Integer branchId)`
 
 **Purpose:** Admins create any staff role. Owners create managers and employees in their agency; managers create employees in their agency and branch.
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Branch not found | `ResourceNotFoundException` | 404 |
+| Agency not found | `ResourceNotFoundException` | 404 |
+| You are not allowed to create staff accounts. | `AccessDeniedException` | 403 |
+| Agency staff must belong to an agency. | `IllegalArgumentException` | 400 |
+| The selected branch does not belong to the agency. | `IllegalArgumentException` | 400 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| You are not allowed to assign the role  . | `AccessDeniedException` | 403 |
+| Email already exists | `DuplicateResourceException` | 409 |
+| Username already exists | `DuplicateResourceException` | 409 |
+| Mobile number already exists | `DuplicateResourceException` | 409 |
 
 ### `User updateProfile(Integer id, UserUpdateRequest request)`
 
@@ -36,15 +59,43 @@ Source: `services/user/UserService.java`.
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Mobile number already in use | `DuplicateResourceException` | 409 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| User not found | `ResourceNotFoundException` | 404 |
+
 ### `User updatePermissions(Integer id, UserTypeEnum type, Integer agencyId, Integer branchId)`
 
 **Purpose:** Admin-only role and placement change. Agency staff must end up in an agency (taken from the branch, or from `agencyId` for owners who have no branch); other roles leave any agency.
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| You cannot change your own role. | `IllegalArgumentException` | 400 |
+| Branch not found | `ResourceNotFoundException` | 404 |
+| Agency not found | `ResourceNotFoundException` | 404 |
+| The selected branch does not belong to the agency. | `IllegalArgumentException` | 400 |
+| Agency staff must belong to an agency. | `IllegalArgumentException` | 400 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| User not found | `ResourceNotFoundException` | 404 |
+
 ### `void softDeleteUser(Integer id)`
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| You cannot deactivate your own account. | `IllegalArgumentException` | 400 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| User not found | `ResourceNotFoundException` | 404 |
 
 ### `List<User> getAgencyUsers(Integer agencyId, UserTypeEnum type)`
 
@@ -52,11 +103,34 @@ Source: `services/user/UserService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Agency not found | `ResourceNotFoundException` | 404 |
+| You are not allowed to view agency staff. | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `ImportResult bulkImportEmployees(MultipartFile file, Integer agencyId)`
 
 **Purpose:** Imports staff rows: username, name, email, password, age, mobile, role, branch name. Managers import only into their own agency; only manager and employee roles are accepted.
 
 **Runs in:** transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Agency not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Unknown role | `IllegalArgumentException` | 400 |
+| Unknown branch | `IllegalArgumentException` | 400 |
+| is required | `IllegalArgumentException` | 400 |
+| You are not allowed to assign the role  . | `AccessDeniedException` | 403 |
+| Age must be a whole number | `IllegalArgumentException` | 400 |
+| Email already exists | `DuplicateResourceException` | 409 |
+| Username already exists | `DuplicateResourceException` | 409 |
+| Mobile number already exists | `DuplicateResourceException` | 409 |
 
 ### `User getVisibleUser(Integer id)`
 
@@ -64,9 +138,23 @@ Source: `services/user/UserService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| You can only view your own profile. | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| User not found | `ResourceNotFoundException` | 404 |
+
 ### `User getUserById(Integer id)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| User not found | `ResourceNotFoundException` | 404 |
 
 ### `List<User> getUsersByType(UserTypeEnum type)`
 
@@ -74,4 +162,12 @@ Source: `services/user/UserService.java`.
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `User getCurrentUser()`
+
+**Exceptions:** none of its own; failures come from the functions it calls.

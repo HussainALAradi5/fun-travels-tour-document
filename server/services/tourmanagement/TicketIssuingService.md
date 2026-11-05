@@ -16,10 +16,27 @@ Builds priced tickets with numbers and scan codes. Prices always come from the s
 
 **Purpose:** Creates one unsaved ticket per traveler selection.
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Meal ' ' was selected twice. | `WorkflowException` `DUPLICATE_MEAL` | 409 |
+| Meal ' ' is no longer available. | `WorkflowException` `MEAL_INACTIVE` | 409 |
+| Meal ' ' is not offered on this tour. | `WorkflowException` `MEAL_NOT_OFFERED` | 409 |
+| Ticket codes could not be generated. | `WorkflowException` `TICKET_CODE_FAILED` | 409 |
+
 ### `Ticket prepare(Ticket ticket, Tour tour, User customer, TourReservation reservation)`
 
 **Purpose:** Fills identity, codes, relations, and price on a ticket.
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Ticket codes could not be generated. | `WorkflowException` `TICKET_CODE_FAILED` | 409 |
+
 ### `void applyPricing(Ticket ticket, Tour tour)`
 
 **Purpose:** Recalculates price from the stored tour, seat, and meals.
+
+**Exceptions:** none of its own; failures come from the functions it calls.

@@ -1,11 +1,11 @@
 # GenericTrackingController
 
-Base path `/api/tracking`. Source: `controllers/support/GenericTrackingController.java`.
+Base path `/api/v1/tracking`. Source: `controllers/support/GenericTrackingController.java`.
 
-Errors use the shared envelope (see [errors](../../globals/errors.md)): 400 validation or bad input, 401 missing/invalid token, 403 role or ownership, 404 missing record, 409 workflow or duplicate conflict.
+Errors use the shared envelope and codes in [errors](../../globals/errors.md). The Exceptions column lists the statuses an endpoint can return (workflow codes in brackets), derived from the service functions it calls; each service page lists the cases behind them.
 
-| Method and path | Service function | Why it is used | Role | Request | Response |
-| --- | --- | --- | --- | --- | --- |
-| `GET /api/tracking/{refType}/{refId}` | `GenericTrackingService.getTimeline` | Get timeline. | any signed-in user | - | `TimelineResponse` |
-| `POST /api/tracking/{refType}/{refId}/comments` | `GenericTrackingService.addComment` | Add comment. | any signed-in user | body `CommentRequest` | `CommentResponse` |
-| `PUT /api/tracking/comments/{commentId}` | `GenericTrackingService.updateComment` | Only the author edits a comment, and only while the record is still open. | any signed-in user | body `CommentRequest` | `CommentResponse` |
+| Method and path | Service function | Why it is used | Role | Request | Response | Exceptions |
+| --- | --- | --- | --- | --- | --- | --- |
+| `GET /api/v1/tracking/{refType}/{refId}` | `GenericTrackingService.getTimeline` | Events and comments of one record, oldest first. | any signed-in user | - | `TimelineResponse` | 401, 403, 404 |
+| `POST /api/v1/tracking/{refType}/{refId}/comments` | `GenericTrackingService.addComment` | Add comment. | any signed-in user | body `CommentRequest` | `CommentResponse` | 400, 401, 403, 404, 409 (`REQUEST_CLOSED`) |
+| `PUT /api/v1/tracking/comments/{commentId}` | `GenericTrackingService.updateComment` | Authors edit their own comments. | any signed-in user | body `CommentRequest` | `CommentResponse` | 400, 401, 403, 404, 409 (`REQUEST_CLOSED`) |

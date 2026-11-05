@@ -33,11 +33,28 @@ Per-tour taken seats (for booking and the seat picker) and whether a seat is hel
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| This tour is not available for booking. | `WorkflowException` `TOUR_NOT_BOOKABLE` | 409 |
+| There are not enough places available for this booking. | `WorkflowException` `INSUFFICIENT_CAPACITY` | 409 |
+| Inventory quantity must be greater than zero. | `WorkflowException` | 409 |
+| Tour not found. | `WorkflowException` | 409 |
+| This tour has no transportation seats to choose. | `WorkflowException` `INVALID_SEAT_FOR_TOUR` | 409 |
+| Seat not found. | `WorkflowException` `SEAT_NOT_FOUND` | 409 |
+| The selected seat does not belong to this tour's transportation. | `WorkflowException` `INVALID_SEAT_FOR_TOUR` | 409 |
+| Each traveler must have a different seat. | `WorkflowException` `DUPLICATE_SEAT` | 409 |
+| Seat   is no longer available. Please choose another seat. | `WorkflowException` `SEAT_NOT_AVAILABLE` | 409 |
+| There are not enough transportation seats available for this booking. | `WorkflowException` `INSUFFICIENT_TRANSPORTATION_SEATS` | 409 |
+
 ### `int reconcileActiveTours()`
 
 **Purpose:** Nightly: sets every bookable tour's available places from its tickets.
 
 **Runs in:** transaction
+
+**Exceptions:** none of its own; failures come from the functions it calls.
 
 ### `void release(Integer tourId, int quantity, List<Ticket> tickets)`
 
@@ -45,14 +62,25 @@ Per-tour taken seats (for booking and the seat picker) and whether a seat is hel
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Inventory quantity must be greater than zero. | `WorkflowException` | 409 |
+| Tour not found. | `WorkflowException` | 409 |
+
 ### `Set<Integer> takenSeatIds(Integer tourId)`
 
 **Purpose:** Ids of seats held by active tickets of the tour.
 
 **Runs in:** read-only transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `boolean isSeatInUse(Integer seatId)`
 
 **Purpose:** True when a seat is held by an active ticket of any tour that has not finished.
 
 **Runs in:** read-only transaction
+
+**Exceptions:** none of its own; failures come from the functions it calls.

@@ -53,9 +53,22 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 
 **Runs in:** read-only transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `TourReservation getById(Integer id)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Reservation not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 
 ### `TourReservation create(ReservationCreateRequest request)`
 
@@ -63,13 +76,36 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 
 **Runs in:** transaction; roles: CUSTOMER, EMPLOYEE, ADMIN, MANAGER, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| You already have an active reservation that conflicts with these dates. | `WorkflowException` `DATE_CONFLICT` | 409 |
+| A reservation customer is required. | `WorkflowException` `CUSTOMER_REQUIRED` | 409 |
+| User not found | `ResourceNotFoundException` | 404 |
+
 ### `TourReservation finalizeReservationWithPayment(Integer reservationId, PaymentMethod method)`
 
 **Runs in:** transaction; roles: CUSTOMER, ADMIN, MANAGER, OWNER
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Reservation was not found. | `WorkflowException` `RESERVATION_NOT_FOUND` | 409 |
+| This reservation can no longer be paid because it is  . | `WorkflowException` `RESERVATION_NOT_PAYABLE` | 409 |
+| Your reservation hold expired. Please select your seats again. | `WorkflowException` `RESERVATION_HOLD_EXPIRED` | 409 |
+| This tour is no longer available for booking. | `WorkflowException` `TOUR_NOT_BOOKABLE` | 409 |
+| We could not complete the payment. Please try another payment method. | `WorkflowException` `PAYMENT_FAILED` | 409 |
+| Status change not allowed by the workflow | `WorkflowException` | 409 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `void expirePendingReservations()`
 
 **Runs in:** transaction; scheduled `fixedDelayString = "${booking.hold-cleanup-ms:60000}"`
+
+**Exceptions:** none of its own; failures come from the functions it calls.
 
 ### `TourReservation cancelReservation(Integer reservationId)`
 
@@ -77,9 +113,29 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 
 **Runs in:** transaction
 
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Reservation is already cancelled. | `WorkflowException` `ALREADY_CANCELLED` | 409 |
+| Cannot cancel a reservation for a tour that is already completed. | `WorkflowException` | 409 |
+| Status change not allowed by the workflow | `WorkflowException` | 409 |
+| Reservation not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `TourReservation updateStatus(Integer id, GenericStatus newStatus)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Status change not allowed by the workflow | `WorkflowException` | 409 |
+| Reservation not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+| Reservation is already cancelled. | `WorkflowException` `ALREADY_CANCELLED` | 409 |
+| Cannot cancel a reservation for a tour that is already completed. | `WorkflowException` | 409 |
 
 ### `void syncAfterTicketCancellation(TourReservation reservation)`
 
@@ -87,6 +143,14 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 
 **Runs in:** transaction
 
+**Exceptions:** none of its own; failures come from the functions it calls.
+
 ### `PageResponse<TourReservation> filter(ReservationFilterRequest filter)`
 
 **Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

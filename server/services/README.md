@@ -1,6 +1,6 @@
 # Services
 
-Every public function with its signature, generated from the source. Services marked *business logic* also carry hand-written rules, cases, and exceptions.
+Every public function in source order: signature, purpose, transaction and role notes, and the cases it rejects with their exception and status (its own throws and those of the private helpers it calls). Services marked *business logic* also carry hand-written rules.
 
 | Domain | Service | Functions | Business logic |
 | --- | --- | --- | --- |

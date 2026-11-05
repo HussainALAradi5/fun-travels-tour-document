@@ -11,3 +11,10 @@ Generates a branded PDF or Excel report and keeps it as the requester's media.
 ## Functions
 
 ### `Media generate(ReportRequest request)`
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| You are not allowed to export  . | `AccessDeniedException` | 403 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

@@ -1,5 +1,19 @@
 # Verification
 
+## 2026-11-05 (evening): review fixes
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw package`: 79 tests (adds error mapping, auth rate limit, nightly job transactions) | Pass |
+| Server | Flyway on an empty database: V1 and V2 applied, schema validated, seed ran | Pass |
+| Server | Flyway on a database built by Hibernate with the retired column and seat constraint added back | Baselined at 1, V2 applied, both dropped, 54 indexes |
+| All | Fresh database after each fix (errors, migrations, lazy loading, middleware, `/api/v1`, layer move): end-to-end 48/48, booking contract 20/20, earlier round 37/37, mobile screens 24/24, access and logic 32/32, reports 52/52, WebSocket 4/4 | 217/217 each time |
+| Server | Rate limit at 3 per window: fourth login gets 429 `TOO_MANY_REQUESTS` with `Retry-After: 60`; `X-Request-Id` echoed and in the log; DELETE on a POST route gets 405 | Pass |
+| Server | SQL statements per list request, same data, before and after lazy loading | agencies 8 to 4, branches 5 to 3, tours 18 to 10, tickets 17 to 6, reservations 14 to 5, requests 5 to 3, vehicles 7 to 4, users 19 to 5, catalog 12 to 7, customer tickets 9 to 5 |
+| Web | `npm run typecheck`, `npm run lint`, `npm run build` | Pass |
+| Mobile | `npm run typecheck`, `npm run lint` | Pass |
+| Not verified | Mobile on an emulator or device; nightly jobs at midnight (covered by a unit test) | - |
+
 ## 2026-11-05: code cleanup
 
 | Repository | Check | Result |
