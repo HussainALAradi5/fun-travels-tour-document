@@ -40,7 +40,7 @@ Source: `services/payment/TransactionService.java`.
 | Case | Exception | Status |
 | --- | --- | --- |
 | Debit amount must be greater than zero. | `IllegalArgumentException` | 400 |
-| Insufficient wallet balance. | `WorkflowException` `INSUFFICIENT_BALANCE` | 409 |
+| Insufficient wallet balance. | `WorkflowException` | 409 |
 
 ### `PageResponse<Transaction> filterTransactions(TransactionFilterRequest filter)`
 

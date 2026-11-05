@@ -20,10 +20,10 @@ Builds priced tickets with numbers and scan codes. Prices always come from the s
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Meal ' ' was selected twice. | `WorkflowException` `DUPLICATE_MEAL` | 409 |
-| Meal ' ' is no longer available. | `WorkflowException` `MEAL_INACTIVE` | 409 |
-| Meal ' ' is not offered on this tour. | `WorkflowException` `MEAL_NOT_OFFERED` | 409 |
-| Ticket codes could not be generated. | `WorkflowException` `TICKET_CODE_FAILED` | 409 |
+| Meal ' ' was selected twice. | `WorkflowException` | 409 |
+| Meal ' ' is no longer available. | `WorkflowException` | 409 |
+| Meal ' ' is not offered on this tour. | `WorkflowException` | 409 |
+| Ticket codes could not be generated. | `WorkflowException` | 409 |
 
 ### `Ticket prepare(Ticket ticket, Tour tour, User customer, TourReservation reservation)`
 
@@ -33,7 +33,7 @@ Builds priced tickets with numbers and scan codes. Prices always come from the s
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Ticket codes could not be generated. | `WorkflowException` `TICKET_CODE_FAILED` | 409 |
+| Ticket codes could not be generated. | `WorkflowException` | 409 |
 
 ### `void applyPricing(Ticket ticket, Tour tour)`
 

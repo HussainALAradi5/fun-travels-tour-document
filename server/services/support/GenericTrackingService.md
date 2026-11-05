@@ -37,7 +37,7 @@ Timelines (events + comments) are readable only by people who can read the recor
 | --- | --- | --- |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 | Comment content is required. | `IllegalArgumentException` | 400 |
-| This request is closed. No further modifications are allowed. | `WorkflowException` `REQUEST_CLOSED` | 409 |
+| This request is closed. No further modifications are allowed. | `WorkflowException` | 409 |
 | Request not found | `ResourceNotFoundException` | 404 |
 | You are not allowed to access this request timeline. | `AccessDeniedException` | 403 |
 | Reservation not found | `ResourceNotFoundException` | 404 |
@@ -60,7 +60,7 @@ Timelines (events + comments) are readable only by people who can read the recor
 | Only the author can edit this comment. | `AccessDeniedException` | 403 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 | Comment content is required. | `IllegalArgumentException` | 400 |
-| This request is closed. No further modifications are allowed. | `WorkflowException` `REQUEST_CLOSED` | 409 |
+| This request is closed. No further modifications are allowed. | `WorkflowException` | 409 |
 | Request not found | `ResourceNotFoundException` | 404 |
 | You are not allowed to access this request timeline. | `AccessDeniedException` | 403 |
 | Reservation not found | `ResourceNotFoundException` | 404 |

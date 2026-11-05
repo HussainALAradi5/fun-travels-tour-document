@@ -94,8 +94,8 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 | Case | Exception | Status |
 | --- | --- | --- |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
-| You already have an active reservation that conflicts with these dates. | `WorkflowException` `DATE_CONFLICT` | 409 |
-| A reservation customer is required. | `WorkflowException` `CUSTOMER_REQUIRED` | 409 |
+| You already have an active reservation that conflicts with these dates. | `WorkflowException` | 409 |
+| A reservation customer is required. | `WorkflowException` | 409 |
 | User not found | `ResourceNotFoundException` | 404 |
 
 ### `TourReservation finalizeReservationWithPayment(Integer reservationId, PaymentMethod method)`
@@ -106,11 +106,11 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Reservation was not found. | `WorkflowException` `RESERVATION_NOT_FOUND` | 409 |
-| This reservation can no longer be paid because it is  . | `WorkflowException` `RESERVATION_NOT_PAYABLE` | 409 |
-| Your reservation hold expired. Please select your seats again. | `WorkflowException` `RESERVATION_HOLD_EXPIRED` | 409 |
-| This tour is no longer available for booking. | `WorkflowException` `TOUR_NOT_BOOKABLE` | 409 |
-| We could not complete the payment. Please try another payment method. | `WorkflowException` `PAYMENT_FAILED` | 409 |
+| Reservation was not found. | `WorkflowException` | 409 |
+| This reservation can no longer be paid because it is  . | `WorkflowException` | 409 |
+| Your reservation hold expired. Please select your seats again. | `WorkflowException` | 409 |
+| This tour is no longer available for booking. | `WorkflowException` | 409 |
+| We could not complete the payment. Please try another payment method. | `WorkflowException` | 409 |
 | Status change not allowed by the workflow | `WorkflowException` | 409 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 
@@ -130,7 +130,7 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Reservation is already cancelled. | `WorkflowException` `ALREADY_CANCELLED` | 409 |
+| Reservation is already cancelled. | `WorkflowException` | 409 |
 | Cannot cancel a reservation for a tour that is already completed. | `WorkflowException` | 409 |
 | Status change not allowed by the workflow | `WorkflowException` | 409 |
 | Reservation not found | `ResourceNotFoundException` | 404 |
@@ -147,7 +147,7 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 | Status change not allowed by the workflow | `WorkflowException` | 409 |
 | Reservation not found | `ResourceNotFoundException` | 404 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
-| Reservation is already cancelled. | `WorkflowException` `ALREADY_CANCELLED` | 409 |
+| Reservation is already cancelled. | `WorkflowException` | 409 |
 | Cannot cancel a reservation for a tour that is already completed. | `WorkflowException` | 409 |
 
 ### `void syncAfterTicketCancellation(TourReservation reservation)`

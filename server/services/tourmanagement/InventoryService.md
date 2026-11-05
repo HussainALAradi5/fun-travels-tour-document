@@ -37,16 +37,16 @@ Per-tour taken seats (for booking and the seat picker) and whether a seat is hel
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| This tour is not available for booking. | `WorkflowException` `TOUR_NOT_BOOKABLE` | 409 |
-| There are not enough places available for this booking. | `WorkflowException` `INSUFFICIENT_CAPACITY` | 409 |
+| This tour is not available for booking. | `WorkflowException` | 409 |
+| There are not enough places available for this booking. | `WorkflowException` | 409 |
 | Inventory quantity must be greater than zero. | `WorkflowException` | 409 |
 | Tour not found. | `WorkflowException` | 409 |
-| This tour has no transportation seats to choose. | `WorkflowException` `INVALID_SEAT_FOR_TOUR` | 409 |
-| Seat not found. | `WorkflowException` `SEAT_NOT_FOUND` | 409 |
-| The selected seat does not belong to this tour's transportation. | `WorkflowException` `INVALID_SEAT_FOR_TOUR` | 409 |
-| Each traveler must have a different seat. | `WorkflowException` `DUPLICATE_SEAT` | 409 |
-| Seat   is no longer available. Please choose another seat. | `WorkflowException` `SEAT_NOT_AVAILABLE` | 409 |
-| No standard seats are left on this tour. Please choose a seat for each traveler. | `WorkflowException` `SEAT_CHOICE_REQUIRED` | 409 |
+| This tour has no transportation seats to choose. | `WorkflowException` | 409 |
+| Seat not found. | `WorkflowException` | 409 |
+| The selected seat does not belong to this tour's transportation. | `WorkflowException` | 409 |
+| Each traveler must have a different seat. | `WorkflowException` | 409 |
+| Seat   is no longer available. Please choose another seat. | `WorkflowException` | 409 |
+| No standard seats are left on this tour. Please choose a seat for each traveler. | `WorkflowException` | 409 |
 
 ### `int reconcileActiveTours()`
 

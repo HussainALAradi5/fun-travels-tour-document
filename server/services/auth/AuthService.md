@@ -29,7 +29,7 @@ Source: `services/auth/AuthService.java`.
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Invalid username or password | `WorkflowException` `INVALID_CREDENTIALS` | 409 |
+| Invalid username or password | `WorkflowException` | 409 |
 
 ### `String requestPasswordReset(String email)`
 
@@ -45,4 +45,4 @@ Source: `services/auth/AuthService.java`.
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| This reset link is invalid or has expired. | `WorkflowException` `INVALID_RESET_LINK` | 409 |
+| This reset link is invalid or has expired. | `WorkflowException` | 409 |

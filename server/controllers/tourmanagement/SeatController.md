@@ -1,13 +1,13 @@
 # SeatController
 
-Base path `/api/v1/seats`. Source: `controllers/tourmanagement/SeatController.java`.
+Base path `/api/seats`. Source: `controllers/tourmanagement/SeatController.java`.
 
 Errors use the shared envelope and codes in [errors](../../globals/errors.md). The Exceptions column lists the statuses an endpoint can return (workflow codes in brackets), derived from the service functions it calls; each service page lists the cases behind them.
 
 | Method and path | Service function | Why it is used | Role | Request | Response | Exceptions |
 | --- | --- | --- | --- | --- | --- | --- |
-| `GET /api/v1/seats` | `SeatService.getAll` | Get all. | any signed-in user | query `page`, `size`, `sortDir` | `PageResponse<SeatResponse>` | 400, 401 |
-| `GET /api/v1/seats/{id}` | `SeatService.getById` | Get by id. | any signed-in user | - | `SeatResponse` | 401, 404 |
-| `PATCH /api/v1/seats/{id}` | `SeatService.updateSeat` | Chair type and price can only change while no active booking or approved/active tour uses the seat. | OWNER, MANAGER, ADMIN | body `SeatUpdateRequest` | `SeatResponse` | 400, 401, 403, 404, 409 (`SEAT_IN_USE`, `SEAT_LAYOUT_LOCKED`, `SEAT_STATUS_LOCKED`) |
-| `GET /api/v1/seats/search` | `SeatService.search` | Lists seats. | any signed-in user | query `filter` | `PageResponse<SeatResponse>` | 400, 401, 404 |
-| `PATCH /api/v1/seats/{id}/status` | `SeatService.updateStatus` | Update status. | OWNER, MANAGER, ADMIN | query `status` | `SeatResponse` | 400, 401, 403, 404, 409 (`SEAT_IN_USE`, `SEAT_STATUS_LOCKED`) |
+| `GET /api/seats` | `SeatService.getAll` | Get all. | any signed-in user | query `page`, `size`, `sortDir` | `PageResponse<SeatResponse>` | 400, 401 |
+| `GET /api/seats/{id}` | `SeatService.getById` | Get by id. | any signed-in user | - | `SeatResponse` | 401, 404 |
+| `PATCH /api/seats/{id}` | `SeatService.updateSeat` | Chair type and price can only change while no active booking or approved/active tour uses the seat. | OWNER, MANAGER, ADMIN | body `SeatUpdateRequest` | `SeatResponse` | 400, 401, 403, 404, 409 |
+| `GET /api/seats/search` | `SeatService.search` | Lists seats. | any signed-in user | query `filter` | `PageResponse<SeatResponse>` | 400, 401, 404 |
+| `PATCH /api/seats/{id}/status` | `SeatService.updateStatus` | Update status. | OWNER, MANAGER, ADMIN | query `status` | `SeatResponse` | 400, 401, 403, 404, 409 |

@@ -25,7 +25,7 @@ The layout mirrors the code layers, not features.
 | [phases](phases/README.md) | The nine project phases with goal, tasks, acceptance criteria, verification and status |
 | [server/models](server/models/README.md) | Every model, its fields, and the relationship table |
 | [server/services](server/services/README.md) | Every service function: signature, purpose, cases and exceptions; business rules for workflow services |
-| [server/controllers](server/controllers/README.md) | Every endpoint under `/api/v1`: method, path, service function, role, request and response DTO, exceptions |
+| [server/controllers](server/controllers/README.md) | Every endpoint under `/api`: method, path, service function, role, request and response DTO, exceptions |
 | [server/dto](server/dto/README.md) | Every request and response record with fields and validation rules; how clients mirror them |
 | [server/enums](server/enums/README.md) / [server/constants](server/constants/README.md) | Enumerations and shared rule values |
 | [server/globals](server/globals/README.md) | Configuration, security filters, error codes, pagination, Flyway migrations, seeds |

@@ -12,7 +12,7 @@ Shared building blocks every layer uses.
 | Layer | Folders | Items |
 | --- | --- | --- |
 | Server | `config/`, `constants/`, `enums/`, `models/base/`, `utilities/`, `middlewares/` | Typed `AppProperties`, `ErrorCodes`, `BaseEntity`, `ApiResponse`, `CodeGenerator`, pagination, JWT, error handling, rate limit, request ids |
-| Clients | `config/`, `services/` | One API client per app, endpoint maps under `/api/v1` |
+| Clients | `config/`, `services/` | One API client per app, endpoint maps under `/api` |
 
 ## Tasks
 

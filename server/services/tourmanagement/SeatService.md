@@ -52,12 +52,12 @@ Seat records of a vehicle. A seat's stored status is its physical condition (`AV
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Cannot change the type or price of a seat held by an active ticket. | `WorkflowException` `SEAT_IN_USE` | 409 |
-| Seat layout is locked while the vehicle is assigned to an approved or active tour. | `WorkflowException` `SEAT_LAYOUT_LOCKED` | 409 |
+| Cannot change the type or price of a seat held by an active ticket. | `WorkflowException` | 409 |
+| Seat layout is locked while the vehicle is assigned to an approved or active tour. | `WorkflowException` | 409 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 | Seat not found | `ResourceNotFoundException` | 404 |
-| Seats are reserved and booked through tickets; staff can only set AVAILABLE or MAINTENANCE. | `WorkflowException` `SEAT_STATUS_LOCKED` | 409 |
-| This seat is held by an active ticket. Move or cancel the ticket first. | `WorkflowException` `SEAT_IN_USE` | 409 |
+| Seats are reserved and booked through tickets; staff can only set AVAILABLE or MAINTENANCE. | `WorkflowException` | 409 |
+| This seat is held by an active ticket. Move or cancel the ticket first. | `WorkflowException` | 409 |
 
 ### `Seat updateStatus(Integer id, SeatStatus status)`
 
@@ -69,5 +69,5 @@ Seat records of a vehicle. A seat's stored status is its physical condition (`AV
 | --- | --- | --- |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 | Seat not found | `ResourceNotFoundException` | 404 |
-| Seats are reserved and booked through tickets; staff can only set AVAILABLE or MAINTENANCE. | `WorkflowException` `SEAT_STATUS_LOCKED` | 409 |
-| This seat is held by an active ticket. Move or cancel the ticket first. | `WorkflowException` `SEAT_IN_USE` | 409 |
+| Seats are reserved and booked through tickets; staff can only set AVAILABLE or MAINTENANCE. | `WorkflowException` | 409 |
+| This seat is held by an active ticket. Move or cancel the ticket first. | `WorkflowException` | 409 |

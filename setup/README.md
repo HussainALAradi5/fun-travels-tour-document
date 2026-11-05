@@ -12,12 +12,12 @@ cp src/main/resources/application.properties.example src/main/resources/applicat
 ./mvnw spring-boot:run
 ```
 
-The API listens on `http://localhost:8080/api/v1` (`SERVER_PORT`, `API_PREFIX`). On start-up Flyway applies the scripts in `db/migration`; a database created before migrations is baselined at version 1 and receives the later scripts (see [schema and seeds](../server/globals/schema-and-seeds.md)). Profile pictures are stored under `FILE_UPLOAD_DIR` (public), generated reports under `MEDIA_DIR` (private, default `./media`) and deleted after `REPORT_RETENTION_DAYS` (default 30). Sign-in attempts are limited by `AUTH_RATE_LIMIT` per minute and address. The full settings table is in the server README.
+The API listens on `http://localhost:8080/api` (`SERVER_PORT`, `API_PREFIX`). On start-up Flyway applies the scripts in `db/migration`; a database created before migrations is baselined at version 1 and receives the later scripts (see [schema and seeds](../server/globals/schema-and-seeds.md)). Profile pictures are stored under `FILE_UPLOAD_DIR` (public), generated reports under `MEDIA_DIR` (private, default `./media`) and deleted after `REPORT_RETENTION_DAYS` (default 30). Sign-in attempts are limited by `AUTH_RATE_LIMIT` per minute and address. The full settings table is in the server README.
 
 ## Web client
 
 ```bash
-cp .env.example .env.local      # NEXT_PUBLIC_API_BASE_URL=http://localhost:8080/api/v1
+cp .env.example .env.local      # NEXT_PUBLIC_API_BASE_URL=http://localhost:8080/api
 npm ci
 npm run dev                     # http://localhost:3000
 npm run typecheck && npm run lint && npm run build

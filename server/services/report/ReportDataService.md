@@ -19,4 +19,4 @@ Loads report rows through the same service methods the list pages use, so every 
 | Case | Exception | Status |
 | --- | --- | --- |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
-| This report needs  . | `WorkflowException` `REPORT_PARAMETER_REQUIRED` | 409 |
+| This report needs  . | `WorkflowException` | 409 |

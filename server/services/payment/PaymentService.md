@@ -32,7 +32,7 @@ Source: `services/payment/PaymentService.java`.
 
 | Case | Exception | Status |
 | --- | --- | --- |
-| Bookings are paid from your wallet. Top up your wallet by card, then pay. | `WorkflowException` `PAYMENT_METHOD_UNSUPPORTED` | 409 |
+| Bookings are paid from your wallet. Top up your wallet by card, then pay. | `WorkflowException` | 409 |
 
 ### `PageResponse<Payment> filter(PaymentFilterRequest filter)`
 

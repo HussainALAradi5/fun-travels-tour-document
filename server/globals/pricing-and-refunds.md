@@ -24,7 +24,7 @@ Each agency has its own rules (`models/agency/AgencyPolicy`, columns on `agencie
 | `partialRefundDays` | 7 | From this many days before the tour, `partialRefundPercent` is refunded |
 | `partialRefundPercent` | 50 | Share refunded in the partial window; 0 means no partial refund |
 
-`GET /api/v1/agencies/{id}/policy` is public; tour responses include it as `policy` with a one-line `summary`. Only the agency's owner or an administrator can change it (`PUT /api/v1/agencies/{id}/policy`); the partial window must start no later than the full one. Already paid tickets keep the price they were charged.
+`GET /api/agencies/{id}/policy` is public; tour responses include it as `policy` with a one-line `summary`. Only the agency's owner or an administrator can change it (`PUT /api/agencies/{id}/policy`); the partial window must start no later than the full one. Already paid tickets keep the price they were charged.
 
 ## Refunds
 
@@ -35,7 +35,7 @@ Each agency has its own rules (`models/agency/AgencyPolicy`, columns on `agencie
 | Closer than `partialRefundDays` | Nothing |
 | The agency cancels the tour | 100%, always |
 
-Only **active** tickets are refunded, so cancelling one ticket and then the reservation never refunds a ticket twice. Before confirming, the apps show `GET /api/v1/reservations/{id}/refund-quote` or `GET /api/v1/tickets/{id}/refund-quote`: what was paid, what would come back, the percentage, the days left, and the rule. The quote uses the same calculation as the cancellation.
+Only **active** tickets are refunded, so cancelling one ticket and then the reservation never refunds a ticket twice. Before confirming, the apps show `GET /api/reservations/{id}/refund-quote` or `GET /api/tickets/{id}/refund-quote`: what was paid, what would come back, the percentage, the days left, and the rule. The quote uses the same calculation as the cancellation.
 
 ## Agency cancellation of a tour
 

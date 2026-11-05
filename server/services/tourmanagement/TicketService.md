@@ -78,7 +78,7 @@ Nightly: unpaid tickets of tours that have started are cancelled and their place
 | --- | --- | --- |
 | A cancelled or completed ticket cannot change status. | `WorkflowException` | 409 |
 | Ticket status can only progress to APPROVED, CONFIRMED, or COMPLETED. | `WorkflowException` | 409 |
-| Cannot approve this ticket before it is paid. | `WorkflowException` `TICKET_NOT_PAID` | 409 |
+| Cannot approve this ticket before it is paid. | `WorkflowException` | 409 |
 | A ticket can only be completed after the tour is completed. | `WorkflowException` | 409 |
 | Ticket not found | `ResourceNotFoundException` | 404 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |

@@ -8,7 +8,7 @@ Vehicles of an agency: registration, editing, seat layout, unit status, and flee
 
 - Lists, search, and detail are for staff: agency staff see only their agency's vehicles, admins all. Customers get 403. Search matches provider, internal code, and registration number.
 - A missing vehicle is 404. Agency staff always create vehicles in their own agency; a branch must belong to that agency. Codes are unique, and a registration number is unique per provider.
-- Vehicles no longer carry seat counters: seats are booked per tour, so availability is always read for a tour (`GET /api/v1/seats/search?tourId=`).
+- Vehicles no longer carry seat counters: seats are booked per tour, so availability is always read for a tour (`GET /api/seats/search?tourId=`).
 - Seats are generated from the capacity and `seatConfig` (special chair counts; the rest are standard). Editing re-labels chair types only while no booking or running tour locks the layout.
 
 ## Functions
@@ -73,7 +73,7 @@ Vehicles of an agency: registration, editing, seat layout, unit status, and flee
 | This registration already exists for the selected provider. | `DuplicateResourceException` | 409 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 | Transportation not found | `ResourceNotFoundException` | 404 |
-| Seat layout cannot be changed while seats are held by active tickets. | `WorkflowException` `SEAT_LAYOUT_LOCKED` | 409 |
+| Seat layout cannot be changed while seats are held by active tickets. | `WorkflowException` | 409 |
 | Seat layout cannot be changed while this transportation is assigned to an approved or active tour. | `WorkflowException` | 409 |
 | Unsupported chair type: | `IllegalArgumentException` | 400 |
 | Seat counts cannot be negative. | `IllegalArgumentException` | 400 |

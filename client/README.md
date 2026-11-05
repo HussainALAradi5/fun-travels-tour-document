@@ -27,7 +27,7 @@ Next.js App Router with Chakra UI. Layers under `src/`:
 ## Fixed client defects
 
 - Bulk-import template had Name and Username in the wrong order for the server parser.
-- `getAllBranches` called `/api/v1/api/branches`; `getVisibleStaff` called a non-existent endpoint (removed).
+- `getAllBranches` called `/api/api/branches`; `getVisibleStaff` called a non-existent endpoint (removed).
 - Profile image and WebSocket URLs were hard-coded to `localhost:8080`.
 - The booking page offered every meal in the system instead of the tour's meals.
 - Unused `useBookingCheckout` path (created zero-priced bookings) is no longer reachable on the server.
@@ -73,7 +73,7 @@ Next.js App Router with Chakra UI. Layers under `src/`:
 
 ## Exports (PDF and Excel)
 
-Every Export button opens `ExportDialog`. When the table passes a `report` (`ReportSpec`: report type plus `tourId`, `agencyId`, or `role`) and the user is signed in, the **server** generates the report from all matching records and keeps it (`POST /api/v1/reports`, then `GET /api/v1/media/{id}/download` through `useServerReport`). Selected rows, guests, and tables without a report type use the same template in the browser (`utilities/export/`, brand values in `constants/export/reportTemplate.ts`):
+Every Export button opens `ExportDialog`. When the table passes a `report` (`ReportSpec`: report type plus `tourId`, `agencyId`, or `role`) and the user is signed in, the **server** generates the report from all matching records and keeps it (`POST /api/reports`, then `GET /api/media/{id}/download` through `useServerReport`). Selected rows, guests, and tables without a report type use the same template in the browser (`utilities/export/`, brand values in `constants/export/reportTemplate.ts`):
 
 | File | Template |
 | --- | --- |

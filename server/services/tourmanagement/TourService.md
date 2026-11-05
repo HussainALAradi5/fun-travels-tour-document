@@ -47,10 +47,10 @@ Reading tours is in `TourCatalogService`, the status workflow in `TourStatusServ
 | End date cannot be earlier than the start date. | `WorkflowException` | 409 |
 | Tour capacity must be greater than zero. | `WorkflowException` | 409 |
 | Tour capacity cannot exceed transportation capacity. | `WorkflowException` | 409 |
-| Discount cannot exceed the base price. | `WorkflowException` `DISCOUNT_ABOVE_PRICE` | 409 |
+| Discount cannot exceed the base price. | `WorkflowException` | 409 |
 | One or more meal plans were not found. | `ResourceNotFoundException` | 404 |
-| Meal ' ' is not active. | `WorkflowException` `MEAL_INACTIVE` | 409 |
-| Meal ' ' belongs to another agency. | `WorkflowException` `MEAL_OTHER_AGENCY` | 409 |
+| Meal ' ' is not active. | `WorkflowException` | 409 |
+| Meal ' ' belongs to another agency. | `WorkflowException` | 409 |
 
 ### `Tour updateTour(Integer id, TourUpdateRequest request)`
 
@@ -61,10 +61,10 @@ Reading tours is in `TourCatalogService`, the status workflow in `TourStatusServ
 | Case | Exception | Status |
 | --- | --- | --- |
 | Cannot modify a completed tour. | `WorkflowException` | 409 |
-| Capacity cannot be lower than the number of reserved or sold places. | `WorkflowException` `CAPACITY_BELOW_BOOKINGS` | 409 |
+| Capacity cannot be lower than the number of reserved or sold places. | `WorkflowException` | 409 |
 | A selected city must belong to its selected country. | `WorkflowException` | 409 |
-| Transportation cannot change after tickets were issued for this tour. | `WorkflowException` `TRANSPORTATION_LOCKED` | 409 |
-| Discount cannot exceed the base price. | `WorkflowException` `DISCOUNT_ABOVE_PRICE` | 409 |
+| Transportation cannot change after tickets were issued for this tour. | `WorkflowException` | 409 |
+| Discount cannot exceed the base price. | `WorkflowException` | 409 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 | Transportation is already assigned to an overlapping tour. | `WorkflowException` | 409 |
 | Start date is required. | `WorkflowException` | 409 |
@@ -76,5 +76,5 @@ Reading tours is in `TourCatalogService`, the status workflow in `TourStatusServ
 | Country not found | `ResourceNotFoundException` | 404 |
 | City not found | `ResourceNotFoundException` | 404 |
 | One or more meal plans were not found. | `ResourceNotFoundException` | 404 |
-| Meal ' ' is not active. | `WorkflowException` `MEAL_INACTIVE` | 409 |
-| Meal ' ' belongs to another agency. | `WorkflowException` `MEAL_OTHER_AGENCY` | 409 |
+| Meal ' ' is not active. | `WorkflowException` | 409 |
+| Meal ' ' belongs to another agency. | `WorkflowException` | 409 |

@@ -8,7 +8,7 @@ All values come from environment variables through `application.properties` (cop
 | `spring.datasource.username` / `password` | `DB_USERNAME` / `DB_PASSWORD` | - | |
 | `jwt.secret` | `JWT_SECRET` | development placeholder | **Required, at least 32 characters** (`JwtProperties`). Change for any shared environment |
 | `jwt.expiration` | `JWT_EXPIRATION` | `86400000` (24 h) | milliseconds |
-| `app.api-prefix` | `API_PREFIX` | `/api/v1` | Prefix of every REST endpoint; the web and mobile apps use the same value |
+| `app.api-prefix` | `API_PREFIX` | `/api` | Prefix of every REST endpoint; the web and mobile apps use the same value |
 | `app.rate-limit.auth-requests` / `window-seconds` | `AUTH_RATE_LIMIT` / `AUTH_RATE_WINDOW_SECONDS` | `10` / `60` | Sign-in, registration and reset attempts per address and window |
 | `app.media-dir` | `MEDIA_DIR` | `./media` | Private generated reports, never served statically |
 | `app.report-retention-days` | `REPORT_RETENTION_DAYS` | `30` | Reports older than this are deleted nightly |
