@@ -7,7 +7,7 @@ Errors use the shared envelope (see [errors](../../globals/errors.md)): 400 vali
 | Method and path | Service function | Why it is used | Role | Request | Response |
 | --- | --- | --- | --- | --- | --- |
 | `POST /api/transportations` | - | Create. | OWNER, MANAGER, ADMIN | body `TransportationCreateRequest` | `TransportationResponse` |
-| `POST /api/transportations/imports` | - | Import excel. | OWNER, MANAGER, ADMIN | - | `ImportResult` |
+| `POST /api/transportations/imports` | `TransportationImportService.importExcel` | Import excel. | OWNER, MANAGER, ADMIN | - | `ImportResult` |
 | `GET /api/transportations` | - | Get all. | any signed-in user | query `page`, `size`, `sortBy`, `sortDir` | `PageResponse<TransportationResponse>` |
 | `GET /api/transportations/{id}` | - | Get by id. | any signed-in user | - | `TransportationResponse` |
 | `PUT /api/transportations/{id}` | - | Update. | OWNER, MANAGER, ADMIN | body `TransportationUpdateRequest` | `TransportationResponse` |

@@ -31,6 +31,10 @@ Controllers check roles; this service checks whose data a signed-in user may tou
 
 ### `static boolean isAgencyStaff(User user)`
 
+### `static boolean isBranchStaff(User user)`
+
+**Purpose:** Managers and employees, whose tour lists are narrowed to their branch.
+
 ### `static boolean isSupportStaff(User user)`
 
 ### `static Integer agencyScope(User user)`

@@ -1,5 +1,13 @@
 # Verification
 
+## 2026-11-05: code cleanup
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw test` | 69/69 |
+| All | Fresh database after the service split: end-to-end 48/48, booking contract 20/20, earlier round 37/37, mobile screens 24/24, access and logic 32/32, reports 52/52, WebSocket 4/4 | 217/217 |
+| Clients | DTOs regenerated (no `MediaFileDto`); web `tsc` and `eslint`, mobile `tsc` and `expo lint` | Pass |
+
 ## 2026-11-04 (late night): access and logic fixes
 
 | Repository | Check | Result |

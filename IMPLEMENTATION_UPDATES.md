@@ -1,5 +1,13 @@
 # Implementation Updates
 
+## 2026-11-05 - Code cleanup
+
+- `TourService` (627 lines) split into `TourService` (create and edit), `TourCatalogService` (catalog, lists, search, visibility), `TourStatusService` (status workflow), and `TourSchedulerService` (nightly housekeeping); `TransportationService` lost its spreadsheet import to `TransportationImportService`. Code moved unchanged.
+- Hand-written role checks in tour creation and tour search replaced by `AccessPolicyService` (`isAgencyStaff`, `agencyScope`, new `isBranchStaff`).
+- Removed `PUT /api/meals/{id}/price` (replaced by `PUT /api/meals/{id}`; no client used it).
+- `MediaFile` moved from `dto/` to `services/media/`: it is internal to downloads, so clients no longer get a generated copy.
+- The web client no longer tracks `tsconfig.tsbuildinfo` (TypeScript's build cache).
+
 ## 2026-11-04 (late night) - Access and logic fixes
 
 - **Access.** Agency details, staff lists, branches, and agency search are limited to administrators and the agency's own staff; owners can no longer pull another agency's manager into a branch; only bookable tours are public. See [security](security/README.md) items 26-30.

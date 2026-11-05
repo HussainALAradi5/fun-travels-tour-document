@@ -46,6 +46,7 @@ Shared values live in `constants/`; services never repeat them inline.
 | Name | Value |
 | --- | --- |
 | `AGENCY_STAFF` | `EnumSet.of( UserTypeEnum.OWNER, UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
+| `BRANCH_STAFF` | `EnumSet.of(UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
 | `SUPPORT_STAFF` | `EnumSet.of( UserTypeEnum.ADMIN, UserTypeEnum.SUPPORT_AGENT)` |
 | `OWNER_CREATABLE` | `EnumSet.of( UserTypeEnum.MANAGER, UserTypeEnum.EMPLOYEE)` |
 | `MANAGER_CREATABLE` | `EnumSet.of(UserTypeEnum.EMPLOYEE)` |

@@ -38,7 +38,3 @@ Source: `services/tourmanagement/MealPlanService.java`.
 ### `void updateMealStatus(Integer id, GenericStatus status)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
-
-### `MealPlan updatePricing(Integer id, Double newPrice)`
-
-**Runs in:** transaction; roles: ADMIN, MANAGER, OWNER

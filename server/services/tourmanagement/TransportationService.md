@@ -2,6 +2,8 @@
 
 Source: `services/tourmanagement/TransportationService.java`.
 
+Vehicles of an agency: registration, editing, seat layout, unit status, and fleet search.
+
 ## Business logic
 
 - Lists, search, and detail are for staff: agency staff see only their agency's vehicles, admins all. Customers get 403. Search matches provider, internal code, and registration number.
@@ -28,8 +30,6 @@ Source: `services/tourmanagement/TransportationService.java`.
 ### `Transportation create(TransportationCreateRequest request)`
 
 **Runs in:** transaction; roles: ADMIN, MANAGER, OWNER
-
-### `ImportResult importExcel(InputStream input)`
 
 ### `Transportation update(Integer id, TransportationUpdateRequest incomingData)`
 

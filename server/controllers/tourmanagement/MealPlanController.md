@@ -11,4 +11,3 @@ Errors use the shared envelope (see [errors](../../globals/errors.md)): 400 vali
 | `POST /api/meals` | - | Define meal. | OWNER, MANAGER, ADMIN | body `MealPlanCreateRequest` | `MealPlanResponse` |
 | `PUT /api/meals/{id}` | - | Update meal. | OWNER, MANAGER, ADMIN | body `MealPlanCreateRequest` | `MealPlanResponse` |
 | `PATCH /api/meals/{id}/status` | - | Toggle status. | OWNER, MANAGER, ADMIN | query `status` | `Void` |
-| `PUT /api/meals/{id}/price` | - | Update price. | OWNER, MANAGER, ADMIN | query `price` | `MealPlanResponse` |

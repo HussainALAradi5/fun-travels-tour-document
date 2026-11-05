@@ -27,7 +27,7 @@
 | RQ-21 | Functional | Medium | The module shall support GET /api/meals/agency/{agencyId} to show an agency meal catalog. | Endpoint integration test |
 | RQ-22 | Functional | High | The module shall support POST /api/meals to define a meal offering. | Endpoint integration test |
 | RQ-23 | Functional | High | The module shall support PATCH /api/meals/{id}/status to enable or disable a meal. | Endpoint integration test |
-| RQ-24 | Functional | High | The module shall support PUT /api/meals/{id}/price to update meal pricing. | Endpoint integration test |
+| RQ-24 | Functional | High | The module shall support PUT /api/meals/{id} to edit a meal's name, price, description, diets, and spice level. | Endpoint integration test |
 | RQ-25 | Functional | Very High | The module shall support POST /api/reservations to create a 15-minute booking hold. | Endpoint integration test |
 | RQ-26 | Functional | Very High | The module shall support PATCH /api/reservations/{id}/status to perform an authorized reservation transition. | Endpoint integration test |
 | RQ-27 | Functional | Very High | The module shall support PATCH /api/reservations/{id}/cancel to cancel, refund when eligible, and release inventory. | Endpoint integration test |
