@@ -5,6 +5,7 @@
 | Configuration and environment | [configuration.md](configuration.md) |
 | Authentication, rate limiting, request ids, roles, ownership | [security.md](security.md) |
 | Error envelope and codes | [errors.md](errors.md) |
+| Pricing, discounts, refunds, agency policy | [pricing-and-refunds.md](pricing-and-refunds.md) |
 | Pagination and sorting | [pagination.md](pagination.md) |
 | Flyway migrations and development seed | [schema-and-seeds.md](schema-and-seeds.md) |
 

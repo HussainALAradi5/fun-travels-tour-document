@@ -46,6 +46,8 @@ Source: `services/geography/CountryService.java`.
 
 ### `Map<String, Integer> syncAllCountries()`
 
+**Purpose:** Every country: from REST Countries v5 when a key is configured, otherwise from the free country directory.
+
 **Runs in:** transaction
 
 **Cases and exceptions:**

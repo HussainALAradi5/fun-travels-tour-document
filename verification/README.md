@@ -1,5 +1,18 @@
 # Verification
 
+## 2026-11-05 (night): business rules and family booking
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw package`: 88 unit tests (adds policy pricing and refunds, country directory, dial codes) | Pass |
+| All | Fresh database: end-to-end 48, booking contract 20, earlier round 37, mobile screens 24, access 32, reports 52, WebSocket 4 | 217/217 |
+| Server | `business_check`: pricing (adult, kids chair, premium seat with a meal, mixed booking of 3), client prices ignored, automatic seats, duplicate/taken seats, capacity, holds, overlapping dates, inactive tours, refunds at 30/10/3 days and 20/35 days under a custom policy, refund quotes equal refunds and are private, agency cancellation limits, tour workflow, policy permissions and validation | 53/53 |
+| Server | `rules_check`: meals (diet rules, not offered, inactive, price change after payment), seats in maintenance, hold expiry returning places and seats, double payment, vehicle capacity and layout lock, overlapping vehicle tours, capacity below bookings, dates, sale price, staff roles | 36/36 |
+| Web | Booking page with 2 adults and 2 children, seated in one click: estimate $300 ($400 - $100 kids); server charged $300 with 4 tickets; ticket page shows the journey and "Cancel now and $50.00 of $50.00 (100%) returns" | Pass |
+| Web | `typecheck`, `lint`, `build` | Pass |
+| Mobile | `typecheck`, `lint` | Pass |
+| Not verified | The new mobile booking screen on the phone (hot-reloaded, not yet tapped through) | - |
+
 ## 2026-11-05 (evening): review fixes
 
 | Repository | Check | Result |

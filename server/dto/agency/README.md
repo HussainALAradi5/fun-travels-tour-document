@@ -41,6 +41,30 @@ request record.
 | `cityId` | `Integer` | - |
 | `agencyOwnerId` | `Integer` | - |
 
+## AgencyPolicyResponse
+
+response record; built by `from(Agency)`. An agency's discount and cancellation rules as customers see them before booking.
+
+| Field | Type | Rules |
+| --- | --- | --- |
+| `agencyId` | `Integer` | - |
+| `kidsDiscountPercent` | `int` | - |
+| `fullRefundDays` | `int` | - |
+| `partialRefundDays` | `int` | - |
+| `partialRefundPercent` | `int` | - |
+| `summary` | `String` | - |
+
+## AgencyPolicyUpdateRequest
+
+request record. New discount and cancellation rules for an agency; the partial-refund window must start no later than the full one.
+
+| Field | Type | Rules |
+| --- | --- | --- |
+| `kidsDiscountPercent` | `Integer` | required; Kids discount cannot be negative; Kids discount cannot exceed 100% |
+| `fullRefundDays` | `Integer` | required; Days cannot be negative; Use at most 365 days |
+| `partialRefundDays` | `Integer` | required; Days cannot be negative; Use at most 365 days |
+| `partialRefundPercent` | `Integer` | required; Refund cannot be negative; Refund cannot exceed 100% |
+
 ## AgencyResponse
 
 response record; built by `from(Agency)`.

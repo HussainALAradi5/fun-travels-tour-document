@@ -10,6 +10,6 @@ Errors use the shared envelope and codes in [errors](../../globals/errors.md). T
 | `GET /api/v1/tours/search` | `TourCatalogService.filter` | Search. | public | query `filter` | `PageResponse<TourResponse>` | 400 |
 | `GET /api/v1/tours` | `TourCatalogService.getAll` | Admins and agency staff list every tour (staff within their agency); everyone else only bookable ones. | public | query `page`, `size`, `sortBy`, `sortDir` | `PageResponse<TourResponse>` | 400 |
 | `GET /api/v1/tours/{id}` | `TourCatalogService.getVisible` | One tour by id for the public endpoint. | public | - | `TourResponse` | 404 |
-| `POST /api/v1/tours` | `TourService.create` | Create. | OWNER, MANAGER, ADMIN | body `TourCreateRequest` | `TourResponse` | 400, 401, 403, 404, 409 (`MEAL_INACTIVE`, `MEAL_OTHER_AGENCY`) |
-| `PUT /api/v1/tours/{id}` | `TourService.updateTour` | Update. | OWNER, MANAGER, ADMIN | body `TourUpdateRequest` | `TourResponse` | 400, 401, 403, 404, 409 (`CAPACITY_BELOW_BOOKINGS`, `MEAL_INACTIVE`, `MEAL_OTHER_AGENCY`, `TRANSPORTATION_LOCKED`) |
+| `POST /api/v1/tours` | `TourService.create` | Create. | OWNER, MANAGER, ADMIN | body `TourCreateRequest` | `TourResponse` | 400, 401, 403, 404, 409 (`DISCOUNT_ABOVE_PRICE`, `MEAL_INACTIVE`, `MEAL_OTHER_AGENCY`) |
+| `PUT /api/v1/tours/{id}` | `TourService.updateTour` | Update. | OWNER, MANAGER, ADMIN | body `TourUpdateRequest` | `TourResponse` | 400, 401, 403, 404, 409 (`CAPACITY_BELOW_BOOKINGS`, `DISCOUNT_ABOVE_PRICE`, `MEAL_INACTIVE`, `MEAL_OTHER_AGENCY`, `TRANSPORTATION_LOCKED`) |
 | `PUT /api/v1/tours/{id}/status` | `TourStatusService.updateStatus` | Update status. | OWNER, MANAGER, ADMIN | query `status` | `TourResponse` | 400, 401, 403, 409 |

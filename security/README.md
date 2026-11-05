@@ -40,6 +40,8 @@ Review of the server, web client, and their contract (2026-11). Every finding be
 | 33 | Low | 401 and 403 from the security filters had an empty body, unlike every other error | `SecurityErrorResponder` writes the shared envelope |
 | 34 | Low | Unknown routes and wrong methods returned 500 and logged a stack trace | 404 `ROUTE_NOT_FOUND` and 405 `METHOD_NOT_ALLOWED` |
 | 25 | Design | Generated reports hold customer and financial data | Stored in a private media folder (not under the public `/uploads`), downloaded only through `/api/v1/media/{id}/download` by the owner or an admin with `Cache-Control: no-store`; reports reuse the list pages' scoping and per-type role rules |
+| 35 | Medium | Tour create and edit listed EMPLOYEE in the service while the endpoint allowed only owners, managers and admins | Service and endpoint agree: owners, managers and admins |
+| 36 | Low | Agency discount and refund rules could be changed by any agency staff role if exposed | `PUT /api/v1/agencies/{id}/policy` is for the agency owner or an admin only; managers, employees and customers get 403 (live-tested) |
 
 ## Known limitations
 

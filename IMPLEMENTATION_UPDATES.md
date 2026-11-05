@@ -1,5 +1,18 @@
 # Implementation Updates
 
+## 2026-11-05 (night) - Business rules, family booking, agency policies
+
+- **Bug fixed: accidental kids discount.** Travelers without a chosen seat got the first free seats, which are the kids chairs, so adults paid half price. Automatic seats are now standard seats only (`SEAT_CHOICE_REQUIRED` when none is left).
+- **Bug fixed: web checkout total** ignored the kids discount and showed a higher total than the server charged.
+- **Agency policy.** Each agency sets its kids chair discount and refund windows (V4); prices and refunds use the tour's agency policy; owners edit it in Pricing and refunds; customers see it before booking. See [pricing and refunds](server/globals/pricing-and-refunds.md).
+- **Tour sale price.** Tours take a `discountPrice` (it existed in the model but no request could set it).
+- **Family booking.** Web and mobile set adults and children in one step, seat the group together in one tap, copy meals to everyone, and show a live price.
+- **Refund preview.** `GET .../refund-quote` for bookings and tickets; the cancel dialogs show the exact amount instead of a fixed 14/7-day text that was wrong for custom policies.
+- **Clearer journey.** The web ticket tracker follows the real state (booked, paid, tour running, departure, back home) and says what happens next.
+- **Roles.** Tour create and edit: owners, managers, admins (service and endpoint now agree).
+- **Countries from an API.** All 250 countries are imported from the free world-countries dataset on startup; every country has an HTTPS flag.
+- **Deployment.** Render (Docker, Frankfurt) with an external Neon database; Render generates the JWT secret and seed password.
+
 ## 2026-11-05 (evening) - Review fixes
 
 Fixes for every finding of the [2026-11-05 test report](verification/test-report-2026-11-05.md), one branch and pull request each.

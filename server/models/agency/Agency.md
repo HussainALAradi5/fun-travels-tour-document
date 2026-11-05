@@ -13,5 +13,6 @@ Table `agencies`. Inherits `BaseEntity`. Source: `models/agency/Agency.java`.
 | `country` | `Country` | ManyToOne  |
 | `city` | `City` | ManyToOne  |
 | `branches` | `List<AgencyBranch>` | OneToMany  |
+| `policy` | `AgencyPolicy` |   |
 | `isActive` | `boolean` |   |
 | `employees` | `List<User>` | OneToMany  |

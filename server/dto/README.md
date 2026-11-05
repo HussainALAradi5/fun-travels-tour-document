@@ -12,6 +12,8 @@ Every request and response body is a Java record in `dto/<domain>/`, one type pe
 | agency | [AgencyBranchCreateRequest](agency/README.md#agencybranchcreaterequest) | request record |
 | agency | [AgencyBranchResponse](agency/README.md#agencybranchresponse) | response record |
 | agency | [AgencyCreateRequest](agency/README.md#agencycreaterequest) | request record |
+| agency | [AgencyPolicyResponse](agency/README.md#agencypolicyresponse) | response record |
+| agency | [AgencyPolicyUpdateRequest](agency/README.md#agencypolicyupdaterequest) | request record |
 | agency | [AgencyResponse](agency/README.md#agencyresponse) | response record |
 | agency | [AgencySummary](agency/README.md#agencysummary) | response record |
 | agency | [BranchSummary](agency/README.md#branchsummary) | response record |
@@ -51,6 +53,7 @@ Every request and response body is a Java record in `dto/<domain>/`, one type pe
 | support | [UserRequestResponse](support/README.md#userrequestresponse) | response record |
 | tourmanagement | [MealPlanCreateRequest](tourmanagement/README.md#mealplancreaterequest) | request record |
 | tourmanagement | [MealPlanResponse](tourmanagement/README.md#mealplanresponse) | response record |
+| tourmanagement | [RefundQuoteResponse](tourmanagement/README.md#refundquoteresponse) | response record |
 | tourmanagement | [ReservationCreateRequest](tourmanagement/README.md#reservationcreaterequest) | request record |
 | tourmanagement | [ReservationFilterRequest](tourmanagement/README.md#reservationfilterrequest) | query parameters (class) |
 | tourmanagement | [ReservationResponse](tourmanagement/README.md#reservationresponse) | response record |

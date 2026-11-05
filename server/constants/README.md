@@ -42,6 +42,11 @@ Shared values live in `constants/`; services never repeat them inline.
 | `DATABASE_ERROR` | `"DATABASE_ERROR"` |
 | `INTERNAL_ERROR` | `"INTERNAL_ERROR"` |
 
+## geography/MobileNumberLengths
+
+| Name | Value |
+| --- | --- |
+
 ## report/ReportRules
 
 | Name | Value |
@@ -60,8 +65,8 @@ Shared values live in `constants/`; services never repeat them inline.
 | `HOLD_MINUTES` | `15` |
 | `FULL_REFUND_AFTER_DAYS` | `14` |
 | `HALF_REFUND_MIN_DAYS` | `7` |
-| `HALF_REFUND_RATE` | `new BigDecimal("0.50")` |
-| `KIDS_CHAIR_DISCOUNT_RATE` | `new BigDecimal("0.50")` |
+| `DEFAULT_KIDS_DISCOUNT_PERCENT` | `50` |
+| `DEFAULT_PARTIAL_REFUND_PERCENT` | `50` |
 | `TOUR_CANCELLATION_MIN_DAYS` | `14` |
 | `TOUR_CANCELLATION_MAX_BOOKED_RATIO` | `1.0 / 3.0` |
 | `REMINDER_DAYS_BEFORE_TOUR` | `7` |

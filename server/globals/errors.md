@@ -12,7 +12,7 @@ Every response uses `ApiResponse` (`utilities/responses/`): `success`, `code`, `
 | 404 | `NOT_FOUND` | Record does not exist | `ResourceNotFoundException` |
 | 404 | `ROUTE_NOT_FOUND` | Address does not exist (signed-in callers; anonymous callers get 401 first) | Spring MVC |
 | 405 | `METHOD_NOT_ALLOWED` | Wrong HTTP method for an address | Spring MVC |
-| 409 | workflow code, or `WORKFLOW_CONFLICT` | Business rule: `INSUFFICIENT_BALANCE`, `SEAT_NOT_AVAILABLE`, `RESERVATION_HOLD_EXPIRED`, `ALREADY_CANCELLED`, `DATE_CONFLICT`, `PAYMENT_METHOD_UNSUPPORTED`, ... | `WorkflowException` |
+| 409 | workflow code, or `WORKFLOW_CONFLICT` | Business rule: `INSUFFICIENT_BALANCE`, `SEAT_NOT_AVAILABLE`, `RESERVATION_HOLD_EXPIRED`, `ALREADY_CANCELLED`, `DATE_CONFLICT`, `PAYMENT_METHOD_UNSUPPORTED`, `SEAT_CHOICE_REQUIRED`, `DUPLICATE_SEAT`, `DISCOUNT_ABOVE_PRICE`, `CAPACITY_BELOW_BOOKINGS`, ... | `WorkflowException` |
 | 409 | `CONFLICT` | State rule such as "only a pending request can be assigned" | `IllegalStateException` |
 | 409 | `DUPLICATE_RESOURCE` | Unique value already used | `DuplicateResourceException`, database unique constraint |
 | 409 | `CONCURRENT_UPDATE` | Record changed by another request | optimistic locking |

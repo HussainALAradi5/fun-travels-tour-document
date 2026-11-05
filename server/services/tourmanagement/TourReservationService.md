@@ -70,6 +70,19 @@ Every `booking.hold-cleanup-ms` (default 60 s), expires PENDING reservations who
 | Reservation not found | `ResourceNotFoundException` | 404 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 
+### `RefundQuoteResponse refundQuote(Integer id)`
+
+**Purpose:** What cancelling the whole booking now would refund; nothing for an unpaid or cancelled booking.
+
+**Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Reservation not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `TourReservation create(ReservationCreateRequest request)`
 
 **Purpose:** Holds places and seats for `BookingRules#HOLD_MINUTES` minutes while payment is pending. Every traveler receives a ticket priced from stored records.

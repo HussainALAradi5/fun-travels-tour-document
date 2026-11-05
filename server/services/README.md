@@ -5,7 +5,7 @@ Every public function in source order: signature, purpose, transaction and role 
 | Domain | Service | Functions | Business logic |
 | --- | --- | --- | --- |
 | agency | [AgencyBranchService](agency/AgencyBranchService.md) | 5 | yes |
-| agency | [AgencyService](agency/AgencyService.md) | 6 | yes |
+| agency | [AgencyService](agency/AgencyService.md) | 8 | yes |
 | auth | [AccessPolicyService](auth/AccessPolicyService.md) | 12 | yes |
 | auth | [AuthService](auth/AuthService.md) | 4 | yes |
 | auth | [JwtService](auth/JwtService.md) | 3 | - |
@@ -15,6 +15,7 @@ Every public function in source order: signature, purpose, transaction and role 
 | common | [GenericFilterService](common/GenericFilterService.md) | 3 | - |
 | common | [SystemSchedulingService](common/SystemSchedulingService.md) | 2 | - |
 | geography | [CityService](geography/CityService.md) | 4 | - |
+| geography | [CountryDirectoryService](geography/CountryDirectoryService.md) | 2 | - |
 | geography | [CountryService](geography/CountryService.md) | 6 | - |
 | geography | [PortService](geography/PortService.md) | 4 | - |
 | media | [MediaService](media/MediaService.md) | 5 | yes |
@@ -32,9 +33,9 @@ Every public function in source order: signature, purpose, transaction and role 
 | tourmanagement | [MealPlanService](tourmanagement/MealPlanService.md) | 6 | yes |
 | tourmanagement | [SeatService](tourmanagement/SeatService.md) | 5 | yes |
 | tourmanagement | [TicketIssuingService](tourmanagement/TicketIssuingService.md) | 3 | yes |
-| tourmanagement | [TicketService](tourmanagement/TicketService.md) | 8 | yes |
+| tourmanagement | [TicketService](tourmanagement/TicketService.md) | 9 | yes |
 | tourmanagement | [TourCatalogService](tourmanagement/TourCatalogService.md) | 4 | yes |
-| tourmanagement | [TourReservationService](tourmanagement/TourReservationService.md) | 9 | yes |
+| tourmanagement | [TourReservationService](tourmanagement/TourReservationService.md) | 10 | yes |
 | tourmanagement | [TourSchedulerService](tourmanagement/TourSchedulerService.md) | 2 | yes |
 | tourmanagement | [TourService](tourmanagement/TourService.md) | 3 | yes |
 | tourmanagement | [TourStatusService](tourmanagement/TourStatusService.md) | 1 | yes |

@@ -29,6 +29,18 @@ response record; built by `from(MealPlan)`.
 | `spiceLevel` | `SpiceLevel` | - |
 | `status` | `GenericStatus` | - |
 
+## RefundQuoteResponse
+
+response record; built by `of(BigDecimal)`. What cancelling now would give back, calculated with the same rules as the cancellation itself.
+
+| Field | Type | Rules |
+| --- | --- | --- |
+| `paid` | `BigDecimal` | - |
+| `refund` | `BigDecimal` | - |
+| `percent` | `int` | - |
+| `daysUntilTour` | `long` | - |
+| `reason` | `String` | - |
+
 ## ReservationCreateRequest
 
 request record. Creates a reservation. Customers always book for themselves; staff pass `user`. When `tickets` is empty the server issues `requestedSlots` tickets without seat or meal choices.
@@ -191,7 +203,8 @@ request record.
 | `tourNumber` | `String` | required, not blank |
 | `title` | `String` | required, not blank |
 | `description` | `String` | - |
-| `basePrice` | `Double` | required |
+| `basePrice` | `Double` | required; Base price cannot be negative |
+| `discountPrice` | `Double` | Discount cannot be negative |
 | `numberOfDays` | `Integer` | required |
 | `startDate` | `LocalDate` | required |
 | `endDate` | `LocalDate` | - |
@@ -254,6 +267,7 @@ response record; built by `from(Tour)`.
 | `createdBy` | `UserSummary` | - |
 | `createdAt` | `LocalDateTime` | - |
 | `availableMeals` | `List<MealPlanResponse>` | - |
+| `policy` | `AgencyPolicyResponse` | - |
 
 ## TourSummary
 
@@ -277,6 +291,7 @@ request record. Partial tour update: null fields are left unchanged. References 
 | `tourNumber` | `String` | - |
 | `description` | `String` | - |
 | `basePrice` | `Double` | Base price cannot be negative |
+| `discountPrice` | `Double` | Discount cannot be negative |
 | `startDate` | `LocalDate` | - |
 | `endDate` | `LocalDate` | - |
 | `numberOfDays` | `Integer` | Number of days must be positive |

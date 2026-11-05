@@ -46,7 +46,7 @@ Per-tour taken seats (for booking and the seat picker) and whether a seat is hel
 | The selected seat does not belong to this tour's transportation. | `WorkflowException` `INVALID_SEAT_FOR_TOUR` | 409 |
 | Each traveler must have a different seat. | `WorkflowException` `DUPLICATE_SEAT` | 409 |
 | Seat   is no longer available. Please choose another seat. | `WorkflowException` `SEAT_NOT_AVAILABLE` | 409 |
-| There are not enough transportation seats available for this booking. | `WorkflowException` `INSUFFICIENT_TRANSPORTATION_SEATS` | 409 |
+| No standard seats are left on this tour. Please choose a seat for each traveler. | `WorkflowException` `SEAT_CHOICE_REQUIRED` | 409 |
 
 ### `int reconcileActiveTours()`
 

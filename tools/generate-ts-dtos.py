@@ -42,7 +42,7 @@ MOBILE_TYPES = {
     "TicketSelectionRequest", "ReservationResponse", "TicketResponse", "NotificationResponse", "NotificationCounts",
     "PasswordResetRequest", "PasswordResetConfirmRequest", "CountryResponse", "PaymentResponse", "ReservationSummary",
     "UserRequestCreateRequest", "UserRequestResponse", "CommentRequest", "CommentResponse", "EventLogResponse",
-    "TimelineResponse", "ReportRequest", "MediaResponse",
+    "TimelineResponse", "ReportRequest", "MediaResponse", "AgencyPolicyResponse", "RefundQuoteResponse",
 }
 NUM = {"Integer", "int", "Double", "double", "Long", "long", "BigDecimal", "Float", "float", "Short"}
 

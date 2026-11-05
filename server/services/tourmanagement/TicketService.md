@@ -53,6 +53,19 @@ Nightly: unpaid tickets of tours that have started are cancelled and their place
 | Ticket not found | `ResourceNotFoundException` | 404 |
 | Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
 
+### `RefundQuoteResponse refundQuote(Integer id)`
+
+**Purpose:** What cancelling this ticket now would refund; nothing for an unpaid or cancelled ticket.
+
+**Runs in:** read-only transaction
+
+**Cases and exceptions:**
+
+| Case | Exception | Status |
+| --- | --- | --- |
+| Ticket not found | `ResourceNotFoundException` | 404 |
+| Caller lacks the role, ownership, or agency access | `AccessDeniedException` | 403 |
+
 ### `Ticket updateStatus(Integer id, GenericStatus newStatus)`
 
 **Purpose:** Staff progress a paid ticket: APPROVED, CONFIRMED, or COMPLETED. Cancellation has its own rules.
