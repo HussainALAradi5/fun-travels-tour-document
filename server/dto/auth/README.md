@@ -50,3 +50,4 @@ request record.
 | `password` | `String` | required, not blank; Password must be at least 6 characters |
 | `mobileNumber` | `String` | required, not blank; + country code and number, e.g. +97339990001 (E.164) |
 | `age` | `Integer` | Age cannot be negative; Age must be realistic |
+| `gender` | `Gender` | required |

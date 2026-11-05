@@ -10,6 +10,7 @@ Table `users`. Inherits `BaseEntity`. Source: `models/user/User.java`.
 | `password` | `String` |  required |
 | `age` | `int` |   |
 | `userType` | `UserTypeEnum` |   |
+| `gender` | `Gender` |   |
 | `mobileNumber` | `String` |  unique, required |
 | `agency` | `Agency` | ManyToOne  |
 | `agencyBranch` | `AgencyBranch` | ManyToOne  |

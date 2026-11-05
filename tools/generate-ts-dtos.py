@@ -21,6 +21,7 @@ ENUMS = {
         "TicketStatus": "@/enums/tour-management/TicketStatus",
         "TransportationStatus": "@/enums/tour-management/TransportationStatus",
         "TransportationType": "@/enums/tour-management/TransportationType", "UserTypeEnum": ("@/enums/UserType", "UserType"),
+        "Gender": "@/enums/Gender",
         "ReportType": "@/enums/report/ReportType", "ReportFormat": "@/enums/report/ReportFormat",
         "MediaCategory": "@/enums/media/MediaCategory",
     },
@@ -30,7 +31,7 @@ ENUMS = {
         "ReportType": "@/enums/ReportType", "ReportFormat": "@/enums/ReportFormat", "MediaCategory": "@/enums/MediaCategory",
         "UserRequestType": "@/enums/UserRequestType", "UserRequestStatus": "@/enums/UserRequestStatus",
         "ReferenceType": "@/enums/ReferenceType", "PaymentStatus": "@/enums/PaymentStatus",
-        "TransactionType": "@/enums/TransactionType",
+        "TransactionType": "@/enums/TransactionType", "Gender": "@/enums/Gender",
     },
 }[FLAVOR]
 # The mobile app only calls customer endpoints; it mirrors just those contracts.

@@ -14,6 +14,7 @@ request record. Staff account created by an administrator, agency owner, or bran
 | `password` | `String` | required, not blank; Password must be at least 6 characters |
 | `mobileNumber` | `String` | required, not blank; + country code and number, e.g. +97339990001 (E.164) |
 | `age` | `Integer` | Age cannot be negative; Age must be realistic |
+| `gender` | `Gender` | required |
 | `userType` | `UserTypeEnum` | required |
 
 ## ProfileResponse
@@ -29,6 +30,7 @@ response record; built by `from(User)`. Everything the profile page shows in one
 | `email` | `String` | - |
 | `mobileNumber` | `String` | - |
 | `age` | `Integer` | - |
+| `gender` | `Gender` | - |
 | `userType` | `UserTypeEnum` | - |
 | `profileImageUrl` | `String` | - |
 | `active` | `boolean` | - |
@@ -59,6 +61,7 @@ response record; built by `from(User)`. A user account as lists and sign-in retu
 | `email` | `String` | - |
 | `mobileNumber` | `String` | - |
 | `age` | `Integer` | - |
+| `gender` | `Gender` | - |
 | `userType` | `UserTypeEnum` | - |
 | `profileImageUrl` | `String` | - |
 | `active` | `boolean` | - |
@@ -76,12 +79,13 @@ response record; built by `from(User)`. A user as other records show them: id an
 
 ## UserUpdateRequest
 
-request record. Self-service profile fields. Role, agency, email, and password are changed elsewhere.
+request record. Self-service profile fields; null fields are left unchanged. Role, agency, email, and password are changed elsewhere.
 
 | Field | Type | Rules |
 | --- | --- | --- |
 | `name` | `String` | - |
 | `mobileNumber` | `String` | + country code and number, e.g. +97339990001 (E.164) |
 | `age` | `Integer` | Age cannot be negative; Age must be realistic |
+| `gender` | `Gender` | - |
 | `base64Image` | `String` | - |
 | `removeImage` | `boolean` | - |

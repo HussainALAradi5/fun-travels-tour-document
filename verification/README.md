@@ -1,5 +1,17 @@
 # Verification
 
+## 2026-11-06: gender, keyboard, demo catalog
+
+| Repository | Check | Result |
+| --- | --- | --- |
+| Server | `./mvnw package` (unit tests) | Pass |
+| Server | Fresh database, every live suite with gender sent on sign-up and staff creation: 48 + 20 + 37 + 24 + 32 + 52 + 4 + 53 + 36 | 306/306 |
+| Server | `gender_check`: sign-up without or with an invalid gender refused, FEMALE stored and returned, profile shows it, user changes it, other edits keep it, staff need it, staff lists and seeded accounts have it | 10/10 |
+| Server | Demo catalog on a fresh database: 4 tours listed; a family of 2 adults and 2 kids with a meal each on the Muscat sale tour costs 1226 | Pass |
+| Web | At 412 px: sign-up with Female, stored as FEMALE; profile shows the pink Female badge; Edit Profile opens with Female chosen; typecheck, lint, build | Pass |
+| Mobile | Typecheck, lint | Pass |
+| Not verified | The mobile keyboard fix and gender screens on a phone | - |
+
 ## 2026-11-05 (night): business rules and family booking
 
 | Repository | Check | Result |

@@ -1,5 +1,13 @@
 # Implementation Updates
 
+## 2026-11-06 - Gender, password visibility, keyboard on Android
+
+- **Gender.** Users have a gender (MALE or FEMALE, migration V5). Sign-up and staff creation require it; profiles can change it; accounts from before keep none until set. Profiles, staff lists, the user directory and its report show it as one colored badge with an icon and the label (blue male, pink female) on web and mobile.
+- **Password fields** on mobile have a show/hide button.
+- **Bug fixed: keyboard covered form fields on Android.** Expo apps are edge-to-edge, so the window no longer resizes for the keyboard; the mobile form container now pads itself on both platforms, offset by its position under the header.
+- **Demo catalog.** A seeded environment also gets four bookable tours, two vehicles and four meals (`DemoCatalogSeeder`), so the live demo has something to book.
+- **Web app on Vercel** at https://fun-travels-tour-client.vercel.app, using the Render API.
+
 ## 2026-11-05 (night) - Business rules, family booking, agency policies
 
 - **Bug fixed: accidental kids discount.** Travelers without a chosen seat got the first free seats, which are the kids chairs, so adults paid half price. Automatic seats are now standard seats only (`SEAT_CHOICE_REQUIRED` when none is left).

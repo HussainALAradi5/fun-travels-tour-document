@@ -25,4 +25,5 @@
 | tourmanagement | `TicketStatus` | `PENDING`, `CONFIRMED`, `CANCELLED`, `COMPLETED` |
 | tourmanagement | `TransportationStatus` | `AVAILABLE`, `PARTIAL`, `FULL`, `MAINTENANCE`, `INACTIVE` |
 | tourmanagement | `TransportationType` | `BUS`, `FLIGHT`, `BOAT`, `TRAIN`, `PRIVATE_CAR`, `FERRY` |
+| user | `Gender` | `MALE`, `FEMALE` |
 | user | `UserTypeEnum` | `ADMIN`, `MANAGER`, `EMPLOYEE`, `OWNER`, `CUSTOMER`, `SUPPORT_AGENT`, `DEVELOPER` |
