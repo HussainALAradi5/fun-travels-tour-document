@@ -12,7 +12,7 @@ cp src/main/resources/application.properties.example src/main/resources/applicat
 ./mvnw spring-boot:run
 ```
 
-The API listens on `http://localhost:8080` (`SERVER_PORT`).
+The API listens on `http://localhost:8080` (`SERVER_PORT`). Profile pictures are stored under `FILE_UPLOAD_DIR` (public), generated reports under `MEDIA_DIR` (private, default `./media`) and deleted after `REPORT_RETENTION_DAYS` (default 30). On start-up, `SchemaMaintenance` drops retired columns from older databases. The full settings table is in the server README.
 
 ## Web client
 
@@ -20,7 +20,7 @@ The API listens on `http://localhost:8080` (`SERVER_PORT`).
 cp .env.example .env.local      # NEXT_PUBLIC_API_BASE_URL=http://localhost:8080/api
 npm ci
 npm run dev                     # http://localhost:3000
-npm run build && npm run lint
+npm run typecheck && npm run lint && npm run build
 ```
 
 ## Mobile app
@@ -29,7 +29,7 @@ npm run build && npm run lint
 cp .env.example .env            # EXPO_PUBLIC_API_URL=http://10.0.2.2:8080 (Android emulator)
 npm install                     # .npmrc enables legacy peer resolution for Expo SDK 58
 npx expo start                  # press a for Android, i for iOS, or scan with Expo Go
-npx tsc --noEmit && npx expo lint
+npm run typecheck && npm run lint
 ```
 
 Use `http://localhost:8080` for the iOS simulator and your computer's LAN IP for a physical device; add that origin to `CORS_ALLOWED_ORIGINS` only if you also use the web build.

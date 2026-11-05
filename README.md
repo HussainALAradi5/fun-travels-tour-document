@@ -4,13 +4,17 @@
 
 **Author:** Hussain Al Aradi - [GitHub](https://github.com/HussainALAradi5)
 
+Travel agencies publish tours with their own vehicles, seats, and meals; customers browse a catalog, book seats, pay from a wallet, and carry a boarding pass with a QR code. Owners, managers, and employees run their agency's tours, fleet, and staff; administrators run the platform. The same server serves a Next.js web app and an Expo mobile app, with live notifications, support requests, refunds by notice period, and branded PDF/Excel reports.
+
+Every repository runs its checks on GitHub Actions (server tests, web type-check/lint/build, mobile type-check/lint/bundle).
+
 ## Repositories
 
 | Application | Stack | Repository | Setup |
 | --- | --- | --- | --- |
 | Server | Java 21, Spring Boot 3.5.16, Spring Data JPA, PostgreSQL | [fun-travels-tour-server](https://github.com/HussainALAradi5/fun-travels-tour-server) | [setup](setup/README.md#server) |
 | Web client | Next.js 16, React 19, TypeScript, Chakra UI 3 | [fun-travels-tour-client](https://github.com/HussainALAradi5/fun-travels-tour-client) | [setup](setup/README.md#web-client) |
-| Mobile app | Expo SDK 58, React Native 0.88, Expo Router, TypeScript | local repository `fun-travels-tour-mobile` (no remote yet) | [setup](setup/README.md#mobile-app) |
+| Mobile app | Expo SDK 58, React Native 0.88, Expo Router, TypeScript | [fun-travels-tour-mobile](https://github.com/HussainALAradi5/fun-travels-tour-mobile) | [setup](setup/README.md#mobile-app) |
 
 ## Documentation map
 

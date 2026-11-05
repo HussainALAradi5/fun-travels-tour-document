@@ -1,5 +1,12 @@
 # Implementation Updates
 
+## 2026-11-05 (later) - Polish
+
+- GitHub Actions in the server (unit tests and package on Java 21), web client (type-check, lint, production build), and mobile app (type-check, lint, Android bundle); the client gained an `npm run typecheck` script.
+- `mvnw` is executable in git, so `./mvnw` works on Linux and macOS.
+- 31 tutorial-style server comments rewritten as short plain ones; one unused import removed.
+- READMEs brought up to date: server settings table and layout (media, reports, records), client quick start with `.env.local`, exports and structure, mobile feature list and checks; the documentation front page summarizes the platform and links the mobile repository.
+
 ## 2026-11-05 - Code cleanup
 
 - `TourService` (627 lines) split into `TourService` (create and edit), `TourCatalogService` (catalog, lists, search, visibility), `TourStatusService` (status workflow), and `TourSchedulerService` (nightly housekeeping); `TransportationService` lost its spreadsheet import to `TransportationImportService`. Code moved unchanged.
